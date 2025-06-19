@@ -15,22 +15,18 @@ const Header: React.FC = () => {
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [expandedMobileEvents, setExpandedMobileEvents] = useState<string[]>([]);
-  const [expandedMobileServices, setExpandedMobileServices] = useState<string[]>([]);
+  const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
+  const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
 
   const toggleMobileEventExpansion = (eventId: string) => {
     setExpandedMobileEvents(prev => 
-      prev.includes(eventId) 
-        ? prev.filter(id => id !== eventId)
-        : [...prev, eventId]
+      prev === eventId ? null : eventId
     );
   };
 
   const toggleMobileServiceExpansion = (serviceId: string) => {
     setExpandedMobileServices(prev => 
-      prev.includes(serviceId) 
-        ? prev.filter(id => id !== serviceId)
-        : [...prev, serviceId]
+      prev === serviceId ? null : serviceId
     );
   };
 
@@ -94,7 +90,7 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-[900px] z-50"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-max min-w-[900px] max-w-screen-xl z-50"
                     onMouseEnter={() => setIsEventsOpen(true)}
                     onMouseLeave={() => setIsEventsOpen(false)}
                   >
@@ -138,7 +134,7 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-[900px] z-50"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-max min-w-[700px] max-w-screen-xl z-50"
                     onMouseEnter={() => setIsServicesOpen(true)}
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
@@ -197,7 +193,7 @@ const Header: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden mt-4 py-4 border-t border-gray-700 max-h-96 overflow-y-auto"
+              className="lg:hidden mt-4 py-4 border-t border-gray-700 max-h-96 overflow-y-auto scrollbar-hide"
             >
               <div className="flex flex-col gap-2">
                 <a href="#home" className="font-semibold text-white py-2">HOME</a>
@@ -218,12 +214,12 @@ const Header: React.FC = () => {
                         <ChevronDown 
                           size={16} 
                           className={`transform transition-transform ${
-                            expandedMobileEvents.includes(event.id) ? 'rotate-180' : ''
+                            expandedMobileEvents === event.id ? 'rotate-180' : ''
                           }`} 
                         />
                       </button>
                       <AnimatePresence>
-                        {expandedMobileEvents.includes(event.id) && (
+                        {expandedMobileEvents === event.id && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
@@ -261,12 +257,12 @@ const Header: React.FC = () => {
                         <ChevronDown 
                           size={16} 
                           className={`transform transition-transform ${
-                            expandedMobileServices.includes(service.id) ? 'rotate-180' : ''
+                            expandedMobileServices === service.id ? 'rotate-180' : ''
                           }`} 
                         />
                       </button>
                       <AnimatePresence>
-                        {expandedMobileServices.includes(service.id) && (
+                        {expandedMobileServices === service.id && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
