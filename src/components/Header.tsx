@@ -30,6 +30,16 @@ const Header: React.FC = () => {
     );
   };
 
+  // Split events data into three columns
+  const eventsColumn1 = eventsData.slice(0, 4);
+  const eventsColumn2 = eventsData.slice(4, 8);
+  const eventsColumn3 = eventsData.slice(8);
+
+  // Split services data into three columns
+  const servicesColumn1 = servicesData.slice(0, 3);
+  const servicesColumn2 = servicesData.slice(3, 6);
+  const servicesColumn3 = servicesData.slice(6);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-lg">
       {/* Top Bar */}
@@ -90,29 +100,76 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-max min-w-[900px] max-w-screen-xl z-50"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-6 w-max min-w-[900px] max-w-screen-xl z-50"
                     onMouseEnter={() => setIsEventsOpen(true)}
                     onMouseLeave={() => setIsEventsOpen(false)}
                   >
-                    <div className="grid grid-cols-4 gap-6 px-6">
-                      {eventsData.map((event) => (
-                        <div key={event.id} className="space-y-3">
-                          <div className="text-brand-primary font-bold text-sm border-b border-gray-100 pb-2">
-                            {event.name}
+                    <div className="grid grid-cols-3 gap-6 px-6">
+                      {/* Column 1 */}
+                      <div className="border-r border-gray-100 pr-6">
+                        {eventsColumn1.map((event) => (
+                          <div key={event.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {event.name}
+                            </div>
+                            <div className="space-y-1">
+                              {event.subEvents && event.subEvents.map((subEvent) => (
+                                <a
+                                  key={subEvent.id}
+                                  href={`/events/${event.id}/${subEvent.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subEvent.name}
+                                </a>
+                              ))}
+                            </div>
                           </div>
-                          <div className="space-y-1">
-                            {event.subEvents && event.subEvents.map((subEvent) => (
-                              <a
-                                key={subEvent.id}
-                                href={`/events/${event.id}/${subEvent.id}`}
-                                className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-xs py-1 px-2 rounded"
-                              >
-                                {subEvent.name}
-                              </a>
-                            ))}
+                        ))}
+                      </div>
+
+                      {/* Column 2 */}
+                      <div className="border-r border-gray-100 pr-6">
+                        {eventsColumn2.map((event) => (
+                          <div key={event.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {event.name}
+                            </div>
+                            <div className="space-y-1">
+                              {event.subEvents && event.subEvents.map((subEvent) => (
+                                <a
+                                  key={subEvent.id}
+                                  href={`/events/${event.id}/${subEvent.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subEvent.name}
+                                </a>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+
+                      {/* Column 3 */}
+                      <div>
+                        {eventsColumn3.map((event) => (
+                          <div key={event.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {event.name}
+                            </div>
+                            <div className="space-y-1">
+                              {event.subEvents && event.subEvents.map((subEvent) => (
+                                <a
+                                  key={subEvent.id}
+                                  href={`/events/${event.id}/${subEvent.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subEvent.name}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -134,37 +191,100 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border py-6 w-max min-w-[700px] max-w-screen-xl z-50"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-6 w-max min-w-[700px] max-w-screen-xl z-50"
                     onMouseEnter={() => setIsServicesOpen(true)}
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
                     <div className="grid grid-cols-3 gap-6 px-6">
-                      {servicesData.map((service) => (
-                        <div key={service.id} className="space-y-3">
-                          <div className="text-brand-primary font-bold text-sm border-b border-gray-100 pb-2">
-                            {service.name}
+                      {/* Column 1 */}
+                      <div className="border-r border-gray-100 pr-6">
+                        {servicesColumn1.map((service) => (
+                          <div key={service.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {service.name}
+                            </div>
+                            <div className="space-y-1">
+                              {service.subServices && service.subServices.map((subService) => (
+                                <a
+                                  key={subService.id}
+                                  href={`/services/${service.id}/${subService.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subService.name}
+                                </a>
+                              ))}
+                              {!service.subServices && (
+                                <a
+                                  href={`/services/${service.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  View Details
+                                </a>
+                              )}
+                            </div>
                           </div>
-                          <div className="space-y-1">
-                            {service.subServices && service.subServices.map((subService) => (
-                              <a
-                                key={subService.id}
-                                href={`/services/${service.id}/${subService.id}`}
-                                className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-xs py-1 px-2 rounded"
-                              >
-                                {subService.name}
-                              </a>
-                            ))}
-                            {!service.subServices && (
-                              <a
-                                href={`/services/${service.id}`}
-                                className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-xs py-1 px-2 rounded"
-                              >
-                                View Details
-                              </a>
-                            )}
+                        ))}
+                      </div>
+
+                      {/* Column 2 */}
+                      <div className="border-r border-gray-100 pr-6">
+                        {servicesColumn2.map((service) => (
+                          <div key={service.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {service.name}
+                            </div>
+                            <div className="space-y-1">
+                              {service.subServices && service.subServices.map((subService) => (
+                                <a
+                                  key={subService.id}
+                                  href={`/services/${service.id}/${subService.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subService.name}
+                                </a>
+                              ))}
+                              {!service.subServices && (
+                                <a
+                                  href={`/services/${service.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  View Details
+                                </a>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+
+                      {/* Column 3 */}
+                      <div>
+                        {servicesColumn3.map((service) => (
+                          <div key={service.id} className="mb-6">
+                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
+                              {service.name}
+                            </div>
+                            <div className="space-y-1">
+                              {service.subServices && service.subServices.map((subService) => (
+                                <a
+                                  key={subService.id}
+                                  href={`/services/${service.id}/${subService.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  {subService.name}
+                                </a>
+                              ))}
+                              {!service.subServices && (
+                                <a
+                                  href={`/services/${service.id}`}
+                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
+                                >
+                                  View Details
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )}
