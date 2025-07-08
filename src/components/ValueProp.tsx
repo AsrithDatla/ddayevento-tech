@@ -16,9 +16,9 @@ const ValueProp: React.FC = () => {
   useEffect(() => {
     if (isInView) {
       const targets = {
-        years: 10,
-        events: 150,
-        clients: 200,
+        years: 4,
+        events: 416,
+        clients: 400,
         support: 24
       };
 

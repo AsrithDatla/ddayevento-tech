@@ -1,71 +1,131 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const aboutImages = [
+  '/about1.jpg', // Replace with your actual image paths or use public URLs
+  '/about2.jpg',
+  '/about3.jpg',
+  '/about4.jpg',
+  '/about5.jpg',
+];
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white pt-32 pb-16">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              onClick={() => window.history.back()}
-              className="flex items-center gap-2 text-brand-primary hover:text-brand-secondary transition-colors"
-            >
-              <ArrowLeft size={20} />
-              Back
-            </button>
-          </div>
+    <div className="min-h-screen flex flex-col bg-[#16a6a6]">
+      {/* Sticky Header Section */}
+      <header className="sticky top-0 z-50 pt-6 pb-2 bg-[#16a6a6] text-white">
+        <div className="container mx-auto px-4 flex flex-col items-center">
+          <Link to="/">
+            <img src="/final-white-logo-400-120.png" alt="Dday Events" className="w-40 mb-2 cursor-pointer" />
+          </Link>
+          <nav className="flex gap-6 text-sm font-semibold mb-6">
+            <Link to="/" className="hover:underline">HOME</Link>
+            <a href="#" className="hover:underline">ABOUT US</a>
+            <a href="#" className="hover:underline">SERVICES</a>
+            <a href="#" className="hover:underline">EVENT STORE</a>
+            <a href="#" className="hover:underline">GALLERY</a>
+            <a href="#" className="hover:underline">REVIEWS</a>
+            <a href="#" className="hover:underline">CONTACT US</a>
+          </nav>
+          <h1 className="text-5xl font-bold mb-6 mt-2">About US</h1>
+        </div>
+      </header>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 font-dancing">
-            About D-Day Evento
-          </h1>
-
-          <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-gray-600 mb-8">
-              Welcome to D-Day Evento - where dreams meet reality and celebrations come to life.
-            </p>
-
-            <div className="bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-2xl p-8 mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 font-dancing">Our Story</h2>
-              <p className="text-gray-700 leading-relaxed">
-                Founded with a passion for creating unforgettable moments, D-Day Evento has been serving 
-                Hyderabad and surrounding areas with exceptional event planning services. We believe that 
-                every celebration deserves to be extraordinary, and we're here to make that happen.
+      {/* Main Content Scrollable, with padding to avoid header/footer overlap */}
+      <main className="flex-1 overflow-y-auto pt-6 pb-10">
+        {/* Who We Are & What We Can Do */}
+        <section className="bg-[#f8f6f3] py-12">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">Who We Are?</h2>
+              <p className="text-gray-700 mb-6">
+                We are a young company driven to cater to the humongous Wedding Business and we are a passionate team to deliver and be a part of your event planning and organizing and make your D-Day the most memorable and special with us here at "D-DAY EVENTO". Celebrate your big day!
               </p>
+              <img src={aboutImages[0]} alt="Who We Are" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
             </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg border">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 font-dancing">Our Mission</h3>
-                <p className="text-gray-600">
-                  To transform your vision into reality through meticulous planning, creative design, 
-                  and flawless execution, ensuring every event speaks style and excellence.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg border">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 font-dancing">Our Vision</h3>
-                <p className="text-gray-600">
-                  To be Hyderabad's most trusted event planning partner, known for innovation, 
-                  quality, and creating memories that last a lifetime.
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <p className="text-lg text-gray-600 italic">
-                "Events that speak style, services that speak excellence."
+            <div>
+              <img src={aboutImages[1]} alt="What We Can Do" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
+              <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">What We Can Do?</h2>
+              <p className="text-gray-700">
+                Birthdays, Anniversaries, Weddings, Wedding functions, All Traditional Events, All Ceremonies, Decoration and Lighting, Catering, Photography, Makeup & Mehendi, Music and Entertainment, Gifts, All Services related to an Event.
               </p>
             </div>
           </div>
-        </motion.div>
-      </div>
+        </section>
+
+        {/* Four Reasons Section */}
+        <section className="bg-white py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center text-[#16a6a6] mb-12">Four Reasons Why You Should Choose Us</h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* D-Day Team */}
+              <div>
+                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
+                  <span className="inline-block">🔔</span> D-Day Team
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Our team is passionate and smart working group of employees. We give in our maximum efforts for meeting our client's requirements to the fullest. Our team's main motto is to provide quality, coordination, and excellent communication to all our clients. We handle each event with care and create those moments each client awaits the most. We are a friendly, dedicated team who enjoys and loves what they do.
+                </p>
+                <img src={aboutImages[2]} alt="D-Day Team" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
+              </div>
+              {/* Perfect Vendors */}
+              <div>
+                <img src={aboutImages[3]} alt="Perfect Vendors" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
+                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
+                  <span className="inline-block">🎉</span> Perfect Vendors
+                </h3>
+                <p className="text-gray-700">
+                  We have vendors from all categories and events. We have specialised vendors who have displayed great work. Our vendors believe in delivering quality, assurance, perfection in their field of work. We make sure our vendors provide the quality of work and satisfaction to us and to our clients. We carefully assess all our vendors and choose verified vendors and cater to the client's needs and requirements.
+                </p>
+              </div>
+              {/* Unique Memories */}
+              <div>
+                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
+                  <span className="inline-block">💡</span> Unique Memories
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Memories are made to last a lifetime and we at D-Day Evento believe in that. We trust in making, creating, and experiencing those moments for our clients. Recreating those moments that each person has thought of, conceptualising and making the events from discussing them to turning the idea into reality. Memories are always preserved and cherished and we believe in making it happen.
+                </p>
+                <img src={aboutImages[4]} alt="Unique Memories" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
+              </div>
+              {/* Unforgettable & Valuable Time */}
+              <div>
+                <img src={aboutImages[0]} alt="Unforgettable & Valuable Time" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
+                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
+                  <span className="inline-block">⏰</span> Unforgettable & Valuable time
+                </h3>
+                <p className="text-gray-700">
+                  Our Event Management Company respects and values our client's time. We analyse the budget, requirements, categories that the client is looking for. We give a detailed note of each thing discussed, suggest, and recommend our client what is suitable for them and make sure each penny they invest in us is a memory created for them. Our goal is to make sure our client spends the most beautiful time at their event when they sit back, relax and enjoy while we do all the work for them so that they can have an unforgettable moment of their life.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="bg-[#16a6a6] py-10 text-white text-center">
+          <h3 className="text-2xl font-bold mb-4">Looking for something very special?</h3>
+          <p className="mb-6">PLAN YOUR BUDGET AND LET'S GET STARTED!</p>
+          <button className="bg-white text-[#16a6a6] font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">BUDGET CALCULATOR</button>
+        </section>
+      </main>
+
+      {/* Sticky Footer Info */}
+      <footer className="sticky bottom-0 z-50 bg-gray-900 text-white py-8 mt-0">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col items-center md:items-start">
+            <img src="/final-white-logo-400-120.png" alt="Dday Events" className="w-32 mb-2" />
+            <p className="text-center md:text-left">" Let's join hands at your convenient Time, Place and Date ! "</p>
+          </div>
+          <div className="text-center md:text-left">
+            <h4 className="font-bold mb-2">CONTACT INFO</h4>
+            <p>Gachibowli, Hyderabad, Telangana</p>
+            <p>ddayevento@gmail.com</p>
+            <p>+91 9701332813</p>
+          </div>
+        </div>
+        <div className="text-center text-gray-400 text-xs mt-6">All Rights Reserved © D-Day Evento</div>
+      </footer>
     </div>
   );
 };

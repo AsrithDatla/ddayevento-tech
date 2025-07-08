@@ -78,18 +78,18 @@ const Hero: React.FC = () => {
               transition={{ duration: 1.2, delay: 0.3 }}
             >
               EVENTS THAT
-              <br />
-              <span className="text-brand-gold">SPEAK STYLE</span>
+              
+              <span className="text-brand-gold"> SPEAK STYLE</span>
             </motion.h1>
 
             {/* Subheadline */}
             <motion.h2 
-              className="text-2xl md:text-4xl font-semibold text-white/90 mb-8 font-dancing"
+              className="text-2xl md:text-4xl font-semibold text-white/90 mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              SERVICES THAT SPEAK EXCELLENCE
+              Services That Speak Excellence
             </motion.h2>
 
             {/* Location Line */}

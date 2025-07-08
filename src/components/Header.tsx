@@ -11,6 +11,56 @@ const SnapchatIcon = ({ size = 16, className = "" }) => (
   </svg>
 );
 
+// Helper function to split and group items for 4 columns
+function splitIntoFourColumns<T extends { subEvents?: any[]; subServices?: any[] }>(items: T[]): T[][] {
+  // Group items with >1 subItems first, then those with 1 or none
+  const withMany = items.filter(item => (item.subEvents ? item.subEvents.length : (item.subServices ? item.subServices.length : 0)) > 1);
+  const withOneOrNone = items.filter(item => (item.subEvents ? item.subEvents.length : (item.subServices ? item.subServices.length : 0)) <= 1);
+
+  // Combine, so all with 1 or none are at the end
+  const sorted = [...withMany, ...withOneOrNone];
+
+  // Split into 4 columns as evenly as possible
+  const columns: T[][] = [[], [], [], []];
+  sorted.forEach((item, idx) => {
+    columns[idx % 4].push(item);
+  });
+  return columns;
+}
+
+// Helper to get the main event by id
+function getEventById(id: string) {
+  return eventsData.find(event => event.id === id);
+}
+
+// Custom column order
+const COLUMN_HEADINGS = [
+  { id: 'weddings', label: 'Weddings' },
+  { id: 'college-events', label: 'College Events' },
+  { id: 'corporate-events', label: 'Corporate Events' },
+  { id: 'festivals-special-days', label: 'Festivals/Special Days' }
+];
+
+// Build columns: each starts with its main heading, then fill with others
+function buildEventColumns() {
+  // Get the main events for each column
+  const columns = COLUMN_HEADINGS.map(heading => {
+    const mainEvent = getEventById(heading.id);
+    return mainEvent ? [mainEvent] : [];
+  });
+
+  // Gather all other events not in the main headings
+  const usedIds = new Set(COLUMN_HEADINGS.map(h => h.id));
+  const otherEvents = eventsData.filter(event => !usedIds.has(event.id));
+
+  // Distribute other events evenly into columns
+  otherEvents.forEach((event, idx) => {
+    columns[idx % 4].push(event);
+  });
+
+  return columns;
+}
+
 const Header: React.FC = () => {
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -30,20 +80,13 @@ const Header: React.FC = () => {
     );
   };
 
-  // Split events data into three columns
-  const eventsColumn1 = eventsData.slice(0, 4);
-  const eventsColumn2 = eventsData.slice(4, 8);
-  const eventsColumn3 = eventsData.slice(8);
-
-  // Split services data into three columns
-  const servicesColumn1 = servicesData.slice(0, 3);
-  const servicesColumn2 = servicesData.slice(3, 6);
-  const servicesColumn3 = servicesData.slice(6);
+  const eventColumns = buildEventColumns();
+  const servicesColumns = splitIntoFourColumns(servicesData);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-lg">
       {/* Top Bar */}
-      <div className="bg-brand-primary text-white py-1 md:py-2">
+      <div className="bg-brand-primary text-white py-0.5 md:py-1">
         <div className="container mx-auto px-4 flex justify-between items-center text-xs md:text-sm">
           <div className="flex items-center gap-2 md:gap-6">
             <div className="flex items-center gap-1 md:gap-2">
@@ -66,22 +109,22 @@ const Header: React.FC = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div 
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
             <img 
               src="/final-white-logo-400-120.png" 
               alt="D-Day Evento" 
-              className="w-32 h-10 md:w-40 md:h-12 object-contain"
+              className="w-44 h-10 md:w-56 md:h-12 object-contain"
             />
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden lg:flex flex-1 items-center justify-center gap-10">
             <a href="#home" className="font-semibold text-white hover:text-brand-gold transition-colors">HOME</a>
             <a href="/about" className="font-semibold text-white hover:text-brand-gold transition-colors">ABOUT US</a>
             
@@ -100,75 +143,83 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-6 w-max min-w-[900px] max-w-screen-xl z-50"
+                    className="absolute top-full left-[-450px] mt-2 bg-white shadow-xl border border-gray-200 w-[1100px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-lg p-6 z-50"
                     onMouseEnter={() => setIsEventsOpen(true)}
                     onMouseLeave={() => setIsEventsOpen(false)}
                   >
-                    <div className="grid grid-cols-3 gap-6 px-6">
-                      {/* Column 1 */}
-                      <div className="border-r border-gray-100 pr-6">
-                        {eventsColumn1.map((event) => (
-                          <div key={event.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {event.name}
-                            </div>
-                            <div className="space-y-1">
-                              {event.subEvents && event.subEvents.map((subEvent) => (
-                                <a
-                                  key={subEvent.id}
-                                  href={`/events/${event.id}/${subEvent.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subEvent.name}
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Column 2 */}
-                      <div className="border-r border-gray-100 pr-6">
-                        {eventsColumn2.map((event) => (
-                          <div key={event.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {event.name}
-                            </div>
-                            <div className="space-y-1">
-                              {event.subEvents && event.subEvents.map((subEvent) => (
-                                <a
-                                  key={subEvent.id}
-                                  href={`/events/${event.id}/${subEvent.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subEvent.name}
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Column 3 */}
+                    <div className="grid grid-cols-4 gap-6 w-full">
+                      {/* Traditional Events */}
                       <div>
-                        {eventsColumn3.map((event) => (
-                          <div key={event.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {event.name}
-                            </div>
-                            <div className="space-y-1">
-                              {event.subEvents && event.subEvents.map((subEvent) => (
-                                <a
-                                  key={subEvent.id}
-                                  href={`/events/${event.id}/${subEvent.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subEvent.name}
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Traditional Events</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Cradle Ceremony</div>
+                          <div className="text-sm text-gray-600">Naming Ceremony</div>
+                          <div className="text-sm text-gray-600">Annaprasana</div>
+                          <div className="mt-2 text-sm text-gray-600">Baby Shower</div>
+                          <div className="text-sm text-gray-600">Sreemantham</div>
+                          <div className="mt-2 text-sm text-gray-600">Half Saree Function</div>
+                          <div className="text-sm text-gray-600">Dhoti Function</div>
+                          <div className="text-sm text-gray-600">Upanayanam Ceremony</div>
+                          <div className="mt-2 text-sm text-gray-600">House Warming</div>
+                          <div className="text-sm text-gray-600">Gruhapravesham</div>
+                        </div>
+                      </div>
+                      {/* Weddings Events */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Weddings Events</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Engagement</div>
+                          <div className="text-sm text-gray-600">Pellikoduku</div>
+                          <div className="text-sm text-gray-600">Pellikuthuru</div>
+                          <div className="text-sm text-gray-600">Haldi</div>
+                          <div className="text-sm text-gray-600">Mehendi</div>
+                          <div className="text-sm text-gray-600">Bachelors Party</div>
+                          <div className="text-sm text-gray-600">Sangeet</div>
+                          <div className="text-sm text-gray-600">Bharath</div>
+                          <div className="text-sm text-gray-600">Wedding Day</div>
+                          <div className="text-sm text-gray-600">Reception</div>
+                        </div>
+                      </div>
+                      {/* Birthdays & Corporate Events */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Birthdays</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Baby Welcoming Event</div>
+                          <div className="text-sm text-gray-600">Cake smash</div>
+                          <div className="text-sm text-gray-600">1st Year Birthday Parties</div>
+                          <div className="text-sm text-gray-600">Kids Yearly Birthdays</div>
+                          <div className="text-sm text-gray-600">Adult Birthday Parties</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">Corporate Events</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Corporate Party</div>
+                          <div className="text-sm text-gray-600">Team Day Outings</div>
+                          <div className="text-sm text-gray-600">Office Parties</div>
+                          <div className="text-sm text-gray-600">Team Lunch/Dinner</div>
+                          <div className="text-sm text-gray-600">Daily Catering Boxes</div>
+                        </div>
+                      </div>
+                      {/* Special Days & College Events */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Special Days</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Surprise Parties</div>
+                          <div className="text-sm text-gray-600">Kitty Parties</div>
+                          <div className="text-sm text-gray-600">House Parties</div>
+                          <div className="text-sm text-gray-600">Candle Light Dinners</div>
+                          <div className="text-sm text-gray-600">Valentines/Proposal</div>
+                          <div className="text-sm text-gray-600">Retirement Day</div>
+                          <div className="text-sm text-gray-600">Anniversaries</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">College Events</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Annual Day</div>
+                          <div className="text-sm text-gray-600">Sports Day</div>
+                          <div className="text-sm text-gray-600">Cultural Day</div>
+                          <div className="text-sm text-gray-600">Freshers Day</div>
+                          <div className="text-sm text-gray-600">Farewell Day</div>
+                          <div className="text-sm text-gray-600">Convocation Day</div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -191,99 +242,118 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-6 w-max min-w-[700px] max-w-screen-xl z-50"
+                    className="absolute top-full left-[-450px] mt-2 bg-white shadow-xl border border-gray-200 w-[1100px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-lg p-6 z-50"
                     onMouseEnter={() => setIsServicesOpen(true)}
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
-                    <div className="grid grid-cols-3 gap-6 px-6">
-                      {/* Column 1 */}
-                      <div className="border-r border-gray-100 pr-6">
-                        {servicesColumn1.map((service) => (
-                          <div key={service.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {service.name}
-                            </div>
-                            <div className="space-y-1">
-                              {service.subServices && service.subServices.map((subService) => (
-                                <a
-                                  key={subService.id}
-                                  href={`/services/${service.id}/${subService.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subService.name}
-                                </a>
-                              ))}
-                              {!service.subServices && (
-                                <a
-                                  href={`/services/${service.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  View Details
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Column 2 */}
-                      <div className="border-r border-gray-100 pr-6">
-                        {servicesColumn2.map((service) => (
-                          <div key={service.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {service.name}
-                            </div>
-                            <div className="space-y-1">
-                              {service.subServices && service.subServices.map((subService) => (
-                                <a
-                                  key={subService.id}
-                                  href={`/services/${service.id}/${subService.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subService.name}
-                                </a>
-                              ))}
-                              {!service.subServices && (
-                                <a
-                                  href={`/services/${service.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  View Details
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Column 3 */}
+                    <div className="grid grid-cols-4 gap-6 w-full">
+                      {/* Decoration */}
                       <div>
-                        {servicesColumn3.map((service) => (
-                          <div key={service.id} className="mb-6">
-                            <div className="text-brand-primary font-bold text-lg border-b border-gray-100 pb-2 mb-3 font-dancing">
-                              {service.name}
-                            </div>
-                            <div className="space-y-1">
-                              {service.subServices && service.subServices.map((subService) => (
-                                <a
-                                  key={subService.id}
-                                  href={`/services/${service.id}/${subService.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  {subService.name}
-                                </a>
-                              ))}
-                              {!service.subServices && (
-                                <a
-                                  href={`/services/${service.id}`}
-                                  className="block text-gray-600 hover:bg-brand-accent hover:text-brand-primary transition-colors text-sm py-1 px-2 rounded"
-                                >
-                                  View Details
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        ))}
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Decoration</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Theme-Based Stage Decoration</div>
+                          <div className="text-sm text-gray-600">Balloon Decoration</div>
+                          <div className="text-sm text-gray-600">Floral Decoration</div>
+                          <div className="text-sm text-gray-600">Fabric Drapes & Canopies</div>
+                          <div className="text-sm text-gray-600">LED / Neon Signage</div>
+                          <div className="text-sm text-gray-600">Entry Gate Setup</div>
+                          <div className="text-sm text-gray-600">Welcome Board & Easel Setup</div>
+                          <div className="text-sm text-gray-600">Table Styling</div>
+                          <div className="text-sm text-gray-600">Photo Booth / Backdrop Walls</div>
+                          <div className="text-sm text-gray-600">Themed Props & Cutouts</div>
+                          <div className="text-sm text-gray-600">Hanging / Ceiling Decor</div>
+                          <div className="text-sm text-gray-600">LED Letters & Numbers</div>
+                          <div className="text-sm text-gray-600">Decor Lighting</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">Cakes</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Custom Theme Cakes</div>
+                          <div className="text-sm text-gray-600">Fondant / Cream Cakes</div>
+                          <div className="text-sm text-gray-600">Dessert Table Styling</div>
+                          <div className="text-sm text-gray-600">Cupcakes, Brownies, Macarons</div>
+                          <div className="text-sm text-gray-600">Name Cakes / Number Cakes</div>
+                          <div className="text-sm text-gray-600">Eggless / Egg Options</div>
+                          <div className="text-sm text-gray-600">Smash Cake for Babies</div>
+                          <div className="text-sm text-gray-600">Instant Cake Cutting Setup</div>
+                        </div>
+                      </div>
+                      {/* Photography & Videography + Return Gifts */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Photography & Videography</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Regular Photography</div>
+                          <div className="text-sm text-gray-600">Regular Videography</div>
+                          <div className="text-sm text-gray-600">Candid Photography</div>
+                          <div className="text-sm text-gray-600">Candid Videography</div>
+                          <div className="text-sm text-gray-600">Teaser / Trailer Video</div>
+                          <div className="text-sm text-gray-600">Drone Photography & Video</div>
+                          <div className="text-sm text-gray-600">Instant Photo Printing Booth</div>
+                          <div className="text-sm text-gray-600">Live Streaming</div>
+                          <div className="text-sm text-gray-600">Photo Album Design & Printing</div>
+                          <div className="text-sm text-gray-600">Same-Day Edits</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 font-dancing mt-16">Return Gifts</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Personalized Gifts</div>
+                          <div className="text-sm text-gray-600">Theme-Based Gift Boxes</div>
+                          <div className="text-sm text-gray-600">Sweet Boxes / Custom Hampers</div>
+                          <div className="text-sm text-gray-600">Eco-Friendly Gifts</div>
+                          <div className="text-sm text-gray-600">Toys / Stationery Sets</div>
+                          <div className="text-sm text-gray-600">Utility Gift Packs</div>
+                          <div className="text-sm text-gray-600">Trousseau Packing</div>
+                          <div className="text-sm text-gray-600">Premium Packing & Tagging</div>
+                          <div className="text-sm text-gray-600">Gift Counters with Attendants</div>
+                        </div>
+                      </div>
+                      {/* Food & Catering + Makeup & Styling */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Food & Catering</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Veg / Non-Veg Catering</div>
+                          <div className="text-sm text-gray-600">South Indian</div>
+                          <div className="text-sm text-gray-600">North Indian</div>
+                          <div className="text-sm text-gray-600">Continental</div>
+                          <div className="text-sm text-gray-600">Italian</div>
+                          <div className="text-sm text-gray-600">Indo-Chinese</div>
+                          <div className="text-sm text-gray-600">Pan Asian</div>
+                          <div className="text-sm text-gray-600">Live Counters/Stalls</div>
+                          <div className="text-sm text-gray-600">Cutlery</div>
+                          <div className="text-sm text-gray-600">Waiter / Staff Management</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-24">Makeup & Styling</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Party Makeup</div>
+                          <div className="text-sm text-gray-600">Bridal Makeup</div>
+                          <div className="text-sm text-gray-600">Groom Makeup & Styling</div>
+                          <div className="text-sm text-gray-600">Saree/Half Saree Draping</div>
+                          <div className="text-sm text-gray-600">Hair Styling & Hairdo</div>
+                          <div className="text-sm text-gray-600">Mehendi Artist</div>
+                          <div className="text-sm text-gray-600">Nail Art Station</div>
+                          <div className="text-sm text-gray-600">Touch-Up Corner</div>
+                          <div className="text-sm text-gray-600">Group Makeup</div>
+                          <div className="text-sm text-gray-600">Makeup Trials</div>
+                        </div>
+                      </div>
+                      {/* Venue Booking & Setup + Entertainment & Activities */}
+                      <div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Venue Booking & Setup</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Venue Selection & Booking Assistance</div>
+                          <div className="text-sm text-gray-600">Banquet Hall Coordination</div>
+                          <div className="text-sm text-gray-600">Outdoor / Garden Venue Setup</div>
+                          <div className="text-sm text-gray-600">Farmhouse Booking</div>
+                          <div className="text-sm text-gray-600">Stage & Seating Arrangement</div>
+                          <div className="text-sm text-gray-600">Parking Arrangement</div>
+                        </div>
+                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-44">Entertainment & Activities</div>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">Music & Sound</div>
+                          
+                          <div className="text-sm text-gray-600">Grand Entry Concepts</div>
+                          <div className="text-sm text-gray-600">Artists</div>
+                          <div className="text-sm text-gray-600">Characters</div>
+                          <div className="text-sm text-gray-600">Games</div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -291,7 +361,6 @@ const Header: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            <a href="/packages" className="font-semibold text-white hover:text-brand-gold transition-colors">PACKAGES</a>
             <a href="/blogs" className="font-semibold text-white hover:text-brand-gold transition-colors">BLOGS</a>
             <a href="#reviews" className="font-semibold text-white hover:text-brand-gold transition-colors">REVIEWS</a>
             <a href="#contact" className="font-semibold text-white hover:text-brand-gold transition-colors">CONTACT US</a>
@@ -413,7 +482,6 @@ const Header: React.FC = () => {
                   ))}
                 </div>
 
-                <a href="/packages" className="font-semibold text-white py-2">PACKAGES</a>
                 <a href="/blogs" className="font-semibold text-white py-2">BLOGS</a>
                 <a href="#reviews" className="font-semibold text-white py-2">REVIEWS</a>
                 <a href="#contact" className="font-semibold text-white py-2">CONTACT US</a>
