@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Send, MessageCircle, Clock, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, MessageCircle, Clock, CheckCircle, Heart, Star } from 'lucide-react';
 
 const ConnectWithUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -35,89 +35,129 @@ const ConnectWithUs: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-brand-primary/10 to-brand-secondary/5">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-24 bg-gradient-to-br from-brand-primary/10 to-brand-secondary/5 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.3, 1]
+          }}
+          transition={{ 
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-10 right-10 w-48 h-48 border border-brand-primary/5 rounded-full"
+        />
+        <motion.div
+          animate={{ 
+            rotate: -360,
+            scale: [1, 0.7, 1]
+          }}
+          transition={{ 
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute bottom-10 left-10 w-36 h-36 border border-brand-gold/10 rounded-full"
+        />
+      </div>
+
+      <div className="container mx-auto px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-dancing">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 bg-brand-primary/10 rounded-full px-6 py-3 mb-6"
+          >
+            <MessageCircle className="text-brand-primary" size={20} />
+            <span className="text-brand-primary font-semibold">Let's Connect</span>
+          </motion.div>
+          
+          <h2 className="text-display-md md:text-display-lg font-bold text-gray-800 mb-8 font-display">
             Connect With Us
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to start planning your dream event? Get in touch for a free consultation and let's make your vision come to life
+          <p className="text-body-lg md:text-heading-md text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Ready to start planning your dream event? Get in touch for a 
+            <span className="text-brand-primary font-semibold"> free consultation</span> and let's make your vision come to life
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">Get In Touch</h3>
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-10 shadow-lg border border-white/50">
+              <h3 className="text-heading-lg font-bold text-gray-800 mb-8 font-display">Get In Touch</h3>
               
               <div className="space-y-6">
                 <motion.div 
-                  className="flex items-center gap-4 p-4 rounded-lg hover:bg-brand-accent/20 transition-colors"
-                  whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 p-5 rounded-2xl hover:bg-brand-accent/20 transition-all duration-300 group"
+                  whileHover={{ x: 10, scale: 1.02 }}
                 >
-                  <div className="bg-brand-primary p-3 rounded-full">
-                    <Phone size={20} className="text-white" />
+                  <div className="bg-gradient-to-r from-brand-primary to-brand-secondary p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Phone size={22} className="text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">Phone</h4>
-                    <p className="text-gray-600">+91-7386813689</p>
-                    <p className="text-gray-600">+91 98498 22899</p>
+                    <h4 className="font-semibold text-gray-800 text-lg">Phone</h4>
+                    <p className="text-gray-600 font-medium">+91-7386813689</p>
+                    <p className="text-gray-600 font-medium">+91 98498 22899</p>
                   </div>
                 </motion.div>
 
                 <motion.div 
-                  className="flex items-center gap-4 p-4 rounded-lg hover:bg-brand-accent/20 transition-colors"
-                  whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 p-5 rounded-2xl hover:bg-brand-accent/20 transition-all duration-300 group"
+                  whileHover={{ x: 10, scale: 1.02 }}
                 >
-                  <div className="bg-brand-secondary p-3 rounded-full">
-                    <Mail size={20} className="text-white" />
+                  <div className="bg-gradient-to-r from-brand-secondary to-brand-primary p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Mail size={22} className="text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">Email</h4>
-                    <p className="text-gray-600">info@ddayevento.com</p>
-                    <p className="text-gray-600">ddayevento9@gmail.com</p>
+                    <h4 className="font-semibold text-gray-800 text-lg">Email</h4>
+                    <p className="text-gray-600 font-medium">info@ddayevento.com</p>
+                    <p className="text-gray-600 font-medium">ddayevento9@gmail.com</p>
                   </div>
                 </motion.div>
 
                 <motion.div 
-                  className="flex items-center gap-4 p-4 rounded-lg hover:bg-brand-accent/20 transition-colors"
-                  whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 p-5 rounded-2xl hover:bg-brand-accent/20 transition-all duration-300 group"
+                  whileHover={{ x: 10, scale: 1.02 }}
                 >
-                  <div className="bg-brand-gold p-3 rounded-full">
-                    <MapPin size={20} className="text-white" />
+                  <div className="bg-gradient-to-r from-brand-gold to-yellow-400 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <MapPin size={22} className="text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">Address</h4>
-                    <p className="text-gray-600">Hyderabad, Telangana</p>
-                    <p className="text-gray-600">Serving Greater Hyderabad Area</p>
+                    <h4 className="font-semibold text-gray-800 text-lg">Address</h4>
+                    <p className="text-gray-600 font-medium">Hyderabad, Telangana</p>
+                    <p className="text-gray-600 font-medium">Serving Greater Hyderabad Area</p>
                   </div>
                 </motion.div>
 
                 <motion.div 
-                  className="flex items-center gap-4 p-4 rounded-lg hover:bg-brand-accent/20 transition-colors"
-                  whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 p-5 rounded-2xl hover:bg-brand-accent/20 transition-all duration-300 group"
+                  whileHover={{ x: 10, scale: 1.02 }}
                 >
-                  <div className="bg-green-500 p-3 rounded-full">
-                    <Clock size={20} className="text-white" />
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Clock size={22} className="text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">Business Hours</h4>
-                    <p className="text-gray-600">Mon - Sat: 9:00 AM - 8:00 PM</p>
-                    <p className="text-gray-600">24/7 Event Support Available</p>
+                    <h4 className="font-semibold text-gray-800 text-lg">Business Hours</h4>
+                    <p className="text-gray-600 font-medium">Mon - Sat: 9:00 AM - 8:00 PM</p>
+                    <p className="text-gray-600 font-medium">24/7 Event Support Available</p>
                   </div>
                 </motion.div>
               </div>
@@ -127,22 +167,52 @@ const ConnectWithUs: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-r from-brand-primary to-brand-secondary rounded-2xl p-8 text-white text-center"
+              className="bg-gradient-to-r from-brand-primary to-brand-secondary rounded-3xl p-10 text-white text-center relative overflow-hidden"
             >
-              <MessageCircle size={48} className="mx-auto mb-4 text-brand-gold" />
-              <h3 className="text-2xl font-bold mb-4 font-dancing">Free Consultation Available</h3>
-              <p className="mb-6 text-white/90">
+              {/* Background decoration */}
+              <div className="absolute inset-0 overflow-hidden">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute -top-10 -right-10 w-32 h-32 border border-white/10 rounded-full"
+                />
+              </div>
+              
+              <div className="relative">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <MessageCircle size={56} className="mx-auto mb-6 text-brand-gold" />
+                </motion.div>
+                
+                <h3 className="text-heading-lg md:text-heading-xl font-bold mb-6 font-display">
+                  Free Consultation Available
+                </h3>
+                <p className="mb-8 text-white/90 text-body-lg leading-relaxed">
                 Schedule a no-obligation consultation to discuss your event vision and get expert advice
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-brand-primary px-8 py-3 rounded-full font-bold hover:bg-brand-gold hover:text-white transition-all duration-300"
-              >
-                Book Free Consultation
-              </motion.button>
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white text-brand-primary px-8 py-4 rounded-full font-bold hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-lg"
+                  >
+                    Book Free Consultation
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-brand-primary transition-all duration-300"
+                  >
+                    <Star size={20} className="inline mr-2" />
+                    View Portfolio
+                  </motion.button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
 
@@ -150,29 +220,39 @@ const ConnectWithUs: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">Event Questionnaire</h3>
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-10 shadow-lg border border-white/50">
+              <h3 className="text-heading-lg font-bold text-gray-800 mb-8 font-display">Event Questionnaire</h3>
               
               {showSuccess ? (
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="text-center py-8"
+                  className="text-center py-12"
                 >
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle size={32} className="text-green-600" />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1, repeat: 2 }}
+                    className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+                  >
+                    <CheckCircle size={40} className="text-green-600" />
+                  </motion.div>
+                  <h4 className="text-heading-md font-bold text-gray-800 mb-4 font-display">Message Sent!</h4>
+                  <p className="text-gray-600 text-body-lg">
+                    We'll get back to you within 24 hours with a personalized consultation.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 mt-4 text-brand-primary">
+                    <Heart size={16} />
+                    <span className="text-sm font-medium">Thank you for choosing D-Day Evento!</span>
                   </div>
-                  <h4 className="text-xl font-bold text-gray-800 mb-2 font-dancing">Message Sent!</h4>
-                  <p className="text-gray-600">We'll get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-body-md font-semibold text-gray-700 mb-3">
                         Full Name *
                       </label>
                       <input
@@ -181,13 +261,13 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors"
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
                         placeholder="Enter your full name"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-body-md font-semibold text-gray-700 mb-3">
                         Phone Number *
                       </label>
                       <input
@@ -196,14 +276,14 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors"
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
                         placeholder="Enter your phone number"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-body-md font-semibold text-gray-700 mb-3">
                       Email Address *
                     </label>
                     <input
@@ -212,20 +292,20 @@ const ConnectWithUs: React.FC = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors"
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
                       placeholder="Enter your email address"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-body-md font-semibold text-gray-700 mb-3">
                       Event Type
                     </label>
                     <select
                       name="eventType"
                       value={formData.eventType}
                       onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors"
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
                     >
                       <option value="">Select event type</option>
                       <option value="weddings">Weddings</option>
@@ -238,7 +318,7 @@ const ConnectWithUs: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-body-md font-semibold text-gray-700 mb-3">
                       Tell us about your event *
                     </label>
                     <textarea
@@ -246,8 +326,8 @@ const ConnectWithUs: React.FC = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={4}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors resize-none"
+                      rows={5}
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 resize-none hover:border-brand-primary/50"
                       placeholder="Describe your event vision, expected guests, date preferences, and any specific requirements..."
                     />
                   </div>
@@ -255,19 +335,19 @@ const ConnectWithUs: React.FC = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-brand-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-brand-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white py-4 px-8 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-3"
                   >
                     {isSubmitting ? (
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                        className="w-6 h-6 border-2 border-white border-t-transparent rounded-full"
                       />
                     ) : (
                       <>
-                        <Send size={18} />
+                        <Send size={20} />
                         Send Message
                       </>
                     )}
