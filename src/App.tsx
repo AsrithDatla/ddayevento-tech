@@ -11,10 +11,12 @@ import VisualGalleries from './components/VisualGalleries';
 import ConnectWithUs from './components/ConnectWithUs';
 import WhatsAppFloat from './components/WhatsAppFloat';
 import Footer from './components/Footer';
+import AboutUs from './pages/AboutUs';
+import Blogs from './pages/Blogs';
 
 // Lazy load event and service pages
-const EventSubPage = lazy(() => import('./pages/events/EventSubPage'));
-const ServiceSubPage = lazy(() => import('./pages/services/ServiceSubPage'));
+const EventDetailPage = lazy(() => import('./pages/events/EventDetailPage'));
+const ServiceDetailPage = lazy(() => import('./pages/services/ServiceDetailPage'));
 
 function App() {
   return (
@@ -34,9 +36,10 @@ function App() {
               <ConnectWithUs />
             </>
           } />
-          <Route path="/events/:eventId/:subEventId" element={<EventSubPage />} />
-          <Route path="/services/:serviceId/:subServiceId" element={<ServiceSubPage />} />
-          <Route path="/services/:serviceId" element={<ServiceSubPage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
+          <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />
         </Routes>
       </Suspense>
       <Footer />

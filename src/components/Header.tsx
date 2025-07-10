@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Phone, Mail, Instagram, Facebook, Linkedin, Menu, X } from 'lucide-react';
-import { eventsData } from '../data/eventsData';
-import { servicesData } from '../data/servicesData';
+import { 
+  desktopEventsNavSections, 
+  desktopServicesNavSections,
+  mobileEventsNavSections,
+  mobileServicesNavSections,
+  generateEventUrl,
+  generateServiceUrl
+} from '../data/navConfig';
 
 // Snapchat icon component since it's not in lucide-react
 const SnapchatIcon = ({ size = 16, className = "" }) => (
@@ -11,56 +17,6 @@ const SnapchatIcon = ({ size = 16, className = "" }) => (
   </svg>
 );
 
-// Helper function to split and group items for 4 columns
-function splitIntoFourColumns<T extends { subEvents?: any[]; subServices?: any[] }>(items: T[]): T[][] {
-  // Group items with >1 subItems first, then those with 1 or none
-  const withMany = items.filter(item => (item.subEvents ? item.subEvents.length : (item.subServices ? item.subServices.length : 0)) > 1);
-  const withOneOrNone = items.filter(item => (item.subEvents ? item.subEvents.length : (item.subServices ? item.subServices.length : 0)) <= 1);
-
-  // Combine, so all with 1 or none are at the end
-  const sorted = [...withMany, ...withOneOrNone];
-
-  // Split into 4 columns as evenly as possible
-  const columns: T[][] = [[], [], [], []];
-  sorted.forEach((item, idx) => {
-    columns[idx % 4].push(item);
-  });
-  return columns;
-}
-
-// Helper to get the main event by id
-function getEventById(id: string) {
-  return eventsData.find(event => event.id === id);
-}
-
-// Custom column order
-const COLUMN_HEADINGS = [
-  { id: 'weddings', label: 'Weddings' },
-  { id: 'college-events', label: 'College Events' },
-  { id: 'corporate-events', label: 'Corporate Events' },
-  { id: 'festivals-special-days', label: 'Festivals/Special Days' }
-];
-
-// Build columns: each starts with its main heading, then fill with others
-function buildEventColumns() {
-  // Get the main events for each column
-  const columns = COLUMN_HEADINGS.map(heading => {
-    const mainEvent = getEventById(heading.id);
-    return mainEvent ? [mainEvent] : [];
-  });
-
-  // Gather all other events not in the main headings
-  const usedIds = new Set(COLUMN_HEADINGS.map(h => h.id));
-  const otherEvents = eventsData.filter(event => !usedIds.has(event.id));
-
-  // Distribute other events evenly into columns
-  otherEvents.forEach((event, idx) => {
-    columns[idx % 4].push(event);
-  });
-
-  return columns;
-}
-
 const Header: React.FC = () => {
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -68,20 +24,17 @@ const Header: React.FC = () => {
   const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
   const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
 
-  const toggleMobileEventExpansion = (eventId: string) => {
+  const toggleMobileEventExpansion = (sectionId: string) => {
     setExpandedMobileEvents(prev => 
-      prev === eventId ? null : eventId
+      prev === sectionId ? null : sectionId
     );
   };
 
-  const toggleMobileServiceExpansion = (serviceId: string) => {
+  const toggleMobileServiceExpansion = (sectionId: string) => {
     setExpandedMobileServices(prev => 
-      prev === serviceId ? null : serviceId
+      prev === sectionId ? null : sectionId
     );
   };
-
-  const eventColumns = buildEventColumns();
-  const servicesColumns = splitIntoFourColumns(servicesData);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-lg">
@@ -116,16 +69,18 @@ const Header: React.FC = () => {
             className="flex items-center flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
-            <img 
-              src="/final-white-logo-400-120.png" 
-              alt="D-Day Evento" 
-              className="w-44 h-10 md:w-56 md:h-12 object-contain"
-            />
+            <a href="/">
+              <img 
+                src="/final-white-logo-400-120.png" 
+                alt="D-Day Evento" 
+                className="w-44 h-10 md:w-56 md:h-12 object-contain"
+              />
+            </a>
           </motion.div>
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex flex-1 items-center justify-center gap-10">
-            <a href="#home" className="font-semibold text-white hover:text-brand-gold transition-colors">HOME</a>
+            <a href="/" className="font-semibold text-white hover:text-brand-gold transition-colors">HOME</a>
             <a href="/about" className="font-semibold text-white hover:text-brand-gold transition-colors">ABOUT US</a>
             
             {/* Events Dropdown */}
@@ -147,80 +102,25 @@ const Header: React.FC = () => {
                     onMouseEnter={() => setIsEventsOpen(true)}
                     onMouseLeave={() => setIsEventsOpen(false)}
                   >
-                    <div className="grid grid-cols-4 gap-6 w-full">
-                      {/* Traditional Events */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Traditional Events</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Cradle Ceremony</div>
-                          <div className="text-sm text-gray-600">Naming Ceremony</div>
-                          <div className="text-sm text-gray-600">Annaprasana</div>
-                          <div className="mt-2 text-sm text-gray-600">Baby Shower</div>
-                          <div className="text-sm text-gray-600">Sreemantham</div>
-                          <div className="mt-2 text-sm text-gray-600">Half Saree Function</div>
-                          <div className="text-sm text-gray-600">Dhoti Function</div>
-                          <div className="text-sm text-gray-600">Upanayanam Ceremony</div>
-                          <div className="mt-2 text-sm text-gray-600">House Warming</div>
-                          <div className="text-sm text-gray-600">Gruhapravesham</div>
+                    <div className="grid grid-cols-3 gap-6 w-full">
+                      {desktopEventsNavSections.map((section) => (
+                        <div key={section.id}>
+                          <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">
+                            {section.label}
+                          </div>
+                          <div className="space-y-1">
+                            {section.items.map((item, index) => (
+                              <a
+                                key={index}
+                                href={generateEventUrl(section.id, item)}
+                                className="block text-sm text-gray-600 hover:text-brand-primary transition-colors"
+                              >
+                                {item}
+                              </a>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      {/* Weddings Events */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Weddings Events</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Engagement</div>
-                          <div className="text-sm text-gray-600">Pellikoduku</div>
-                          <div className="text-sm text-gray-600">Pellikuthuru</div>
-                          <div className="text-sm text-gray-600">Haldi</div>
-                          <div className="text-sm text-gray-600">Mehendi</div>
-                          <div className="text-sm text-gray-600">Bachelors Party</div>
-                          <div className="text-sm text-gray-600">Sangeet</div>
-                          <div className="text-sm text-gray-600">Bharath</div>
-                          <div className="text-sm text-gray-600">Wedding Day</div>
-                          <div className="text-sm text-gray-600">Reception</div>
-                        </div>
-                      </div>
-                      {/* Birthdays & Corporate Events */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Birthdays</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Baby Welcoming Event</div>
-                          <div className="text-sm text-gray-600">Cake smash</div>
-                          <div className="text-sm text-gray-600">1st Year Birthday Parties</div>
-                          <div className="text-sm text-gray-600">Kids Yearly Birthdays</div>
-                          <div className="text-sm text-gray-600">Adult Birthday Parties</div>
-                        </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">Corporate Events</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Corporate Party</div>
-                          <div className="text-sm text-gray-600">Team Day Outings</div>
-                          <div className="text-sm text-gray-600">Office Parties</div>
-                          <div className="text-sm text-gray-600">Team Lunch/Dinner</div>
-                          <div className="text-sm text-gray-600">Daily Catering Boxes</div>
-                        </div>
-                      </div>
-                      {/* Special Days & College Events */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Special Days</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Surprise Parties</div>
-                          <div className="text-sm text-gray-600">Kitty Parties</div>
-                          <div className="text-sm text-gray-600">House Parties</div>
-                          <div className="text-sm text-gray-600">Candle Light Dinners</div>
-                          <div className="text-sm text-gray-600">Valentines/Proposal</div>
-                          <div className="text-sm text-gray-600">Retirement Day</div>
-                          <div className="text-sm text-gray-600">Anniversaries</div>
-                        </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">College Events</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Annual Day</div>
-                          <div className="text-sm text-gray-600">Sports Day</div>
-                          <div className="text-sm text-gray-600">Cultural Day</div>
-                          <div className="text-sm text-gray-600">Freshers Day</div>
-                          <div className="text-sm text-gray-600">Farewell Day</div>
-                          <div className="text-sm text-gray-600">Convocation Day</div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </motion.div>
                 )}
@@ -247,114 +147,24 @@ const Header: React.FC = () => {
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
                     <div className="grid grid-cols-4 gap-6 w-full">
-                      {/* Decoration */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Decoration</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Theme-Based Stage Decoration</div>
-                          <div className="text-sm text-gray-600">Balloon Decoration</div>
-                          <div className="text-sm text-gray-600">Floral Decoration</div>
-                          <div className="text-sm text-gray-600">Fabric Drapes & Canopies</div>
-                          <div className="text-sm text-gray-600">LED / Neon Signage</div>
-                          <div className="text-sm text-gray-600">Entry Gate Setup</div>
-                          <div className="text-sm text-gray-600">Welcome Board & Easel Setup</div>
-                          <div className="text-sm text-gray-600">Table Styling</div>
-                          <div className="text-sm text-gray-600">Photo Booth / Backdrop Walls</div>
-                          <div className="text-sm text-gray-600">Themed Props & Cutouts</div>
-                          <div className="text-sm text-gray-600">Hanging / Ceiling Decor</div>
-                          <div className="text-sm text-gray-600">LED Letters & Numbers</div>
-                          <div className="text-sm text-gray-600">Decor Lighting</div>
+                      {desktopServicesNavSections.map((section) => (
+                        <div key={section.id}>
+                          <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">
+                            {section.label}
+                          </div>
+                          <div className="space-y-1">
+                            {section.items.map((item, index) => (
+                              <a
+                                key={index}
+                                href={generateServiceUrl(section.id, item)}
+                                className="block text-sm text-gray-600 hover:text-brand-primary transition-colors"
+                              >
+                                {item}
+                              </a>
+                            ))}
+                          </div>
                         </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-6">Cakes</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Custom Theme Cakes</div>
-                          <div className="text-sm text-gray-600">Fondant / Cream Cakes</div>
-                          <div className="text-sm text-gray-600">Dessert Table Styling</div>
-                          <div className="text-sm text-gray-600">Cupcakes, Brownies, Macarons</div>
-                          <div className="text-sm text-gray-600">Name Cakes / Number Cakes</div>
-                          <div className="text-sm text-gray-600">Eggless / Egg Options</div>
-                          <div className="text-sm text-gray-600">Smash Cake for Babies</div>
-                          <div className="text-sm text-gray-600">Instant Cake Cutting Setup</div>
-                        </div>
-                      </div>
-                      {/* Photography & Videography + Return Gifts */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Photography & Videography</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Regular Photography</div>
-                          <div className="text-sm text-gray-600">Regular Videography</div>
-                          <div className="text-sm text-gray-600">Candid Photography</div>
-                          <div className="text-sm text-gray-600">Candid Videography</div>
-                          <div className="text-sm text-gray-600">Teaser / Trailer Video</div>
-                          <div className="text-sm text-gray-600">Drone Photography & Video</div>
-                          <div className="text-sm text-gray-600">Instant Photo Printing Booth</div>
-                          <div className="text-sm text-gray-600">Live Streaming</div>
-                          <div className="text-sm text-gray-600">Photo Album Design & Printing</div>
-                          <div className="text-sm text-gray-600">Same-Day Edits</div>
-                        </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 font-dancing mt-16">Return Gifts</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Personalized Gifts</div>
-                          <div className="text-sm text-gray-600">Theme-Based Gift Boxes</div>
-                          <div className="text-sm text-gray-600">Sweet Boxes / Custom Hampers</div>
-                          <div className="text-sm text-gray-600">Eco-Friendly Gifts</div>
-                          <div className="text-sm text-gray-600">Toys / Stationery Sets</div>
-                          <div className="text-sm text-gray-600">Utility Gift Packs</div>
-                          <div className="text-sm text-gray-600">Trousseau Packing</div>
-                          <div className="text-sm text-gray-600">Premium Packing & Tagging</div>
-                          <div className="text-sm text-gray-600">Gift Counters with Attendants</div>
-                        </div>
-                      </div>
-                      {/* Food & Catering + Makeup & Styling */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Food & Catering</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Veg / Non-Veg Catering</div>
-                          <div className="text-sm text-gray-600">South Indian</div>
-                          <div className="text-sm text-gray-600">North Indian</div>
-                          <div className="text-sm text-gray-600">Continental</div>
-                          <div className="text-sm text-gray-600">Italian</div>
-                          <div className="text-sm text-gray-600">Indo-Chinese</div>
-                          <div className="text-sm text-gray-600">Pan Asian</div>
-                          <div className="text-sm text-gray-600">Live Counters/Stalls</div>
-                          <div className="text-sm text-gray-600">Cutlery</div>
-                          <div className="text-sm text-gray-600">Waiter / Staff Management</div>
-                        </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-24">Makeup & Styling</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Party Makeup</div>
-                          <div className="text-sm text-gray-600">Bridal Makeup</div>
-                          <div className="text-sm text-gray-600">Groom Makeup & Styling</div>
-                          <div className="text-sm text-gray-600">Saree/Half Saree Draping</div>
-                          <div className="text-sm text-gray-600">Hair Styling & Hairdo</div>
-                          <div className="text-sm text-gray-600">Mehendi Artist</div>
-                          <div className="text-sm text-gray-600">Nail Art Station</div>
-                          <div className="text-sm text-gray-600">Touch-Up Corner</div>
-                          <div className="text-sm text-gray-600">Group Makeup</div>
-                          <div className="text-sm text-gray-600">Makeup Trials</div>
-                        </div>
-                      </div>
-                      {/* Venue Booking & Setup + Entertainment & Activities */}
-                      <div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">Venue Booking & Setup</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Venue Selection & Booking Assistance</div>
-                          <div className="text-sm text-gray-600">Banquet Hall Coordination</div>
-                          <div className="text-sm text-gray-600">Outdoor / Garden Venue Setup</div>
-                          <div className="text-sm text-gray-600">Farmhouse Booking</div>
-                          <div className="text-sm text-gray-600">Stage & Seating Arrangement</div>
-                          <div className="text-sm text-gray-600">Parking Arrangement</div>
-                        </div>
-                        <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing mt-44">Entertainment & Activities</div>
-                        <div className="space-y-1">
-                          <div className="text-sm text-gray-600">Music & Sound</div>
-                          
-                          <div className="text-sm text-gray-600">Grand Entry Concepts</div>
-                          <div className="text-sm text-gray-600">Artists</div>
-                          <div className="text-sm text-gray-600">Characters</div>
-                          <div className="text-sm text-gray-600">Games</div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </motion.div>
                 )}
@@ -385,7 +195,7 @@ const Header: React.FC = () => {
               className="lg:hidden mt-4 py-4 border-t border-gray-700 max-h-96 overflow-y-auto scrollbar-hide"
             >
               <div className="flex flex-col gap-2">
-                <a href="#home" className="font-semibold text-white py-2">HOME</a>
+                <a href="/" className="font-semibold text-white py-2">HOME</a>
                 <a href="/about" className="font-semibold text-white py-2">ABOUT US</a>
                 
                 {/* Mobile Events Accordion */}
@@ -393,35 +203,35 @@ const Header: React.FC = () => {
                   <div className="font-semibold text-white py-2 border-b border-gray-600">
                     EVENTS
                   </div>
-                  {eventsData.map((event) => (
-                    <div key={event.id} className="ml-4">
+                  {mobileEventsNavSections.map((section) => (
+                    <div key={section.id} className="ml-4">
                       <button
-                        onClick={() => toggleMobileEventExpansion(event.id)}
+                        onClick={() => toggleMobileEventExpansion(section.id)}
                         className="flex items-center justify-between w-full text-left text-brand-gold font-medium py-2"
                       >
-                        {event.name}
+                        {section.label}
                         <ChevronDown 
                           size={16} 
                           className={`transform transition-transform ${
-                            expandedMobileEvents === event.id ? 'rotate-180' : ''
+                            expandedMobileEvents === section.id ? 'rotate-180' : ''
                           }`} 
                         />
                       </button>
                       <AnimatePresence>
-                        {expandedMobileEvents === event.id && (
+                        {expandedMobileEvents === section.id && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             className="ml-4 space-y-1"
                           >
-                            {event.subEvents && event.subEvents.map((subEvent) => (
+                            {section.items.map((item, index) => (
                               <a
-                                key={subEvent.id}
-                                href={`/events/${event.id}/${subEvent.id}`}
+                                key={index}
+                                href={generateEventUrl(section.id, item)}
                                 className="block text-gray-300 text-sm py-1 hover:text-white"
                               >
-                                {subEvent.name}
+                                {item}
                               </a>
                             ))}
                           </motion.div>
@@ -436,45 +246,37 @@ const Header: React.FC = () => {
                   <div className="font-semibold text-white py-2 border-b border-gray-600">
                     SERVICES
                   </div>
-                  {servicesData.map((service) => (
-                    <div key={service.id} className="ml-4">
+                  {mobileServicesNavSections.map((section) => (
+                    <div key={section.id} className="ml-4">
                       <button
-                        onClick={() => toggleMobileServiceExpansion(service.id)}
+                        onClick={() => toggleMobileServiceExpansion(section.id)}
                         className="flex items-center justify-between w-full text-left text-brand-gold font-medium py-2"
                       >
-                        {service.name}
+                        {section.label}
                         <ChevronDown 
                           size={16} 
                           className={`transform transition-transform ${
-                            expandedMobileServices === service.id ? 'rotate-180' : ''
+                            expandedMobileServices === section.id ? 'rotate-180' : ''
                           }`} 
                         />
                       </button>
                       <AnimatePresence>
-                        {expandedMobileServices === service.id && (
+                        {expandedMobileServices === section.id && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             className="ml-4 space-y-1"
                           >
-                            {service.subServices && service.subServices.map((subService) => (
+                            {section.items.map((item, index) => (
                               <a
-                                key={subService.id}
-                                href={`/services/${service.id}/${subService.id}`}
+                                key={index}
+                                href={generateServiceUrl(section.id, item)}
                                 className="block text-gray-300 text-sm py-1 hover:text-white"
                               >
-                                {subService.name}
+                                {item}
                               </a>
                             ))}
-                            {!service.subServices && (
-                              <a
-                                href={`/services/${service.id}`}
-                                className="block text-gray-300 text-sm py-1 hover:text-white"
-                              >
-                                View Details
-                              </a>
-                            )}
                           </motion.div>
                         )}
                       </AnimatePresence>
