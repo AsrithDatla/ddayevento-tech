@@ -9,7 +9,24 @@ export default {
           secondary: '#578FCA',
           accent: '#F5F0CD',
           gold: '#FADA7A',
-        }
+          // Enhanced color palette
+          'primary-dark': '#2A5A94',
+          'primary-light': '#4A84C7',
+          'gold-dark': '#E6C366',
+          'gold-light': '#FDE68A',
+          'neutral-50': '#F8F9FA',
+          'neutral-100': '#E9ECEF',
+          'neutral-200': '#DEE2E6',
+          'neutral-300': '#CED4DA',
+          'neutral-400': '#ADB5BD',
+          'neutral-500': '#6C757D',
+          'neutral-600': '#495057',
+          'neutral-700': '#343A40',
+          'neutral-800': '#212529',
+          'neutral-900': '#1A1D20',
+        },
+        // WhatsApp brand color
+        whatsapp: '#25D366',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

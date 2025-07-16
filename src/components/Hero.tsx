@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Sparkles, MapPin, Heart, Users, Calendar } from 'lucide-react';
-import QuoteModal from './QuoteModal';
+import QuoteModal from './QuoteGenerator/QuoteModal';
+import { FloatingTrustBadge } from './TrustIndicators';
 
 const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -83,6 +84,9 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
+      {/* Floating Trust Badge */}
+      <FloatingTrustBadge className="absolute top-32 right-8 hidden lg:block" />
+
       {/* Hero Content */}
       <div className="relative flex items-center justify-center min-h-screen pt-32 pb-20">
         <div className="container mx-auto px-6 text-center">
@@ -92,7 +96,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            {/* Trust Badge */}
+            {/* Trust Badge with Local Focus */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -100,32 +104,32 @@ const Hero: React.FC = () => {
               className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/30"
             >
               <Star className="text-brand-gold" size={20} />
-              <span className="text-white font-medium">Trusted by 400+ Happy Families</span>
+              <span className="text-white font-medium">Hyderabad's #1 Event Planners</span>
               <Star className="text-brand-gold" size={20} />
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline with Local Positioning */}
             <motion.h1 
               className="text-display-lg md:text-display-xl font-black text-white mb-8 leading-tight font-hero tracking-wider"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.4, delay: 0.5, ease: "easeOut" }}
             >
-              YOUR VISION,
+              HYDERABAD'S MOST
               <br />
               <span className="text-brand-gold bg-gradient-to-r from-brand-gold to-yellow-300 bg-clip-text text-transparent"> 
-                OUR PASSION
+                TRUSTED EVENT PLANNERS
               </span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Subheadline with Local Market Focus */}
             <motion.h2 
               className="text-heading-md md:text-heading-xl font-semibold text-white/95 mb-10 font-display"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.9 }}
             >
-              Creating Unforgettable Celebrations in Hyderabad
+              Premier Wedding Planners & Event Management Company in Hyderabad
             </motion.h2>
 
             {/* Value Proposition */}
@@ -141,24 +145,24 @@ const Hero: React.FC = () => {
               </p>
             </motion.div>
 
-            {/* Stats Row */}
+            {/* Stats Row - Mobile Optimized */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.3 }}
-              className="flex flex-wrap justify-center gap-8 mb-12"
+              className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-12"
             >
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-brand-gold">400+</div>
-                <div className="text-white/80 text-sm">Happy Clients</div>
+              <div className="text-center min-w-[80px]">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">500+</div>
+                <div className="text-white/80 text-xs sm:text-sm">Happy Clients</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-brand-gold">4+</div>
-                <div className="text-white/80 text-sm">Years Experience</div>
+              <div className="text-center min-w-[80px]">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">6+</div>
+                <div className="text-white/80 text-xs sm:text-sm">Years Experience</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-brand-gold">24/7</div>
-                <div className="text-white/80 text-sm">Support</div>
+              <div className="text-center min-w-[80px]">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">24/7</div>
+                <div className="text-white/80 text-xs sm:text-sm">Support</div>
               </div>
             </motion.div>
 

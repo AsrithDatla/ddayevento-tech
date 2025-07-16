@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Phone, Mail, Instagram, Facebook, Linkedin, Menu, X } from 'lucide-react';
+import { ChevronDown, Phone, Mail, Instagram, Facebook, Linkedin, Menu, X, MapPin } from 'lucide-react';
+import QuoteModal from './QuoteGenerator/QuoteModal';
 import { 
   desktopEventsNavSections, 
   desktopServicesNavSections,
@@ -23,6 +24,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
   const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const toggleMobileEventExpansion = (sectionId: string) => {
     setExpandedMobileEvents(prev => 
@@ -38,25 +40,31 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-lg">
-      {/* Top Bar */}
-      <div className="bg-brand-primary text-white py-0.5 md:py-1">
+      {/* Top Bar with Local Focus - Mobile Optimized */}
+      <div className="bg-brand-primary text-white py-1 md:py-1">
         <div className="container mx-auto px-4 flex justify-between items-center text-xs md:text-sm">
           <div className="flex items-center gap-2 md:gap-6">
             <div className="flex items-center gap-1 md:gap-2">
               <Phone size={12} className="md:w-4 md:h-4" />
-              <span className="hidden sm:inline">+91-7386813689</span>
-              <span className="sm:hidden">+91-7386813689</span>
+              <span className="text-xs sm:text-sm">+91-7386813689</span>
             </div>
             <div className="hidden md:flex items-center gap-2">
               <Mail size={14} />
               <span>info@ddayevento.com</span>
             </div>
+            <div className="hidden lg:flex items-center gap-2 text-brand-gold">
+              <MapPin size={12} />
+              <span>Serving Hyderabad & Surrounding Areas</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 md:gap-4">
-            <Instagram size={14} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
-            <Facebook size={14} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
-            <SnapchatIcon size={14} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
-            <Linkedin size={14} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
+          <div className="flex items-center gap-1 md:gap-4">
+            <div className="hidden md:flex items-center gap-1 text-brand-gold text-xs">
+              <span>500+ Events in Hyderabad</span>
+            </div>
+            <Instagram size={12} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
+            <Facebook size={12} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
+            <SnapchatIcon size={12} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
+            <Linkedin size={12} className="md:w-4 md:h-4 cursor-pointer hover:text-brand-gold transition-colors" />
           </div>
         </div>
       </div>
@@ -69,17 +77,17 @@ const Header: React.FC = () => {
             className="flex items-center flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
-            <a href="/">
+            <a href="/" aria-label="D-Day Evento - Home">
               <img 
                 src="/final-white-logo-400-120.png" 
-                alt="D-Day Evento" 
+                alt="D-Day Evento - Hyderabad's Most Trusted Event Planners" 
                 className="w-44 h-10 md:w-56 md:h-12 object-contain"
               />
             </a>
           </motion.div>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden lg:flex flex-1 items-center justify-center gap-10">
+          <div className="hidden lg:flex flex-1 items-center justify-center gap-8">
             <a href="/" className="font-semibold text-white hover:text-brand-gold transition-colors">HOME</a>
             <a href="/about" className="font-semibold text-white hover:text-brand-gold transition-colors">ABOUT US</a>
             
@@ -176,10 +184,25 @@ const Header: React.FC = () => {
             <a href="#contact" className="font-semibold text-white hover:text-brand-gold transition-colors">CONTACT US</a>
           </div>
 
+          {/* Get Quote CTA Button */}
+          <div className="hidden lg:flex">
+            <motion.button
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="bg-brand-gold hover:bg-brand-gold-dark text-brand-primary px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              GET QUOTE
+            </motion.button>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -189,6 +212,7 @@ const Header: React.FC = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
+              id="mobile-menu"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -287,11 +311,27 @@ const Header: React.FC = () => {
                 <a href="/blogs" className="font-semibold text-white py-2">BLOGS</a>
                 <a href="#reviews" className="font-semibold text-white py-2">REVIEWS</a>
                 <a href="#contact" className="font-semibold text-white py-2">CONTACT US</a>
+                
+                {/* Mobile Get Quote Button */}
+                <motion.button
+                  onClick={() => setIsQuoteModalOpen(true)}
+                  className="bg-brand-gold hover:bg-brand-gold-dark text-brand-primary px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 shadow-lg mt-4"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  GET QUOTE
+                </motion.button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
+
+      {/* Quote Modal */}
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </header>
   );
 };

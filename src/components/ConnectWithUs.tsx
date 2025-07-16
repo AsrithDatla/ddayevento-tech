@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, MessageCircle, Clock, CheckCircle, Heart, Star } from 'lucide-react';
+import { InlineTrustIndicators } from './TrustIndicators';
 
 const ConnectWithUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -86,13 +87,16 @@ const ConnectWithUs: React.FC = () => {
           <h2 className="text-display-md md:text-display-lg font-bold text-gray-800 mb-8 font-display">
             Connect With Us
           </h2>
-          <p className="text-body-lg md:text-heading-md text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Ready to start planning your dream event? Get in touch for a 
-            <span className="text-brand-primary font-semibold"> free consultation</span> and let's make your vision come to life
+          <p className="text-body-lg md:text-heading-md text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            Ready to start planning your dream event in Hyderabad? Get in touch for a 
+            <span className="text-brand-primary font-semibold"> free consultation</span> and let's make your vision come to life across Gachibowli, Kondapur, and Jubilee Hills
           </p>
+          
+          {/* Trust Indicators */}
+          <InlineTrustIndicators className="mb-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -261,7 +265,7 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
+                        className="w-full p-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation"
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -276,7 +280,7 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
+                        className="w-full p-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation"
                         placeholder="Enter your phone number"
                       />
                     </div>
@@ -338,6 +342,7 @@ const ConnectWithUs: React.FC = () => {
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white py-4 px-8 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-3"
+                    aria-label={isSubmitting ? "Sending message..." : "Send message"}
                   >
                     {isSubmitting ? (
                       <motion.div

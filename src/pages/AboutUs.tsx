@@ -39,7 +39,7 @@ const AboutUs: React.FC = () => {
             <div>
               <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">Who We Are?</h2>
               <p className="text-gray-700 mb-6">
-                We are a young company driven to cater to the humongous Wedding Business and we are a passionate team to deliver and be a part of your event planning and organizing and make your D-Day the most memorable and special with us here at "D-DAY EVENTO". Celebrate your big day!
+                We are Hyderabad's premier event management company driven to cater to the wedding and event planning business across Telangana. As passionate event planners in Hyderabad, we deliver exceptional service and make your D-Day the most memorable and special with us here at "D-DAY EVENTO". Celebrate your big day with Hyderabad's most trusted event planners!
               </p>
               <img src={aboutImages[0]} alt="Who We Are" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
             </div>
@@ -47,7 +47,7 @@ const AboutUs: React.FC = () => {
               <img src={aboutImages[1]} alt="What We Can Do" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
               <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">What We Can Do?</h2>
               <p className="text-gray-700">
-                Birthdays, Anniversaries, Weddings, Wedding functions, All Traditional Events, All Ceremonies, Decoration and Lighting, Catering, Photography, Makeup & Mehendi, Music and Entertainment, Gifts, All Services related to an Event.
+                Birthday party planners in Hyderabad, Anniversary celebrations, Wedding planners Hyderabad, Traditional Telugu wedding functions, All ceremonial events across Telangana, Event decoration and lighting in Gachibowli, Catering services Hyderabad, Wedding photography Kondapur, Bridal makeup & Mehendi artists, DJ and entertainment services, Return gifts, and all event management services in Hyderabad.
               </p>
             </div>
           </div>
@@ -64,7 +64,7 @@ const AboutUs: React.FC = () => {
                   <span className="inline-block">🔔</span> D-Day Team
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  Our team is passionate and smart working group of employees. We give in our maximum efforts for meeting our client's requirements to the fullest. Our team's main motto is to provide quality, coordination, and excellent communication to all our clients. We handle each event with care and create those moments each client awaits the most. We are a friendly, dedicated team who enjoys and loves what they do.
+                  Our Hyderabad-based team is a passionate and smart working group of event planning professionals. We give our maximum efforts for meeting our client's requirements across Gachibowli, Kondapur, and Jubilee Hills. Our team's main motto is to provide quality event management, coordination, and excellent communication to all our clients in Hyderabad. We handle each event with care and create those moments each client awaits the most. We are a friendly, dedicated team of event planners who enjoys and loves what they do.
                 </p>
                 <img src={aboutImages[2]} alt="D-Day Team" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
               </div>
@@ -75,7 +75,7 @@ const AboutUs: React.FC = () => {
                   <span className="inline-block">🎉</span> Perfect Vendors
                 </h3>
                 <p className="text-gray-700">
-                  We have vendors from all categories and events. We have specialised vendors who have displayed great work. Our vendors believe in delivering quality, assurance, perfection in their field of work. We make sure our vendors provide the quality of work and satisfaction to us and to our clients. We carefully assess all our vendors and choose verified vendors and cater to the client's needs and requirements.
+                  We have the best event vendors across Hyderabad from all categories and events. We have specialised vendors in Gachibowli, Kondapur, and Jubilee Hills who have displayed great work. Our Hyderabad vendors believe in delivering quality, assurance, and perfection in their field of work. We make sure our local vendors provide the quality of work and satisfaction to us and to our clients across Telangana. We carefully assess all our Hyderabad-based vendors and choose verified vendors to cater to the client's needs and requirements.
                 </p>
               </div>
               {/* Unique Memories */}

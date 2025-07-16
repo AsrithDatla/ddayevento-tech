@@ -1,148 +1,285 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { MessageCircle, X, Phone, Clock, Users } from 'lucide-react';
 
-const WhatsAppFloat: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+interface WhatsAppFloatProps {
+  phoneNumber?: string;
+  message?: string;
+  position?: 'bottom-right' | 'bottom-left';
+  showOnScroll?: boolean;
+}
 
-  const handleSendWhatsApp = () => {
-    const phoneNumber = '919849822899';
-    const defaultMessage = message || 'Hi! I\'m interested in your event planning services. Can you help me with more information?';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
+const WhatsAppFloat: React.FC<WhatsAppFloatProps> = ({
+  phoneNumber = '917386813689',
+  message = 'Hi! I\'m interested in your event planning services. Can you help me with a quote?',
+  position = 'bottom-right',
+  showOnScroll = true
+}) => {
+  const [isVisible, setIsVisible] = useState(!showOnScroll);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  // Show/hide based on scroll
+  useEffect(() => {
+    if (!showOnScroll) return;
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 300;
+      setIsVisible(scrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showOnScroll]);
+
+  // Show tooltip after delay
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setShowTooltip(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
+
+  // Hide tooltip after showing for a while
+  useEffect(() => {
+    if (showTooltip) {
+      const timer = setTimeout(() => {
+        setShowTooltip(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showTooltip]);
+
+  const handleWhatsAppClick = () => {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Track click event for analytics and lead scoring
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'whatsapp_click', {
+        event_category: 'engagement',
+        event_label: 'floating_button',
+        value: 1
+      });
+    }
+    
+    // Track WhatsApp engagement for lead scoring
+    try {
+      fetch('/api/analytics/whatsapp-engagement', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'floating_button',
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent
+        })
+      });
+    } catch (error) {
+      console.log('Analytics tracking failed:', error);
+    }
+    
     window.open(whatsappUrl, '_blank');
-    setIsOpen(false);
-    setMessage('');
+    setIsExpanded(false);
   };
 
+  const positionClasses = {
+    'bottom-right': 'bottom-6 right-6',
+    'bottom-left': 'bottom-6 left-6'
+  };
+
+  if (!isVisible) return null;
+
   return (
-    <>
-      {/* Floating WhatsApp Button */}
-      <motion.div
-        className="fixed bottom-6 right-6 z-50"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
-      >
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-colors duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          animate={{ 
-            y: [0, -10, 0],
-          }}
-          transition={{ 
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        >
-          <MessageCircle size={28} />
-        </motion.button>
-
-        {/* Notification Badge */}
-        <motion.div
-          className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 3 }}
-        >
-          1
-        </motion.div>
-      </motion.div>
-
-      {/* WhatsApp Chat Popup */}
+    <div className={`fixed ${positionClasses[position]} z-50`}>
       <AnimatePresence>
-        {isOpen && (
+        {/* Tooltip */}
+        {showTooltip && !isExpanded && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            className="fixed bottom-24 right-6 w-80 bg-white rounded-2xl shadow-2xl z-50 overflow-hidden border border-gray-200"
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            className={`absolute bottom-20 ${position === 'bottom-right' ? 'right-0' : 'left-0'} mb-2`}
           >
-            {/* Header */}
-            <div className="bg-green-500 text-white p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <MessageCircle size={20} />
-                </div>
-                <div>
-                  <h3 className="font-semibold">D-Day Evento</h3>
-                  <p className="text-sm text-green-100">Typically replies instantly</p>
-                </div>
-              </div>
+            <div className="bg-white rounded-lg shadow-lg border p-3 max-w-xs relative">
               <button
-                onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                onClick={() => setShowTooltip(false)}
+                className="absolute -top-2 -right-2 w-6 h-6 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-600"
               >
-                <X size={20} />
+                <X size={12} />
               </button>
-            </div>
-
-            {/* Chat Body */}
-            <div className="p-4">
-              <div className="bg-gray-100 rounded-lg p-3 mb-4">
-                <p className="text-sm text-gray-700">
-                  👋 Hi there! Welcome to D-Day Evento. 
-                  <br />
-                  <br />
-                  How can we help you plan your perfect event today?
-                </p>
+              <div className="text-sm text-gray-800 font-medium mb-1">
+                Need help planning your event?
               </div>
+              <div className="text-xs text-gray-600 mb-2">
+                Chat with us on WhatsApp for instant assistance!
+              </div>
+              <div className="flex items-center gap-2 text-xs text-green-600">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span>Online now</span>
+              </div>
+              {/* Arrow */}
+              <div className={`absolute top-full ${position === 'bottom-right' ? 'right-4' : 'left-4'} w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white`}></div>
+            </div>
+          </motion.div>
+        )}
 
-              <div className="space-y-3">
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message here..."
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
-                  rows={3}
-                />
-
-                <div className="flex flex-col gap-2">
-                  <button
-                    onClick={() => setMessage('I want to plan a wedding event')}
-                    className="text-left p-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
-                  >
-                    💒 I want to plan a wedding event
-                  </button>
-                  <button
-                    onClick={() => setMessage('I need help with a corporate event')}
-                    className="text-left p-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
-                  >
-                    🏢 I need help with a corporate event
-                  </button>
-                  <button
-                    onClick={() => setMessage('Can you help with a birthday party?')}
-                    className="text-left p-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
-                  >
-                    🎉 Can you help with a birthday party?
-                  </button>
+        {/* Expanded Chat Preview */}
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className={`absolute bottom-20 ${position === 'bottom-right' ? 'right-0' : 'left-0'} mb-2`}
+          >
+            <div className="bg-white rounded-2xl shadow-2xl border w-80 overflow-hidden">
+              {/* Header */}
+              <div className="bg-whatsapp text-white p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <MessageCircle size={20} />
+                  </div>
+                  <div>
+                    <div className="font-semibold">D-Day Evento</div>
+                    <div className="text-xs opacity-90 flex items-center gap-1">
+                      <div className="w-2 h-2 bg-green-300 rounded-full"></div>
+                      Online now
+                    </div>
+                  </div>
                 </div>
-
-                <motion.button
-                  onClick={handleSendWhatsApp}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-green-500 hover: bg-green-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center gap-2"
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="text-white/80 hover:text-white"
                 >
-                  <Send size={18} />
-                  Send Message
-                </motion.button>
+                  <X size={20} />
+                </button>
               </div>
-            </div>
 
-            {/* Footer */}
-            <div className="bg-gray-50 px-4 py-2 text-center">
-              <p className="text-xs text-gray-500">
-                We'll respond as soon as possible
-              </p>
+              {/* Chat Content */}
+              <div className="p-4 bg-gray-50 max-h-60 overflow-y-auto">
+                <div className="space-y-3">
+                  {/* Bot Message */}
+                  <div className="flex gap-2">
+                    <div className="w-8 h-8 bg-whatsapp rounded-full flex items-center justify-center flex-shrink-0">
+                      <MessageCircle size={14} className="text-white" />
+                    </div>
+                    <div className="bg-white rounded-lg p-3 shadow-sm max-w-xs">
+                      <div className="text-sm text-gray-800">
+                        👋 Hi! Welcome to D-Day Evento!
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        How can we help you plan your perfect event?
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Options */}
+                  <div className="space-y-2 ml-10">
+                    <button className="block w-full text-left bg-blue-50 hover:bg-blue-100 rounded-lg p-2 text-sm text-blue-800 transition-colors">
+                      🎉 Get Event Quote
+                    </button>
+                    <button className="block w-full text-left bg-purple-50 hover:bg-purple-100 rounded-lg p-2 text-sm text-purple-800 transition-colors">
+                      📅 Check Availability
+                    </button>
+                    <button className="block w-full text-left bg-green-50 hover:bg-green-100 rounded-lg p-2 text-sm text-green-800 transition-colors">
+                      💬 Chat with Expert
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 bg-white border-t">
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="w-full bg-whatsapp hover:bg-whatsapp/90 text-white rounded-lg py-3 px-4 font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={18} />
+                  Continue on WhatsApp
+                </button>
+                <div className="text-xs text-gray-500 text-center mt-2">
+                  Usually replies within minutes
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+
+      {/* Main Floating Button */}
+      <motion.button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="relative w-14 h-14 bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+      >
+        {/* Pulse Animation */}
+        <div className="absolute inset-0 bg-whatsapp rounded-full animate-ping opacity-20"></div>
+        
+        {/* Icon */}
+        <AnimatePresence mode="wait">
+          {isExpanded ? (
+            <motion.div
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <X size={24} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="whatsapp"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <MessageCircle size={24} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Notification Badge */}
+        <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+          1
+        </div>
+      </motion.button>
+
+      {/* Quick Stats (shown on hover) */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className={`absolute bottom-20 ${position === 'bottom-right' ? 'right-16' : 'left-16'} mb-2`}
+          >
+            <div className="bg-white rounded-lg shadow-lg border p-3 text-xs">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1 text-green-600">
+                  <Users size={12} />
+                  <span>400+ Events</span>
+                </div>
+                <div className="flex items-center gap-1 text-blue-600">
+                  <Clock size={12} />
+                  <span>2min Response</span>
+                </div>
+                <div className="flex items-center gap-1 text-purple-600">
+                  <Phone size={12} />
+                  <span>24/7 Support</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

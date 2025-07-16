@@ -1,41 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Building, GraduationCap, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { InlineTrustIndicators } from './TrustIndicators';
 
 const EventCategories: React.FC = () => {
   const categories = [
     {
       icon: Heart,
-      title: 'Social & Milestone Events',
-      description: 'Celebrating life\'s most precious moments with warmth and elegance',
-      events: ['Weddings', 'Birthdays', 'Anniversaries', 'Baby Showers', 'Naming Ceremonies'],
+      title: 'Wedding Planners Hyderabad',
+      description: 'Celebrating life\'s most precious moments with warmth and elegance across Hyderabad\'s finest venues',
+      events: ['Wedding Planning Hyderabad', 'Birthday Party Planners', 'Anniversary Celebrations', 'Baby Shower Events', 'Naming Ceremonies'],
       color: 'from-pink-500 to-rose-400',
       bgColor: 'bg-pink-50',
       image: 'https://images.pexels.com/photos/1616343/pexels-photo-1616343.jpeg?w=400&h=300&fit=crop'
     },
     {
       icon: Building,
-      title: 'Corporate Events',
-      description: 'Elevating your business events with professional excellence',
-      events: ['Product Launches', 'Conferences', 'Team Building', 'Award Ceremonies'],
+      title: 'Corporate Event Management Hyderabad',
+      description: 'Elevating your business events with professional excellence in Gachibowli and Kondapur',
+      events: ['Product Launches Hyderabad', 'Corporate Conferences', 'Team Building Events', 'Award Ceremonies'],
       color: 'from-blue-600 to-blue-500',
       bgColor: 'bg-blue-50',
       image: 'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?w=400&h=300&fit=crop'
     },
     {
       icon: GraduationCap,
-      title: 'Educational & Sports Events',
-      description: 'Honoring achievements and celebrating success stories',
-      events: ['Graduations', 'College Fests', 'Sports Events', 'Academic Awards'],
+      title: 'Educational Events Hyderabad',
+      description: 'Honoring achievements and celebrating success stories across Hyderabad\'s educational institutions',
+      events: ['College Graduation Events', 'University Fests Hyderabad', 'Sports Events', 'Academic Award Ceremonies'],
       color: 'from-green-500 to-emerald-400',
       bgColor: 'bg-green-50',
       image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?w=400&h=300&fit=crop'
     },
     {
       icon: Users,
-      title: 'Public & Community Events',
-      description: 'Bringing communities together through memorable celebrations',
-      events: ['Festival Celebrations', 'Shop Openings', 'Community Gatherings', 'Cultural Events'],
+      title: 'Community Events Hyderabad',
+      description: 'Bringing Hyderabad communities together through memorable celebrations and cultural events',
+      events: ['Festival Celebrations Hyderabad', 'Shop Opening Events', 'Community Gatherings', 'Cultural Events Telangana'],
       color: 'from-purple-500 to-indigo-400',
       bgColor: 'bg-purple-50',
       image: 'https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg?w=400&h=300&fit=crop'
@@ -80,14 +81,17 @@ const EventCategories: React.FC = () => {
           <h2 className="text-display-md md:text-display-lg font-bold text-gray-800 mb-8 font-display">
             Our Event Expertise
           </h2>
-          <p className="text-body-lg md:text-heading-md text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From intimate family gatherings to grand celebrations, we specialize in creating 
-            <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story
+          <p className="text-body-lg md:text-heading-md text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            From intimate family gatherings to grand celebrations across Hyderabad, we specialize in creating 
+            <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story in Gachibowli, Kondapur, and surrounding areas
           </p>
+          
+          {/* Trust Indicators */}
+          <InlineTrustIndicators className="mb-4" />
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {categories.map((category, index) => (
             <motion.div
               key={index}
