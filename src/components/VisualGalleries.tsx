@@ -83,7 +83,7 @@ const VisualGalleries: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-dancing">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-heading">
             Visual Stories
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -104,7 +104,7 @@ const VisualGalleries: React.FC = () => {
                 <Instagram size={24} className="text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 font-dancing">Instagram Feed</h3>
+                <h3 className="text-2xl font-bold text-gray-800 font-heading">Instagram Feed</h3>
                 <p className="text-gray-600">Follow us @ddayevento</p>
               </div>
             </div>
@@ -160,7 +160,7 @@ const VisualGalleries: React.FC = () => {
                 <Youtube size={24} className="text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 font-dancing">Video Portfolio</h3>
+                <h3 className="text-2xl font-bold text-gray-800 font-heading">Video Portfolio</h3>
                 <p className="text-gray-600">Watch our event highlights</p>
               </div>
             </div>

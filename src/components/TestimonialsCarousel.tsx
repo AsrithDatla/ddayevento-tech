@@ -67,9 +67,8 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <Star
         key={index}
         size={16}
-        className={`${
-          index < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-        }`}
+        className={`${index < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+          }`}
       />
     ));
   };
@@ -77,24 +76,27 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + itemsPerView);
 
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-20 bg-gradient-to-br from-gray-50/50 to-white/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+            className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6"
           >
-            What Our Clients Say
+            What Our Clients{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+              Say
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
           >
             Over 400+ successful events in Hyderabad. Here's what our happy clients have to say about their experience with D-Day Evento.
           </motion.p>
@@ -107,17 +109,16 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-2 mb-8"
+            className="flex flex-wrap justify-center gap-3 mb-12"
           >
             {eventTypes.map((type) => (
               <button
                 key={type.value}
                 onClick={() => setSelectedFilter(type.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  selectedFilter === type.value
-                    ? 'bg-brand-primary text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-brand-primary/10 hover:text-brand-primary border border-gray-200'
-                }`}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${selectedFilter === type.value
+                  ? 'bg-brand-primary text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-brand-primary/10 hover:text-brand-primary border border-gray-200 shadow-sm'
+                  }`}
               >
                 {type.label}
               </button>
@@ -126,20 +127,20 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
         )}
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative mx-4 md:mx-8">
           {/* Navigation Buttons */}
           {testimonials.length > itemsPerView && (
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-brand-primary hover:text-white"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-brand-primary hover:text-white border border-gray-200"
                 aria-label="Previous testimonials"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-brand-primary hover:text-white"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-brand-primary hover:text-white border border-gray-200"
                 aria-label="Next testimonials"
               >
                 <ChevronRight size={20} />
@@ -148,7 +149,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           )}
 
           {/* Testimonials Grid */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden mb-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -156,13 +157,12 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5 }}
-                className={`grid gap-6 ${
-                  itemsPerView === 1 
-                    ? 'grid-cols-1' 
-                    : itemsPerView === 2 
-                    ? 'grid-cols-1 md:grid-cols-2' 
+                className={`grid gap-8 mb-6 ${itemsPerView === 1
+                  ? 'grid-cols-1'
+                  : itemsPerView === 2
+                    ? 'grid-cols-1 md:grid-cols-2'
                     : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                }`}
+                  }`}
               >
                 {visibleTestimonials.map((testimonial, index) => (
                   <motion.div
@@ -170,7 +170,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 relative"
+                    className="bg-white/70 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/30 relative mb-4"
                   >
                     {/* Quote Icon */}
                     <div className="absolute top-4 right-4 text-brand-primary/20">
@@ -192,7 +192,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                       <h4 className="font-semibold text-gray-800 text-lg">
                         {testimonial.name}
                       </h4>
-                      
+
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <MapPin size={14} />
                         <span>{testimonial.location}</span>
@@ -222,18 +222,17 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
           {/* Dots Indicator */}
           {testimonials.length > itemsPerView && (
-            <div className="flex justify-center gap-2 mt-8">
-              {Array.from({ 
-                length: Math.ceil(testimonials.length / itemsPerView) 
+            <div className="flex justify-center gap-3 mt-12">
+              {Array.from({
+                length: Math.ceil(testimonials.length / itemsPerView)
               }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index * itemsPerView)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    Math.floor(currentIndex / itemsPerView) === index
-                      ? 'bg-brand-primary'
-                      : 'bg-gray-300 hover:bg-brand-primary/50'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${Math.floor(currentIndex / itemsPerView) === index
+                    ? 'bg-brand-primary w-8'
+                    : 'bg-gray-300 hover:bg-brand-primary/50'
+                    }`}
                   aria-label={`Go to testimonial group ${index + 1}`}
                 />
               ))}
@@ -247,23 +246,23 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-8 border-t border-gray-200"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-gray-200"
         >
           <div className="text-center">
-            <div className="text-3xl font-bold text-brand-primary mb-2">400+</div>
-            <div className="text-sm text-gray-600">Events Completed</div>
+            <div className="text-4xl font-bold text-brand-primary mb-3">400+</div>
+            <div className="text-sm text-gray-600 font-medium">Events Completed</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-brand-primary mb-2">5.0</div>
-            <div className="text-sm text-gray-600">Average Rating</div>
+            <div className="text-4xl font-bold text-brand-primary mb-3">5.0</div>
+            <div className="text-sm text-gray-600 font-medium">Average Rating</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-brand-primary mb-2">98%</div>
-            <div className="text-sm text-gray-600">Client Satisfaction</div>
+            <div className="text-4xl font-bold text-brand-primary mb-3">98%</div>
+            <div className="text-sm text-gray-600 font-medium">Client Satisfaction</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-brand-primary mb-2">5+</div>
-            <div className="text-sm text-gray-600">Years Experience</div>
+            <div className="text-4xl font-bold text-brand-primary mb-3">5+</div>
+            <div className="text-sm text-gray-600 font-medium">Years Experience</div>
           </div>
         </motion.div>
       </div>

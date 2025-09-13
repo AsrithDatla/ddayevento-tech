@@ -74,7 +74,7 @@ const WeddingPlannersHyderabad: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-dancing"
+              className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-heading"
             >
               Best Wedding Planners in Hyderabad
             </motion.h1>
@@ -114,7 +114,7 @@ const WeddingPlannersHyderabad: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-dancing text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-heading text-center">
               Why Choose D-Day Evento for Your Hyderabad Wedding?
             </h2>
             
@@ -152,13 +152,13 @@ const WeddingPlannersHyderabad: React.FC = () => {
             transition={{ duration: 0.8, delay: 1.0 }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-dancing text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-heading text-center">
               Complete Wedding Planning Services in Hyderabad
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">
+                <h3 className="text-2xl font-bold text-gray-800 mb-6 font-heading">
                   Our Wedding Services
                 </h3>
                 
@@ -179,7 +179,7 @@ const WeddingPlannersHyderabad: React.FC = () => {
               </div>
 
               <div className="bg-gradient-to-br from-brand-primary/10 to-brand-secondary/10 rounded-3xl p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">
+                <h3 className="text-2xl font-bold text-gray-800 mb-6 font-heading">
                   Areas We Serve in Hyderabad
                 </h3>
                 
@@ -210,7 +210,7 @@ const WeddingPlannersHyderabad: React.FC = () => {
             transition={{ duration: 0.8, delay: 1.6 }}
             className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 mb-16"
           >
-            <h3 className="text-3xl font-bold text-gray-800 mb-8 font-dancing text-center">
+            <h3 className="text-3xl font-bold text-gray-800 mb-8 font-heading text-center">
               Wedding Planning Packages in Hyderabad
             </h3>
             
@@ -260,7 +260,7 @@ const WeddingPlannersHyderabad: React.FC = () => {
             transition={{ duration: 0.8, delay: 1.8 }}
             className="text-center bg-gradient-to-r from-brand-primary/10 to-brand-gold/10 rounded-2xl p-8"
           >
-            <h3 className="text-3xl font-bold text-gray-800 mb-4 font-dancing">
+            <h3 className="text-3xl font-bold text-gray-800 mb-4 font-heading">
               Ready to Plan Your Dream Wedding in Hyderabad?
             </h3>
             <p className="text-xl text-gray-600 mb-8">

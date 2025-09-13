@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
-    <section id="home" className="min-h-screen relative overflow-hidden bg-gradient-hero-warm">
+    <section id="home" className="hero-section min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Background with Gradient */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -84,8 +84,7 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Floating Trust Badge */}
-      <FloatingTrustBadge className="absolute top-32 right-8 hidden lg:block" />
+     
 
       {/* Hero Content */}
       <div className="relative flex items-center justify-center min-h-screen pt-32 pb-20">
@@ -115,56 +114,24 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.4, delay: 0.5, ease: "easeOut" }}
             >
-              HYDERABAD'S MOST
-              <br />
-              <span className="text-brand-gold bg-gradient-to-r from-brand-gold to-yellow-300 bg-clip-text text-transparent"> 
-                TRUSTED EVENT PLANNERS
-              </span>
+              Hyderabad's Most Trusted Service Provider
             </motion.h1>
 
             {/* Subheadline with Local Market Focus */}
-            <motion.h2 
-              className="text-heading-md md:text-heading-xl font-semibold text-white/95 mb-10 font-display"
+            <motion.h3 
+              className="text-heading-md md:text-heading-xl font-semibold text-white/95 mb-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.9 }}
             >
-              Premier Wedding Planners & Event Management Company in Hyderabad
-            </motion.h2>
+             From intimate gatherings to grand celebrations, we bring your dreams to life with 
+                     <span className="text-brand-gold font-semibold"> style, elegance, and excellence</span>
+            </motion.h3>
 
-            {/* Value Proposition */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.1 }}
-              className="mb-12"
-            >
-              <p className="text-body-lg md:text-heading-md text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-                From intimate gatherings to grand celebrations, we bring your dreams to life with 
-                <span className="text-brand-gold font-semibold"> style, elegance, and excellence</span>
-              </p>
-            </motion.div>
+
 
             {/* Stats Row - Mobile Optimized */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.3 }}
-              className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-12"
-            >
-              <div className="text-center min-w-[80px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">500+</div>
-                <div className="text-white/80 text-xs sm:text-sm">Happy Clients</div>
-              </div>
-              <div className="text-center min-w-[80px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">6+</div>
-                <div className="text-white/80 text-xs sm:text-sm">Years Experience</div>
-              </div>
-              <div className="text-center min-w-[80px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-gold">24/7</div>
-                <div className="text-white/80 text-xs sm:text-sm">Support</div>
-              </div>
-            </motion.div>
+
 
             {/* CTA Buttons */}
             <motion.div
@@ -175,16 +142,16 @@ const Hero: React.FC = () => {
             >
               <motion.button
                 onClick={() => setIsQuoteModalOpen(true)}
-                className="bg-white text-brand-primary px-10 py-4 rounded-full text-lg font-bold shadow-2xl hover:bg-brand-gold hover:text-white transition-all duration-300 group relative overflow-hidden"
+                className="bg-white text-brand-primary px-10 py-4 rounded-2xl text-lg font-bold shadow-2xl hover:bg-brand-gold hover:text-white transition-all duration-300 group relative overflow-hidden"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="relative z-10">Get Your Dream Quote</span>
+                <span className="relative z-10">Get Your Free Quote</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-gold to-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </motion.button>
               
               <motion.button
-                className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white hover:text-brand-primary transition-all duration-300 backdrop-blur-sm"
+                className="border-2 border-white text-white px-8 py-4 rounded-2xl text-lg font-bold"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >

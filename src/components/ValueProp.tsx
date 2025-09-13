@@ -79,10 +79,10 @@ const ValueProp: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 font-dancing">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 font-heading">
             Your One-Stop Experts for
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent mb-8 font-dancing">
+          <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent mb-8 font-heading">
             Unforgettable Celebrations
           </h3>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -109,7 +109,7 @@ const ValueProp: React.FC = () => {
               </motion.div>
               
               <motion.div
-                className="text-4xl font-bold text-gray-800 mb-2 font-dancing"
+                className="text-4xl font-bold text-gray-800 mb-2 font-heading"
                 animate={{ scale: isInView ? [1, 1.1, 1] : 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >

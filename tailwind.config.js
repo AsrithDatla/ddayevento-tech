@@ -4,50 +4,94 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Redesigned Brand Colors - White, Black, Teal, Gold
         brand: {
-          primary: '#3674B5',
-          secondary: '#578FCA',
-          accent: '#F5F0CD',
-          gold: '#FADA7A',
-          // Enhanced color palette
-          'primary-dark': '#2A5A94',
-          'primary-light': '#4A84C7',
-          'gold-dark': '#E6C366',
-          'gold-light': '#FDE68A',
-          'neutral-50': '#F8F9FA',
-          'neutral-100': '#E9ECEF',
-          'neutral-200': '#DEE2E6',
-          'neutral-300': '#CED4DA',
-          'neutral-400': '#ADB5BD',
-          'neutral-500': '#6C757D',
-          'neutral-600': '#495057',
-          'neutral-700': '#343A40',
-          'neutral-800': '#212529',
-          'neutral-900': '#1A1D20',
+          primary: '#008B8B',      // Teal - Primary brand color
+          secondary: '#20B2AA',    // Light teal - Secondary
+          accent: '#FFD700',       // Gold - CTA/Accent color
+          neutral: '#FFFFFF',      // White - Background
+          text: '#000000',         // Black - Primary text
+          // Teal variations
+          'primary-50': '#F0FDFA',
+          'primary-100': '#CCFBF1',
+          'primary-200': '#99F6E4',
+          'primary-300': '#5EEAD4',
+          'primary-400': '#2DD4BF',
+          'primary-500': '#008B8B',
+          'primary-600': '#0D9488',
+          'primary-700': '#0F766E',
+          'primary-800': '#115E59',
+          'primary-900': '#134E4A',
+          'primary-dark': '#006666',
+          'primary-light': '#20B2AA',
+          // Gold variations
+          'accent-50': '#FFFBEB',
+          'accent-100': '#FEF3C7',
+          'accent-200': '#FDE68A',
+          'accent-300': '#FCD34D',
+          'accent-400': '#FBBF24',
+          'accent-500': '#FFD700',
+          'accent-600': '#D97706',
+          'accent-700': '#B45309',
+          'accent-800': '#92400E',
+          'accent-900': '#78350F',
+          'accent-dark': '#DAA520',
+          'accent-light': '#FFF8DC',
+          // Neutral grays
+          'neutral-50': '#F8FAFC',
+          'neutral-100': '#F1F5F9',
+          'neutral-200': '#E2E8F0',
+          'neutral-300': '#CBD5E1',
+          'neutral-400': '#94A3B8',
+          'neutral-500': '#64748B',
+          'neutral-600': '#475569',
+          'neutral-700': '#334155',
+          'neutral-800': '#1E293B',
+          'neutral-900': '#0F172A',
         },
+        // Semantic color aliases
+        primary: '#008B8B',
+        secondary: '#20B2AA',
+        accent: '#FFD700',
+        teal: '#008B8B',
+        gold: '#FFD700',
         // WhatsApp brand color
         whatsapp: '#25D366',
+        // Legacy support
+        'brand-gold': '#FFD700',
+        'brand-gold-dark': '#DAA520',
+        'brand-gold-light': '#FFF8DC',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        dancing: ['Dancing Script', 'cursive'],
-        display: ['Dancing Script', 'cursive'],
-        hero: ['Bebas Neue', 'cursive'],
-        heading: ['Bebas Neue', 'cursive'],
-        oswald: ['Oswald', 'sans-serif'],
+        // Modern Typography Stack - Plus Jakarta Sans
+        sans: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        hero: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        // Font aliases for semantic usage
+        primary: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        secondary: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        // Legacy support
+        gordita: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display-xl': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display-lg': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display-md': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-        'display-sm': ['2.5rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-        'heading-xl': ['2rem', { lineHeight: '1.3' }],
-        'heading-lg': ['1.75rem', { lineHeight: '1.3' }],
-        'heading-md': ['1.5rem', { lineHeight: '1.4' }],
-        'body-lg': ['1.125rem', { lineHeight: '1.6' }],
-        'body-md': ['1rem', { lineHeight: '1.6' }],
-        'body-sm': ['0.875rem', { lineHeight: '1.5' }],
+        // Updated font sizes to match CSS custom properties
+        'xs': ['11px', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        'sm': ['12px', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        'base': ['14px', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        'md': ['14px', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        'lg': ['16px', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        'xl': ['18px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        '2xl': ['20px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        '3xl': ['24px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        '4xl': ['30px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        // Legacy display sizes for compatibility
+        'display-xl': ['30px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'display-lg': ['24px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'display-md': ['20px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'display-sm': ['18px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
       },
       spacing: {
         '18': '4.5rem',
@@ -58,9 +102,15 @@ export default {
         '38': '9.5rem',
       },
       backgroundImage: {
-        'gradient-hero': 'linear-gradient(135deg, #3674B5 0%, #578FCA 50%, #F5F0CD 100%)',
-        'gradient-hero-warm': 'linear-gradient(135deg, #3674B5 0%, #578FCA 30%, #FADA7A 100%)',
-        'gradient-card': 'linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+        // Updated gradients with new brand colors (Teal & Gold)
+        'gradient-hero': 'linear-gradient(135deg, #008B8B 0%, #20B2AA 50%, #FFFFFF 100%)',
+        'gradient-hero-warm': 'linear-gradient(135deg, #008B8B 0%, #20B2AA 30%, #FFD700 100%)',
+        'gradient-teal': 'linear-gradient(135deg, #008B8B 0%, #20B2AA 100%)',
+        'gradient-gold': 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+        'gradient-card': 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
+        'gradient-brand': 'linear-gradient(135deg, #008B8B 0%, #FFD700 100%)',
+        'gradient-cta': 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #000000 0%, #1E293B 100%)',
       },
       backdropBlur: {
         xs: '2px',

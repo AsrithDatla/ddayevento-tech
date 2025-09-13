@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Phone, Mail, Instagram, Facebook, Linkedin, Menu, X, MapPin } from 'lucide-react';
+import { ChevronDown, ChevronRight, Phone, Mail, Instagram, Facebook, Linkedin, Menu, X, MapPin, ArrowRight } from 'lucide-react';
 import QuoteModal from './QuoteGenerator/QuoteModal';
-import { 
-  desktopEventsNavSections, 
+import {
+  desktopEventsNavSections,
   desktopServicesNavSections,
   mobileEventsNavSections,
   mobileServicesNavSections,
@@ -11,11 +11,9 @@ import {
   generateServiceUrl
 } from '../data/navConfig';
 
-// Snapchat icon component since it's not in lucide-react
+// Font Awesome Snapchat icon component
 const SnapchatIcon = ({ size = 16, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.405.042-3.441.219-.937 1.404-5.965 1.404-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
-  </svg>
+  <i className={`fab fa-snapchat ${className}`} style={{ fontSize: `${size}px` }}></i>
 );
 
 const Header: React.FC = () => {
@@ -25,28 +23,34 @@ const Header: React.FC = () => {
   const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
   const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [activeServicesSubmenu, setActiveServicesSubmenu] = useState<string | null>(null);
 
   const toggleMobileEventExpansion = (sectionId: string) => {
-    setExpandedMobileEvents(prev => 
+    setExpandedMobileEvents(prev =>
       prev === sectionId ? null : sectionId
     );
   };
 
   const toggleMobileServiceExpansion = (sectionId: string) => {
-    setExpandedMobileServices(prev => 
+    setExpandedMobileServices(prev =>
       prev === sectionId ? null : sectionId
     );
   };
 
+  // Removed compact mode behavior to keep header consistent
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-lg">
-      {/* Top Bar with Local Focus - Mobile Optimized */}
-      <div className="bg-brand-primary text-white py-1 md:py-1">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+
+      {/* Top Bar with Contact Info */}
+      <div className="bg-brand-primary/90 text-black py-1 md:py-1">
         <div className="container mx-auto px-4 flex justify-between items-center text-xs md:text-sm">
           <div className="flex items-center gap-2 md:gap-6">
             <div className="flex items-center gap-1 md:gap-2">
               <Phone size={12} className="md:w-4 md:h-4" />
-              <span className="text-xs sm:text-sm">+91-7386813689</span>
+              <span className="text-xs sm:text-sm">+91-777777777</span>
             </div>
             <div className="hidden md:flex items-center gap-2">
               <Mail size={14} />
@@ -69,146 +73,293 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Navigation */}
+      {/* Main Navigation - Only visible when not compact */}
       <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             className="flex items-center flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
           >
-            <a href="/" aria-label="D-Day Evento - Home">
-              <img 
-                src="/final-white-logo-400-120.png" 
-                alt="D-Day Evento - Hyderabad's Most Trusted Event Planners" 
-                className="w-44 h-10 md:w-56 md:h-12 object-contain"
+            <a href="/" className="flex items-center gap-3" aria-label="D-Day Evento - Home">
+              <img
+                src="/D-Day_Evento_logo.png"
+                alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
+                className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
               />
+              <span className="text-brand-teal text-2xl md:text-3xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">D-Day Evento</span>
             </a>
           </motion.div>
 
-          {/* Desktop Navigation - Centered */}
+          {/* Compact mode - No logo, just the three buttons */}
+
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-1 items-center justify-center gap-8">
-            <a href="/" className="font-semibold text-white hover:text-brand-gold transition-colors">HOME</a>
-            <a href="/about" className="font-semibold text-white hover:text-brand-gold transition-colors">ABOUT US</a>
-            
-            {/* Events Dropdown */}
-            <div className="relative">
-              <button
-                className="flex items-center gap-1 font-semibold text-white hover:text-brand-gold transition-colors"
-                onMouseEnter={() => setIsEventsOpen(true)}
-                onMouseLeave={() => setIsEventsOpen(false)}
-              >
-                EVENTS <ChevronDown size={16} />
-              </button>
-              <AnimatePresence>
-                {isEventsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-[-450px] mt-2 bg-white shadow-xl border border-gray-200 w-[1100px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-lg p-6 z-50"
-                    onMouseEnter={() => setIsEventsOpen(true)}
+                <a
+                  href="/"
+                  className="text-black hover:text-brand-teal font-semibold transition-colors"
+                >
+                  HOME
+                </a>
+                <a
+                  href="/about"
+                  className="text-black hover:text-brand-teal font-semibold transition-colors"
+                >
+                  ABOUT US
+                </a>
+
+                {/* Events Dropdown - Enhanced Mega Menu */}
+                <div className="relative group">
+                  <button
+                    className="flex items-center gap-1 text-black hover:text-brand-gold font-semibold transition-all duration-200 group-hover:scale-105"
+                    onMouseEnter={() => {
+                      setIsEventsOpen(true);
+                      setActiveSubmenu(desktopEventsNavSections[0]?.id || null);
+                    }}
                     onMouseLeave={() => setIsEventsOpen(false)}
                   >
-                    <div className="grid grid-cols-3 gap-6 w-full">
-                      {desktopEventsNavSections.map((section) => (
-                        <div key={section.id}>
-                          <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">
-                            {section.label}
+                    EVENTS
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${isEventsOpen ? 'rotate-180' : ''
+                        }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {isEventsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full left-[-450px] mt-3 bg-white shadow-2xl border border-gray-100 w-[1100px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-xl p-0 z-50"
+                        onMouseEnter={() => setIsEventsOpen(true)}
+                        onMouseLeave={() => setIsEventsOpen(false)}
+                      >
+                        <div className="flex">
+                          {/* Left sidebar with categories */}
+                          <div className="w-64 bg-gray-50 p-4 rounded-l-xl">
+                            <div className="space-y-1">
+                              {desktopEventsNavSections.map((section) => (
+                                <button
+                                  key={section.id}
+                                  onMouseEnter={() => setActiveSubmenu(section.id)}
+                                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group ${activeSubmenu === section.id
+                                    ? 'bg-brand-primary text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-white hover:shadow-sm'
+                                    }`}
+                                >
+                                  <span className="font-medium">{section.label}</span>
+                                  <ChevronRight
+                                    size={16}
+                                    className={`transition-transform duration-200 ${activeSubmenu === section.id ? 'text-white' : 'text-gray-400'
+                                      }`}
+                                  />
+                                </button>
+                              ))}
+                            </div>
                           </div>
-                          <div className="space-y-1">
-                            {section.items.map((item, index) => (
-                              <a
-                                key={index}
-                                href={generateEventUrl(section.id, item)}
-                                className="block text-sm text-gray-600 hover:text-brand-primary transition-colors"
+
+                          {/* Right content area */}
+                          <div className="flex-1 p-6">
+                            {desktopEventsNavSections.map((section) => (
+                              <div
+                                key={section.id}
+                                className={`${activeSubmenu === section.id ? 'block' : 'hidden'}`}
                               >
-                                {item}
-                              </a>
+                                <div className="mb-4">
+                                  <h3 className="text-2xl font-bold text-brand-primary mb-2">
+                                    {section.label}
+                                  </h3>
+                                  <p className="text-gray-600 text-sm">
+                                    Professional event planning services in Hyderabad
+                                  </p>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                  {section.items.map((item, index) => (
+                                    <a
+                                      key={index}
+                                      href={generateEventUrl(section.id, item)}
+                                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group border border-transparent hover:border-brand-primary/20"
+                                    >
+                                      <div className="w-2 h-2 bg-brand-gold rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                                      <span className="text-gray-700 group-hover:text-brand-primary font-medium">
+                                        {item}
+                                      </span>
+                                      <ArrowRight
+                                        size={14}
+                                        className="ml-auto text-gray-400 group-hover:text-brand-primary opacity-0 group-hover:opacity-100 transition-all duration-200"
+                                      />
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-            {/* Services Dropdown */}
-            <div className="relative">
-              <button
-                className="flex items-center gap-1 font-semibold text-white hover:text-brand-gold transition-colors"
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
-              >
-                SERVICES <ChevronDown size={16} />
-              </button>
-              <AnimatePresence>
-                {isServicesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-[-450px] mt-2 bg-white shadow-xl border border-gray-200 w-[1100px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-lg p-6 z-50"
-                    onMouseEnter={() => setIsServicesOpen(true)}
+                {/* Services Dropdown - Enhanced Mega Menu with Two-Panel Layout */}
+                <div className="relative group">
+                  <button
+                    className="flex items-center gap-1 text-black hover:text-brand-teal font-semibold transition-all duration-200 group-hover:scale-105"
+                    onMouseEnter={() => {
+                      setIsServicesOpen(true);
+                      setActiveServicesSubmenu(desktopServicesNavSections[0]?.id || null);
+                    }}
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
-                    <div className="grid grid-cols-4 gap-6 w-full">
-                      {desktopServicesNavSections.map((section) => (
-                        <div key={section.id}>
-                          <div className="text-brand-primary font-bold text-2xl border-b border-gray-100 pb-2 mb-3 font-dancing">
-                            {section.label}
+                    SERVICES
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''
+                        }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {isServicesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full left-[-450px] mt-3 bg-white shadow-2xl border border-gray-100 w-[1200px] max-w-[calc(100vw-32px)] max-h-[500px] overflow-y-auto overflow-x-auto rounded-xl p-0 z-50"
+                        onMouseEnter={() => setIsServicesOpen(true)}
+                        onMouseLeave={() => setIsServicesOpen(false)}
+                      >
+                        <div className="flex">
+                          {/* Left sidebar with service categories */}
+                          <div className="w-64 bg-gray-50 p-4 rounded-l-xl">
+                            <div className="space-y-1">
+                              {desktopServicesNavSections.map((section) => (
+                                <button
+                                  key={section.id}
+                                  onMouseEnter={() => setActiveServicesSubmenu(section.id)}
+                                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group ${activeServicesSubmenu === section.id
+                                    ? 'bg-brand-primary text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-white hover:shadow-sm'
+                                    }`}
+                                >
+                                  <span className="font-medium">{section.label}</span>
+                                  <ChevronRight
+                                    size={16}
+                                    className={`transition-transform duration-200 ${activeServicesSubmenu === section.id ? 'text-white' : 'text-gray-400'
+                                      }`}
+                                  />
+                                </button>
+                              ))}
+                            </div>
                           </div>
-                          <div className="space-y-1">
-                            {section.items.map((item, index) => (
-                              <a
-                                key={index}
-                                href={generateServiceUrl(section.id, item)}
-                                className="block text-sm text-gray-600 hover:text-brand-primary transition-colors"
+
+                          {/* Right content area */}
+                          <div className="flex-1 p-6">
+                            {desktopServicesNavSections.map((section) => (
+                              <div
+                                key={section.id}
+                                className={`${activeServicesSubmenu === section.id ? 'block' : 'hidden'}`}
                               >
-                                {item}
-                              </a>
+                                <div className="mb-4">
+                                  <h3 className="text-2xl font-bold text-brand-primary mb-2">
+                                    {section.label}
+                                  </h3>
+                                  <p className="text-gray-600 text-sm">
+                                    Comprehensive event services tailored for Hyderabad
+                                  </p>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                  {section.items.map((item, index) => (
+                                    <a
+                                      key={index}
+                                      href={generateServiceUrl(section.id, item)}
+                                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group border border-transparent hover:border-brand-primary/20"
+                                    >
+                                      <div className="w-2 h-2 bg-brand-gold rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                                      <span className="text-gray-700 group-hover:text-brand-primary font-medium">
+                                        {item}
+                                      </span>
+                                      <ArrowRight
+                                        size={14}
+                                        className="ml-auto text-gray-400 group-hover:text-brand-primary opacity-0 group-hover:opacity-100 transition-all duration-200"
+                                      />
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-            <a href="/blogs" className="font-semibold text-white hover:text-brand-gold transition-colors">BLOGS</a>
-            <a href="#reviews" className="font-semibold text-white hover:text-brand-gold transition-colors">REVIEWS</a>
-            <a href="#contact" className="font-semibold text-white hover:text-brand-gold transition-colors">CONTACT US</a>
-          </div>
+                <a
+                  href="/gallery"
+                  className="text-black hover:text-brand-teal font-semibold transition-colors"
+                >
+                  BLOGS
+                </a>
+                <a
+                  href="/services"
+                  className="text-black hover:text-brand-teal font-semibold transition-colors"
+                >
+                  REVIEWS
+                </a>
+                <a
+                  href="/contact"
+                  className="text-black hover:text-brand-teal font-semibold transition-colors"
+                >
+                  CONTACT US
+                </a>
+              </div>
 
-          {/* Get Quote CTA Button */}
-          <div className="hidden lg:flex">
-            <motion.button
-              onClick={() => setIsQuoteModalOpen(true)}
-              className="bg-brand-gold hover:bg-brand-gold-dark text-brand-primary px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {/* Original Get Quote CTA Button */}
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:flex"
             >
-              GET QUOTE
-            </motion.button>
-          </div>
+              <motion.button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white px-6 py-3 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group hidden lg:flex items-center justify-center"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  GET QUOTE
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
+                </span>
+              </motion.button>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-white"
+            className={`lg:hidden p-2 transition-colors duration-200 ${isCompact ? 'text-gray-800' : 'text-white'
+              }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <motion.div
+              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </motion.div>
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Enhanced */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -216,29 +367,54 @@ const Header: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden mt-4 py-4 border-t border-gray-700 max-h-96 overflow-y-auto scrollbar-hide"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={`lg:hidden mt-4 py-4 border-t max-h-96 overflow-y-auto scrollbar-hide ${isCompact
+                ? 'border-gray-200 bg-white/95 backdrop-blur-lg rounded-lg mx-4 shadow-lg'
+                : 'border-gray-700'
+                }`}
             >
-              <div className="flex flex-col gap-2">
-                <a href="/" className="font-semibold text-white py-2">HOME</a>
-                <a href="/about" className="font-semibold text-white py-2">ABOUT US</a>
-                
-                {/* Mobile Events Accordion */}
+              <div className={`flex flex-col gap-2 ${isCompact ? 'px-4' : ''}`}>
+                <a
+                  href="/"
+                  className={`font-semibold py-2 transition-colors ${isCompact
+                    ? 'text-gray-800 hover:text-brand-primary'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  HOME
+                </a>
+                <a
+                  href="/about"
+                  className={`font-semibold py-2 transition-colors ${isCompact
+                    ? 'text-gray-800 hover:text-brand-primary'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  ABOUT US
+                </a>
+
+                {/* Mobile Events Accordion - Enhanced */}
                 <div className="space-y-2">
-                  <div className="font-semibold text-white py-2 border-b border-gray-600">
+                  <div className={`font-semibold py-2 border-b ${isCompact
+                    ? 'text-gray-800 border-gray-200'
+                    : 'text-white border-gray-600'
+                    }`}>
                     EVENTS
                   </div>
                   {mobileEventsNavSections.map((section) => (
                     <div key={section.id} className="ml-4">
                       <button
                         onClick={() => toggleMobileEventExpansion(section.id)}
-                        className="flex items-center justify-between w-full text-left text-brand-gold font-medium py-2"
+                        className={`flex items-center justify-between w-full text-left font-medium py-2 transition-colors ${isCompact
+                          ? 'text-brand-primary hover:text-brand-primary/80'
+                          : 'text-brand-gold hover:text-brand-gold/80'
+                          }`}
                       >
                         {section.label}
-                        <ChevronDown 
-                          size={16} 
-                          className={`transform transition-transform ${
-                            expandedMobileEvents === section.id ? 'rotate-180' : ''
-                          }`} 
+                        <ChevronDown
+                          size={16}
+                          className={`transform transition-transform ${expandedMobileEvents === section.id ? 'rotate-180' : ''
+                            }`}
                         />
                       </button>
                       <AnimatePresence>
@@ -253,7 +429,10 @@ const Header: React.FC = () => {
                               <a
                                 key={index}
                                 href={generateEventUrl(section.id, item)}
-                                className="block text-gray-300 text-sm py-1 hover:text-white"
+                                className={`block text-sm py-1 transition-colors ${isCompact
+                                  ? 'text-gray-600 hover:text-brand-primary'
+                                  : 'text-gray-300 hover:text-white'
+                                  }`}
                               >
                                 {item}
                               </a>
@@ -265,23 +444,28 @@ const Header: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Mobile Services Accordion */}
+                {/* Mobile Services Accordion - Enhanced */}
                 <div className="space-y-2">
-                  <div className="font-semibold text-white py-2 border-b border-gray-600">
+                  <div className={`font-semibold py-2 border-b ${isCompact
+                    ? 'text-gray-800 border-gray-200'
+                    : 'text-white border-gray-600'
+                    }`}>
                     SERVICES
                   </div>
                   {mobileServicesNavSections.map((section) => (
                     <div key={section.id} className="ml-4">
                       <button
                         onClick={() => toggleMobileServiceExpansion(section.id)}
-                        className="flex items-center justify-between w-full text-left text-brand-gold font-medium py-2"
+                        className={`flex items-center justify-between w-full text-left font-medium py-2 transition-colors ${isCompact
+                          ? 'text-brand-primary hover:text-brand-primary/80'
+                          : 'text-brand-gold hover:text-brand-gold/80'
+                          }`}
                       >
                         {section.label}
-                        <ChevronDown 
-                          size={16} 
-                          className={`transform transition-transform ${
-                            expandedMobileServices === section.id ? 'rotate-180' : ''
-                          }`} 
+                        <ChevronDown
+                          size={16}
+                          className={`transform transition-transform ${expandedMobileServices === section.id ? 'rotate-180' : ''
+                            }`}
                         />
                       </button>
                       <AnimatePresence>
@@ -296,7 +480,10 @@ const Header: React.FC = () => {
                               <a
                                 key={index}
                                 href={generateServiceUrl(section.id, item)}
-                                className="block text-gray-300 text-sm py-1 hover:text-white"
+                                className={`block text-sm py-1 transition-colors ${isCompact
+                                  ? 'text-gray-600 hover:text-brand-primary'
+                                  : 'text-gray-300 hover:text-white'
+                                  }`}
                               >
                                 {item}
                               </a>
@@ -308,18 +495,49 @@ const Header: React.FC = () => {
                   ))}
                 </div>
 
-                <a href="/blogs" className="font-semibold text-white py-2">BLOGS</a>
-                <a href="#reviews" className="font-semibold text-white py-2">REVIEWS</a>
-                <a href="#contact" className="font-semibold text-white py-2">CONTACT US</a>
-                
-                {/* Mobile Get Quote Button */}
+                <a
+                  href="/blogs"
+                  className={`font-semibold py-2 transition-colors ${isCompact
+                    ? 'text-gray-800 hover:text-brand-primary'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  BLOGS
+                </a>
+                <a
+                  href="#reviews"
+                  className={`font-semibold py-2 transition-colors ${isCompact
+                    ? 'text-gray-800 hover:text-brand-primary'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  REVIEWS
+                </a>
+                <a
+                  href="#contact"
+                  className={`font-semibold py-2 transition-colors ${isCompact
+                    ? 'text-gray-800 hover:text-brand-primary'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  CONTACT US
+                </a>
+
+                {/* Mobile Get Quote Button - Enhanced */}
                 <motion.button
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="bg-brand-gold hover:bg-brand-gold-dark text-brand-primary px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 shadow-lg mt-4"
+                  className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 shadow-lg mt-4 relative overflow-hidden group ${isCompact
+                    ? 'bg-brand-primary hover:bg-brand-primary/90 text-white'
+                    : 'bg-brand-gold hover:bg-brand-gold-dark text-brand-primary'
+                    }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  GET QUOTE
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    GET QUOTE
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 </motion.button>
               </div>
             </motion.div>
@@ -328,9 +546,9 @@ const Header: React.FC = () => {
       </nav>
 
       {/* Quote Modal */}
-      <QuoteModal 
-        isOpen={isQuoteModalOpen} 
-        onClose={() => setIsQuoteModalOpen(false)} 
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
       />
     </header>
   );

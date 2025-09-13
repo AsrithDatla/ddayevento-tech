@@ -6,12 +6,12 @@ import { getServiceSectionById } from '../../data/navConfig';
 
 const ServiceDetailPage: React.FC = () => {
   const { sectionId, serviceSlug } = useParams();
-  
+
   // Get the section data
   const section = getServiceSectionById(sectionId || '');
-  
+
   // Convert slug back to service name (approximate match)
-  const serviceName = serviceSlug?.split('-').map(word => 
+  const serviceName = serviceSlug?.split('-').map(word =>
     word.charAt(0).toUpperCase() + word.slice(1)
   ).join(' ') || section?.label || 'Service';
 
@@ -103,16 +103,16 @@ const ServiceDetailPage: React.FC = () => {
                 {serviceData.category}
               </span>
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-dancing"
+              className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-heading"
             >
               {serviceData.title}
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,10 +130,10 @@ const ServiceDetailPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-dancing text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 font-heading text-center">
               Our Work Gallery
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {serviceData.gallery.map((image, index) => (
                 <motion.div
@@ -164,10 +164,10 @@ const ServiceDetailPage: React.FC = () => {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-heading">
                 Why Choose Our {serviceName} Service?
               </h3>
-              
+
               <div className="space-y-4">
                 {serviceData.benefits.map((benefit, index) => (
                   <motion.div
@@ -191,10 +191,10 @@ const ServiceDetailPage: React.FC = () => {
               transition={{ duration: 0.8, delay: 1.4 }}
               className="bg-gradient-to-br from-brand-primary/10 to-brand-secondary/10 rounded-3xl p-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-dancing">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 font-heading">
                 Our Service Process
               </h3>
-              
+
               <div className="space-y-4">
                 {serviceData.process.map((step, index) => (
                   <motion.div
@@ -221,10 +221,10 @@ const ServiceDetailPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 1.8 }}
             className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 mb-16"
           >
-            <h3 className="text-3xl font-bold text-gray-800 mb-8 font-dancing text-center">
+            <h3 className="text-3xl font-bold text-gray-800 mb-8 font-heading text-center">
               Service Packages
             </h3>
-            
+
             <div className="grid md:grid-cols-3 gap-6">
               {Object.entries(serviceData.pricing).map(([tier, price], index) => (
                 <motion.div
@@ -232,27 +232,23 @@ const ServiceDetailPage: React.FC = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 2 + index * 0.1 }}
-                  className={`p-6 rounded-2xl text-center ${
-                    tier === 'premium' 
-                      ? 'bg-gradient-to-br from-brand-primary to-brand-secondary text-white' 
-                      : 'bg-gray-50 border border-gray-200'
-                  }`}
+                  className={`p-6 rounded-2xl text-center ${tier === 'premium'
+                    ? 'bg-gradient-to-br from-brand-primary to-brand-secondary text-white'
+                    : 'bg-gray-50 border border-gray-200'
+                    }`}
                 >
-                  <h4 className={`text-xl font-bold mb-4 capitalize ${
-                    tier === 'premium' ? 'text-white' : 'text-gray-800'
-                  }`}>
+                  <h4 className={`text-xl font-bold mb-4 capitalize ${tier === 'premium' ? 'text-white' : 'text-gray-800'
+                    }`}>
                     {tier} Package
                   </h4>
-                  <p className={`text-2xl font-bold mb-4 ${
-                    tier === 'premium' ? 'text-brand-gold' : 'text-brand-primary'
-                  }`}>
+                  <p className={`text-2xl font-bold mb-4 ${tier === 'premium' ? 'text-brand-gold' : 'text-brand-primary'
+                    }`}>
                     {price}
                   </p>
-                  <button className={`w-full py-3 rounded-lg font-semibold transition-colors ${
-                    tier === 'premium'
-                      ? 'bg-white text-brand-primary hover:bg-brand-gold hover:text-white'
-                      : 'bg-brand-primary text-white hover:bg-brand-primary/90'
-                  }`}>
+                  <button className={`w-full py-3 rounded-lg font-semibold transition-colors ${tier === 'premium'
+                    ? 'bg-white text-brand-primary hover:bg-brand-gold hover:text-white'
+                    : 'bg-brand-primary text-white hover:bg-brand-primary/90'
+                    }`}>
                     Get Quote
                   </button>
                 </motion.div>
@@ -267,13 +263,13 @@ const ServiceDetailPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 2.2 }}
             className="text-center"
           >
-            <h3 className="text-3xl font-bold text-gray-800 mb-4 font-dancing">
+            <h3 className="text-3xl font-bold text-gray-800 mb-4 font-heading">
               Ready to Get Started?
             </h3>
             <p className="text-xl text-gray-600 mb-8">
               Contact us today for a free consultation and custom quote
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}

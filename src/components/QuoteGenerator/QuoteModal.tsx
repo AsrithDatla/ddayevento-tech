@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import EventTypeSelection from './steps/EventTypeSelection';
+import EventCategorySelection from './steps/EventCategorySelection';
+import SubEventSelection from './steps/SubEventSelection';
 import EventDetailsForm from './steps/EventDetailsForm';
 import ServiceSelection from './steps/ServiceSelection';
-import BudgetCalculator from './steps/BudgetCalculator';
 import ContactForm from './steps/ContactForm';
 import ConfirmationStep from './steps/ConfirmationStep';
 import ProgressIndicator from './ProgressIndicator';
@@ -16,11 +16,11 @@ interface QuoteModalProps {
 }
 
 const STEPS: QuoteStep[] = [
-  { id: 1, title: 'Event Type', description: 'Choose your event category' },
-  { id: 2, title: 'Event Details', description: 'Date, location & guest count' },
-  { id: 3, title: 'Services', description: 'Select required services' },
-  { id: 4, title: 'Budget', description: 'Set your budget range' },
-  { id: 5, title: 'Contact', description: 'Your contact information' },
+  { id: 1, title: 'Event Category', description: 'Choose event type' },
+  { id: 2, title: 'Sub Events', description: 'Select specific events' },
+  { id: 3, title: 'Event Details', description: 'Date, location & guests' },
+  { id: 4, title: 'Services', description: 'Select services' },
+  { id: 5, title: 'Contact', description: 'Your information' },
   { id: 6, title: 'Confirmation', description: 'Review and submit' }
 ];
 
@@ -29,12 +29,12 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<QuoteFormData>({
     eventCategory: '',
     eventType: '',
+    subEvents: [],
     eventDate: '',
     guestCount: 0,
     venue: '',
     location: 'Hyderabad',
     selectedServices: [],
-    budgetRange: { min: 50000, max: 200000 },
     contactInfo: {
       name: '',
       email: '',
@@ -75,18 +75,17 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
     switch (step) {
       case 1:
         if (!formData.eventCategory) newErrors.eventCategory = 'Please select an event category';
-        if (!formData.eventType) newErrors.eventType = 'Please select an event type';
         break;
       case 2:
+        if (!formData.subEvents || formData.subEvents.length === 0) newErrors.subEvents = 'Please select at least one sub event';
+        break;
+      case 3:
         if (!formData.eventDate) newErrors.eventDate = 'Please select event date';
         if (!formData.guestCount || formData.guestCount < 1) newErrors.guestCount = 'Please enter guest count';
         if (!formData.venue.trim()) newErrors.venue = 'Please enter venue details';
         break;
-      case 3:
-        if (formData.selectedServices.length === 0) newErrors.services = 'Please select at least one service';
-        break;
       case 4:
-        if (!formData.budgetRange.min || !formData.budgetRange.max) newErrors.budget = 'Please set your budget range';
+        if (formData.selectedServices.length === 0) newErrors.services = 'Please select at least one service';
         break;
       case 5:
         if (!formData.contactInfo.name.trim()) newErrors.name = 'Please enter your name';
@@ -168,7 +167,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
     switch (currentStep) {
       case 1:
         return (
-          <EventTypeSelection
+          <EventCategorySelection
             formData={formData}
             updateFormData={updateFormData}
             errors={errors}
@@ -176,7 +175,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
         );
       case 2:
         return (
-          <EventDetailsForm
+          <SubEventSelection
             formData={formData}
             updateFormData={updateFormData}
             errors={errors}
@@ -184,7 +183,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
         );
       case 3:
         return (
-          <ServiceSelection
+          <EventDetailsForm
             formData={formData}
             updateFormData={updateFormData}
             errors={errors}
@@ -192,7 +191,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
         );
       case 4:
         return (
-          <BudgetCalculator
+          <ServiceSelection
             formData={formData}
             updateFormData={updateFormData}
             errors={errors}

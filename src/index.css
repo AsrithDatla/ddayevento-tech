@@ -2,6 +2,314 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties for Redesigned Brand Colors & Typography */
+:root {
+  /* Core Brand Colors - White, Black, Teal, Gold */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-teal: #008B8B;
+  --color-gold: #FFD700;
+  
+  /* Extended Brand Palette */
+  --color-teal-light: #20B2AA;
+  --color-teal-dark: #006666;
+  --color-gold-light: #FFF8DC;
+  --color-gold-dark: #DAA520;
+  
+  /* Neutral Grays */
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1E293B;
+  --color-gray-900: #0F172A;
+  
+  /* Typography - Plus Jakarta Sans */
+  --font-family-base: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 60px;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Semantic Color Variables */
+  --color-primary: var(--color-teal);
+  --color-secondary: var(--color-teal-light);
+  --color-accent: var(--color-gold);
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+  --color-text-muted: var(--color-gray-600);
+}
+
+@layer base {
+  /* Global Typography & Color Application */
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+  }
+
+  /* Heading Styles - Plus Jakarta Sans for Clean Modern Look */
+  h1, h2, h3, h4, h5, h6,
+  .hero-title, .heading, .display-text {
+    font-family: var(--font-family-base);
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: 0.75em;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1 { 
+    font-size: var(--font-size-6xl); 
+    font-weight: var(--font-weight-black); 
+    line-height: 1.1;
+  }
+  h2 { 
+    font-size: var(--font-size-5xl); 
+    font-weight: var(--font-weight-bold); 
+    line-height: 1.2;
+  }
+  h3 { 
+    font-size: var(--font-size-4xl); 
+    font-weight: var(--font-weight-bold); 
+  }
+  h4 { 
+    font-size: var(--font-size-3xl); 
+    font-weight: var(--font-weight-semibold); 
+  }
+  h5 { 
+    font-size: var(--font-size-2xl); 
+    font-weight: var(--font-weight-semibold); 
+  }
+  h6 { 
+    font-size: var(--font-size-xl); 
+    font-weight: var(--font-weight-medium); 
+  }
+
+  /* Body Text */
+  p, .body-text {
+    font-family: var(--font-family-base);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 1em;
+  }
+
+  /* Button & CTA Styles - Gold Primary, Teal Secondary */
+  .btn, .button, .cta {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    border-radius: 50px;
+    padding: 16px 32px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Primary CTA Button - Gold */
+  .btn-primary, .cta-primary {
+    background: var(--color-gold);
+    color: var(--color-black);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+  }
+
+  .btn-primary:hover, .cta-primary:hover {
+    background: var(--color-gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+  }
+
+  /* Secondary Button - Teal Outline */
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-teal);
+    border: 2px solid var(--color-teal);
+    box-shadow: 0 4px 20px rgba(0, 139, 139, 0.2);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-teal);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 139, 139, 0.3);
+  }
+
+  /* Tertiary Button - Minimal */
+  .btn-tertiary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-gray-300);
+  }
+
+  .btn-tertiary:hover {
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-400);
+  }
+
+  /* Link Styles */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--color-teal-dark);
+  }
+
+  /* Form Elements */
+  input, textarea, select {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+  }
+}
+
+@layer components {
+  /* Brand-specific component classes - White, Black, Teal, Gold */
+  .brand-gradient {
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-gold) 100%);
+  }
+
+  .brand-text-gradient {
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 50%, var(--color-white) 100%);
+  }
+
+  .card-brand {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-brand:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+  }
+
+  /* CTA Styles */
+  .cta-primary {
+    background: var(--color-gold);
+    color: var(--color-black);
+    font-weight: 600;
+    padding: 16px 32px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-primary:hover {
+    background: var(--color-gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--color-teal);
+    border: 2px solid var(--color-teal);
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-secondary:hover {
+    background: var(--color-teal);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 139, 139, 0.3);
+  }
+
+  /* Text Styles */
+  .text-hero {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-section-title {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .text-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -11,4 +319,218 @@
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}/* 
+Event Categories Slider Styles */
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slide-track {
+  display: flex;
+  animation: none; /* We'll handle animation with JavaScript */
+}
+
+.carousel-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.carousel-slide-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 400px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-right: 0;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carousel-link:hover .image-wrapper img {
+  transform: scale(1.05);
+}
+
+.overflow-category-name {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-wrapper {
+    width: 300px;
+    height: 200px;
+  }
+}
+
+/* Smooth hover effects */
+.carousel-link {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Gradient overlay for better text readability */
+.image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none;
+}/* Ev
+ent Categories Slider Styles */
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slide-track {
+  display: flex;
+  animation: none; /* We'll handle animation with JavaScript */
+  gap: 20px; /* Gap between cards */
+}
+
+.carousel-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.carousel-slide-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 400px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-link:hover .image-wrapper {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.carousel-link:hover .image-wrapper img {
+  transform: scale(1.08);
+}
+
+.overflow-category-name {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+/* Removed connecting lines - clean card layout */
+
+/* Hover state for pause indicator */
+.carousel-link:hover::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  background: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  z-index: 20;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-wrapper {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .slide-track {
+    gap: 15px;
+  }
+}
+
+/* Smooth hover effects */
+.carousel-link {
+  cursor: pointer;
+}
+
+/* Active/clicked state */
+.carousel-link:active {
+  transform: scale(0.98);
+}
+
+/* Focus state for accessibility */
+.carousel-link:focus {
+  outline: 2px solid #FFD700;
+  outline-offset: 4px;
+}
+
+/* Gradient overlay for better text readability */
+.image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  pointer-events: none;
+  z-index: 1;
 }

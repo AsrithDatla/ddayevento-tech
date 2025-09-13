@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+#app-container {
+  font-family: DMSans, sans-serif;
+  color: #0A0A0C;
+}
+
+.hideScrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.text-col {
+  @apply text-gslearnMockingbird dark:text-gslearnSurface;
+}
+.text-col-inv {
+  @apply text-gslearnSurface dark:text-gslearnMockingbird;
+}

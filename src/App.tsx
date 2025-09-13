@@ -14,10 +14,16 @@ import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import Blogs from './pages/Blogs';
 import TrustIndicators, { TrustBanner, LocalTrustIndicators, SecurityTrustIndicators } from './components/TrustIndicators';
+import DesignSystem from './components/DesignSystem';
 
 // Lazy load event and service pages
 const EventDetailPage = lazy(() => import('./pages/events/EventDetailPage'));
 const ServiceDetailPage = lazy(() => import('./pages/services/ServiceDetailPage'));
+const TraditionalEvents = lazy(() => import('./pages/events/TraditionalEvents'));
+const WeddingEvents = lazy(() => import('./pages/events/WeddingEvents'));
+const BirthdayEvents = lazy(() => import('./pages/events/BirthdayEvents'));
+const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
+const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
 
 function App() {
   return (
@@ -29,25 +35,9 @@ function App() {
           <Route path="/" element={
             <>
               <Hero />
-              {/* Trust Indicators Section */}
-              <section className="py-12 bg-gray-50">
-                <div className="container mx-auto px-4">
-                  <TrustIndicators variant="horizontal" className="mb-8" />
-                </div>
-              </section>
               <EventCategories />
               <ServicesGrid />
               <PopularClubhouses />
-              <ValueProp />
-              {/* Local Trust Section */}
-              <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <LocalTrustIndicators />
-                    <SecurityTrustIndicators />
-                  </div>
-                </div>
-              </section>
               <TestimonialsCarousel />
               <VisualGalleries />
               <ConnectWithUs />
@@ -55,6 +45,12 @@ function App() {
           } />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/design-system" element={<DesignSystem />} />
+          <Route path="/events/traditional-events" element={<TraditionalEvents />} />
+          <Route path="/events/wedding-events" element={<WeddingEvents />} />
+          <Route path="/events/birthdays" element={<BirthdayEvents />} />
+          <Route path="/events/corporate-events" element={<CorporateEvents />} />
+          <Route path="/events/special-days" element={<SpecialDays />} />
           <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
           <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />
         </Routes>

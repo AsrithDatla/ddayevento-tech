@@ -19,7 +19,9 @@ export const desktopEventsNavSections: NavSection[] = [
       'Dhoti Function',
       'Upanayanam Ceremony',
       'House Warming',
-      'Gruhapravesham'
+      'Gruhapravesham',
+      '---', // Visual separator
+      'View All Traditional Events'
     ]
   },
   {
@@ -225,7 +227,12 @@ export const getServiceSectionById = (id: string) => {
 
 // Generate URLs for navigation items
 export const generateEventUrl = (sectionId: string, itemName: string) => {
-  const slug = itemName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  // Special case for the Traditional Events page link
+  if (itemName === 'View All Traditional Events') {
+    return '/events/traditional-events';
+  }
+  
+  const slug = itemName.toLowerCase().replace(/\s+/g, '-');
   return `/events/${sectionId}/${slug}`;
 };
 

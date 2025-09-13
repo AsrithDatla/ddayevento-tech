@@ -67,7 +67,7 @@ const testimonials = [
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ const Testimonials: React.FC = () => {
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
             Stories of{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
               Celebration
             </span>
           </h2>
@@ -110,7 +110,7 @@ const Testimonials: React.FC = () => {
                     <h3 className="text-lg font-heading font-bold text-gray-900">
                       {testimonial.name}
                     </h3>
-                    <p className="text-sm text-purple-600 font-medium">
+                    <p className="text-sm text-brand-primary font-medium">
                       {testimonial.event}
                     </p>
                     <p className="text-xs text-gray-500">
@@ -134,14 +134,14 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 <div className="relative">
-                  <Quote className="w-8 h-8 text-purple-200 absolute -top-2 -left-2" />
+                  <Quote className="w-8 h-8 text-brand-primary/20 absolute -top-2 -left-2" />
                   <p className="text-gray-700 leading-relaxed pl-6">
                     {testimonial.text}
                   </p>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-1"></div>
+              <div className="bg-gradient-to-r from-brand-primary to-brand-secondary h-1"></div>
             </motion.div>
           ))}
         </div>
@@ -163,15 +163,15 @@ const Testimonials: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">500+</div>
+                <div className="text-3xl font-bold text-brand-primary mb-2">500+</div>
                 <div className="text-sm text-gray-600">Events Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">4.9★</div>
+                <div className="text-3xl font-bold text-brand-primary mb-2">4.9★</div>
                 <div className="text-sm text-gray-600">Average Rating</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
+                <div className="text-3xl font-bold text-brand-primary mb-2">100%</div>
                 <div className="text-sm text-gray-600">Client Satisfaction</div>
               </div>
             </div>
@@ -180,14 +180,14 @@ const Testimonials: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
               >
                 Start Planning Your Event
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300"
+                className="border-2 border-brand-primary text-brand-primary px-8 py-3 rounded-xl font-semibold hover:bg-brand-primary hover:text-white transition-all duration-300"
               >
                 View More Reviews
               </motion.button>

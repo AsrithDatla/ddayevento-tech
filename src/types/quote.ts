@@ -25,21 +25,21 @@ export interface SelectedService {
 }
 
 export interface QuoteFormData {
-  // Step 1: Event Type
+  // Step 1: Event Category
   eventCategory: string;
-  eventType: string;
   
-  // Step 2: Event Details
+  // Step 2: Sub Events
+  eventType: string;
+  subEvents: string[];
+  
+  // Step 3: Event Details
   eventDate: string;
   guestCount: number;
   venue: string;
   location: string;
   
-  // Step 3: Services
+  // Step 4: Services
   selectedServices: SelectedService[];
-  
-  // Step 4: Budget
-  budgetRange: BudgetRange;
   
   // Step 5: Contact
   contactInfo: ContactInfo;

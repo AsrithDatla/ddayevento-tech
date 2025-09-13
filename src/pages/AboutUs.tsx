@@ -1,131 +1,363 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { 
+  Users, 
+  CheckCircle, 
+  Star, 
+  Heart, 
+  Clock, 
+  Shield, 
+  Phone, 
+  Calendar,
+  Camera,
+  Palette,
+  Music,
+  UtensilsCrossed,
+  Gift,
+  MapPin,
+  Sparkles,
+  Cake,
+  Car,
+  Mail,
+  ArrowRight,
+  Quote
+} from 'lucide-react';
+import QuoteModal from '../components/QuoteGenerator/QuoteModal';
+import TestimonialsCarousel from '../components/TestimonialsCarousel';
 
-const aboutImages = [
-  '/about1.jpg', // Replace with your actual image paths or use public URLs
-  '/about2.jpg',
-  '/about3.jpg',
-  '/about4.jpg',
-  '/about5.jpg',
+const services = [
+  { icon: Users, title: 'Guest Service Assistance', description: 'Professional guest coordination and support throughout your event' },
+  { icon: Users, title: 'Event Setup Crew', description: 'Expert team for seamless event setup and breakdown' },
+  { icon: Camera, title: 'Photography & Videography', description: 'Capture every precious moment with professional quality' },
+  { icon: Palette, title: 'Decor & Styling', description: 'Transform your venue with stunning decorations and themes' },
+  { icon: Sparkles, title: 'Makeup Artists', description: 'Professional makeup and styling for your special day' },
+  { icon: Music, title: 'Music & Live Entertainment', description: 'DJ services, live music, and entertainment activities' },
+  { icon: UtensilsCrossed, title: 'Catering & Bartending', description: 'Delicious multi-cuisine menus and professional service' },
+  { icon: Car, title: 'Transport & Logistics', description: 'Seamless transportation and logistics coordination' },
+  { icon: MapPin, title: 'Venue Coordination', description: 'Perfect venue selection and complete coordination' },
+  { icon: Gift, title: 'Gifting & Invites', description: 'Custom invitations and thoughtful return gifts' },
+  { icon: Cake, title: 'Cakes', description: 'Custom designed cakes for every celebration' }
+];
+
+const differentiators = [
+  {
+    icon: CheckCircle,
+    title: 'All-in-One Service Network',
+    description: 'We work with service requirements for seamless execution.'
+  },
+  {
+    icon: Shield,
+    title: 'Verified Professionals Only',
+    description: 'Every vendor is handpicked, experienced, and quality-checked.'
+  },
+  {
+    icon: Heart,
+    title: 'Personal Guidance & Consultation',
+    description: 'We help you with planning, doubts, comparisons, and suggestions.'
+  },
+  {
+    icon: Star,
+    title: 'Budget-Based Service Provider',
+    description: 'Get the best within your budget — without compromising on quality.'
+  },
+  {
+    icon: Phone,
+    title: 'Single Point of Contact',
+    description: 'One dedicated planner manages all coordination and communication.'
+  },
+  {
+    icon: Clock,
+    title: 'Timely Responses & Full Availability',
+    description: 'Quick follow-ups, updates, and last-minute support — anytime.'
+  },
+  {
+    icon: Users,
+    title: 'Smooth Coordination Across Services',
+    description: 'We handle transitions between our team for flawless flow.'
+  },
+  {
+    icon: MapPin,
+    title: '100% Doorstep Delivery',
+    description: 'Every item and service — delivered where you need, when you need it.'
+  },
+  {
+    icon: Heart,
+    title: 'After-Event Support',
+    description: 'We stay with you after the event for edits, feedback, and closure.'
+  }
 ];
 
 const AboutUs: React.FC = () => {
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#16a6a6]">
-      {/* Sticky Header Section */}
-      <header className="sticky top-0 z-50 pt-6 pb-2 bg-[#16a6a6] text-white">
-        <div className="container mx-auto px-4 flex flex-col items-center">
-          <Link to="/">
-            <img src="/final-white-logo-400-120.png" alt="Dday Events" className="w-40 mb-2 cursor-pointer" />
-          </Link>
-          <nav className="flex gap-6 text-sm font-semibold mb-6">
-            <Link to="/" className="hover:underline">HOME</Link>
-            <a href="#" className="hover:underline">ABOUT US</a>
-            <a href="#" className="hover:underline">SERVICES</a>
-            <a href="#" className="hover:underline">EVENT STORE</a>
-            <a href="#" className="hover:underline">GALLERY</a>
-            <a href="#" className="hover:underline">REVIEWS</a>
-            <a href="#" className="hover:underline">CONTACT US</a>
-          </nav>
-          <h1 className="text-5xl font-bold mb-6 mt-2">About US</h1>
-        </div>
-      </header>
-
-      {/* Main Content Scrollable, with padding to avoid header/footer overlap */}
-      <main className="flex-1 overflow-y-auto pt-6 pb-10">
-        {/* Who We Are & What We Can Do */}
-        <section className="bg-[#f8f6f3] py-12">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">Who We Are?</h2>
-              <p className="text-gray-700 mb-6">
-                We are Hyderabad's premier event management company driven to cater to the wedding and event planning business across Telangana. As passionate event planners in Hyderabad, we deliver exceptional service and make your D-Day the most memorable and special with us here at "D-DAY EVENTO". Celebrate your big day with Hyderabad's most trusted event planners!
-              </p>
-              <img src={aboutImages[0]} alt="Who We Are" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
-            </div>
-            <div>
-              <img src={aboutImages[1]} alt="What We Can Do" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
-              <h2 className="text-2xl font-bold text-[#16a6a6] mb-2">What We Can Do?</h2>
-              <p className="text-gray-700">
-                Birthday party planners in Hyderabad, Anniversary celebrations, Wedding planners Hyderabad, Traditional Telugu wedding functions, All ceremonial events across Telangana, Event decoration and lighting in Gachibowli, Catering services Hyderabad, Wedding photography Kondapur, Bridal makeup & Mehendi artists, DJ and entertainment services, Return gifts, and all event management services in Hyderabad.
-              </p>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-hero-warm text-white pt-32 pb-20 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 animate-float">
+            <Heart size={60} />
           </div>
-        </section>
-
-        {/* Four Reasons Section */}
-        <section className="bg-white py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center text-[#16a6a6] mb-12">Four Reasons Why You Should Choose Us</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* D-Day Team */}
-              <div>
-                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
-                  <span className="inline-block">🔔</span> D-Day Team
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  Our Hyderabad-based team is a passionate and smart working group of event planning professionals. We give our maximum efforts for meeting our client's requirements across Gachibowli, Kondapur, and Jubilee Hills. Our team's main motto is to provide quality event management, coordination, and excellent communication to all our clients in Hyderabad. We handle each event with care and create those moments each client awaits the most. We are a friendly, dedicated team of event planners who enjoys and loves what they do.
-                </p>
-                <img src={aboutImages[2]} alt="D-Day Team" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
-              </div>
-              {/* Perfect Vendors */}
-              <div>
-                <img src={aboutImages[3]} alt="Perfect Vendors" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
-                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
-                  <span className="inline-block">🎉</span> Perfect Vendors
-                </h3>
-                <p className="text-gray-700">
-                  We have the best event vendors across Hyderabad from all categories and events. We have specialised vendors in Gachibowli, Kondapur, and Jubilee Hills who have displayed great work. Our Hyderabad vendors believe in delivering quality, assurance, and perfection in their field of work. We make sure our local vendors provide the quality of work and satisfaction to us and to our clients across Telangana. We carefully assess all our Hyderabad-based vendors and choose verified vendors to cater to the client's needs and requirements.
-                </p>
-              </div>
-              {/* Unique Memories */}
-              <div>
-                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
-                  <span className="inline-block">💡</span> Unique Memories
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  Memories are made to last a lifetime and we at D-Day Evento believe in that. We trust in making, creating, and experiencing those moments for our clients. Recreating those moments that each person has thought of, conceptualising and making the events from discussing them to turning the idea into reality. Memories are always preserved and cherished and we believe in making it happen.
-                </p>
-                <img src={aboutImages[4]} alt="Unique Memories" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0" />
-              </div>
-              {/* Unforgettable & Valuable Time */}
-              <div>
-                <img src={aboutImages[0]} alt="Unforgettable & Valuable Time" className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 mb-4" />
-                <h3 className="text-xl font-bold text-[#16a6a6] mb-2 flex items-center gap-2">
-                  <span className="inline-block">⏰</span> Unforgettable & Valuable time
-                </h3>
-                <p className="text-gray-700">
-                  Our Event Management Company respects and values our client's time. We analyse the budget, requirements, categories that the client is looking for. We give a detailed note of each thing discussed, suggest, and recommend our client what is suitable for them and make sure each penny they invest in us is a memory created for them. Our goal is to make sure our client spends the most beautiful time at their event when they sit back, relax and enjoy while we do all the work for them so that they can have an unforgettable moment of their life.
-                </p>
-              </div>
-            </div>
+          <div className="absolute top-40 right-20 animate-float-delayed">
+            <Star size={50} />
           </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="bg-[#16a6a6] py-10 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">Looking for something very special?</h3>
-          <p className="mb-6">PLAN YOUR BUDGET AND LET'S GET STARTED!</p>
-          <button className="bg-white text-[#16a6a6] font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">BUDGET CALCULATOR</button>
-        </section>
-      </main>
-
-      {/* Sticky Footer Info */}
-      <footer className="sticky bottom-0 z-50 bg-gray-900 text-white py-8 mt-0">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col items-center md:items-start">
-            <img src="/final-white-logo-400-120.png" alt="Dday Events" className="w-32 mb-2" />
-            <p className="text-center md:text-left">" Let's join hands at your convenient Time, Place and Date ! "</p>
-          </div>
-          <div className="text-center md:text-left">
-            <h4 className="font-bold mb-2">CONTACT INFO</h4>
-            <p>Gachibowli, Hyderabad, Telangana</p>
-            <p>ddayevento@gmail.com</p>
-            <p>+91 9701332813</p>
+          <div className="absolute bottom-40 left-20 animate-float-slow">
+            <Sparkles size={45} />
           </div>
         </div>
-        <div className="text-center text-gray-400 text-xs mt-6">All Rights Reserved © D-Day Evento</div>
-      </footer>
+
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="font-gordita font-bold text-5xl md:text-6xl mb-6 leading-tight">
+              CELEBRATING THE DAY
+            </h1>
+            <div className="text-2xl md:text-3xl font-gordita font-semibold mb-4 text-brand-gold">
+              One Platform. Every Event. All Your Services.
+            </div>
+            <p className="text-xl md:text-2xl font-gordita font-medium mb-8 max-w-4xl mx-auto leading-relaxed">
+              From First Thought to Final Applause
+            </p>
+            <p className="text-lg font-gordita font-normal max-w-3xl mx-auto leading-relaxed opacity-90">
+              From small gatherings to big gatherings, we simplify every celebration with complete event solutions and provide end-to-end required service support.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Who We Are Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center mb-16"
+          >
+            <h2 className="font-gordita font-bold text-4xl md:text-5xl text-brand-primary mb-6">
+              Who We Are
+            </h2>
+            <div className="text-2xl font-gordita font-semibold text-brand-accent mb-8">
+              Your Complete Event Ecosystem
+            </div>
+            <p className="text-lg font-gordita font-normal text-brand-text leading-relaxed">
+              At D-day Evento, we help you plan and execute events without the stress. We are a complete event service provider, who bring and offer personal guidance, and manage everything from your first inquiry to post-event follow-ups — so you can celebrate while we handle the work behind-the-scenes.
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+          >
+            {[
+              { number: '500+', label: 'Events Completed' },
+              { number: '4+', label: 'Years Experience' },
+              { number: '50+', label: 'Verified Vendors' },
+              { number: '24/7', label: 'Support Available' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="font-gordita font-bold text-3xl md:text-4xl text-brand-primary mb-2">
+                  {stat.number}
+                </div>
+                <div className="font-gordita font-medium text-sm text-brand-text">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What We Offer Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-teal-50 to-brand-coral-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-gordita font-bold text-4xl md:text-5xl text-brand-primary mb-6">
+              What We Offer
+            </h2>
+            <div className="text-2xl font-gordita font-semibold text-brand-accent mb-8">
+              One Click. Every Service.
+            </div>
+            <p className="text-lg font-gordita font-normal text-brand-text max-w-3xl mx-auto">
+              Services You Can Book with Us
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className="text-white" size={24} />
+                    </div>
+                    <h3 className="font-gordita font-semibold text-lg text-brand-primary">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <p className="font-gordita font-normal text-brand-text text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* What Makes Us Different Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-gordita font-bold text-4xl md:text-5xl text-brand-primary mb-6">
+              What Makes Us Different
+            </h2>
+            <div className="text-2xl font-gordita font-semibold text-brand-accent mb-8">
+              Why Choose D-day Evento?
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {differentiators.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="text-center group"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="text-white" size={28} />
+                  </div>
+                  <h3 className="font-gordita font-semibold text-xl text-brand-primary mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="font-gordita font-normal text-brand-text leading-relaxed">
+                    {item.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-teal-50 to-brand-coral-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-gordita font-bold text-4xl md:text-5xl text-brand-primary mb-6">
+              What Our Clients Say
+            </h2>
+            <div className="text-2xl font-gordita font-semibold text-brand-accent mb-8">
+              Real Experiences. Happy Celebrations.
+            </div>
+          </motion.div>
+
+          <TestimonialsCarousel />
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-brand-primary to-brand-secondary text-white relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 animate-float">
+            <Quote size={80} />
+          </div>
+          <div className="absolute bottom-10 right-10 animate-float-delayed">
+            <Heart size={60} />
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="font-gordita font-bold text-4xl md:text-5xl mb-6">
+              Ready to Plan Your Event?
+            </h2>
+            <div className="text-2xl font-gordita font-semibold mb-8 text-brand-gold">
+              From Plan to Party — We've Got You
+            </div>
+            <p className="text-xl font-gordita font-normal mb-12 max-w-3xl mx-auto leading-relaxed">
+              Big or small, we have got your back. Get in touch today and let us bring your event to life — the D-Day Evento way.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <motion.button
+                onClick={() => setIsQuoteModalOpen(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-brand-primary font-gordita font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              >
+                Get Started
+                <ArrowRight size={20} />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white text-white font-gordita font-semibold px-8 py-4 rounded-xl hover:bg-white hover:text-brand-primary transition-all duration-300 flex items-center gap-2"
+              >
+                <Calendar size={20} />
+                Schedule a Consultation
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+
+
+      {/* Quote Modal */}
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   );
 };
