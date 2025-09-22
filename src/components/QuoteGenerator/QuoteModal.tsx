@@ -42,16 +42,34 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
       whatsapp: ''
     },
     specialRequests: '',
-    estimatedTotal: 0
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(1);
+      setFormData({
+        eventCategory: '',
+        eventType: '',
+        subEvents: [],
+        eventDate: '',
+        guestCount: 0,
+        venue: '',
+        location: 'Hyderabad',
+        selectedServices: [],
+        contactInfo: {
+          name: '',
+          email: '',
+          phone: '',
+          whatsapp: ''
+        },
+        specialRequests: '',
+      });
+      setIsSubmitted(false);
       setErrors({});
     }
   }, [isOpen]);
@@ -87,7 +105,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
       case 4:
         if (formData.selectedServices.length === 0) newErrors.services = 'Please select at least one service';
         break;
-      case 5:
+      case 5: {
         if (!formData.contactInfo.name.trim()) newErrors.name = 'Please enter your name';
         if (!formData.contactInfo.email.trim()) newErrors.email = 'Please enter your email';
         if (!formData.contactInfo.phone.trim()) newErrors.phone = 'Please enter your phone number';
@@ -102,6 +120,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
           newErrors.phone = 'Please enter a valid phone number';
         }
         break;
+      }
     }
 
     setErrors(newErrors);
@@ -136,22 +155,45 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
 
     setIsSubmitting(true);
     try {
-      // Here you would typically send the data to your backend
-      const response = await fetch('/api/quote-request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          submittedAt: new Date().toISOString(),
-          source: 'website_quote_modal'
-        }),
-      });
+      const payload = JSON.stringify(formData);
+      const bytes = new TextEncoder().encode(payload).length;
+      if (bytes > 100_000) {
+        console.warn('Quote form payload unusually large:', bytes, 'bytes');
+      }
+      const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const primaryUrl = '/api/send-quote';
+      const fallbackUrl = isDev ? 'http://localhost:3000/api/send-quote' : primaryUrl;
+
+      async function doPost(url: string) {
+        return fetch(url, {
+          method: 'POST',
+          // Minimal set of headers to reduce risk of 431
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: payload,
+          redirect: 'follow',
+          // Ensure no cookies or auth headers are attached automatically
+          credentials: 'omit',
+          // Do not send referrer header
+          referrerPolicy: 'no-referrer',
+          // Avoid cache complications
+          cache: 'no-store'
+        });
+      }
+
+      let response = await doPost(primaryUrl);
+      if (response.status === 404 || response.status === 431) {
+        console.warn('Primary API POST failed with status', response.status, 'retrying with fallback URL');
+        response = await doPost(fallbackUrl);
+      }
 
       if (response.ok) {
-        setCurrentStep(6); // Move to confirmation step
+        setIsSubmitted(true);
       } else {
+        const text = await response.text().catch(() => '');
+        console.error('API error status', response.status, 'body:', text);
         throw new Error('Failed to submit quote request');
       }
     } catch (error) {
@@ -161,6 +203,34 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
       setIsSubmitting(false);
     }
   };
+
+  if (!isOpen) {
+    return null;
+  }
+
+  if (isSubmitted) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="bg-white rounded-2xl shadow-2xl w-full max-w-md text-center p-8"
+        >
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Thank You!</h2>
+          <p className="text-gray-600 mb-6">
+            Your quote request has been submitted successfully. We will get back to you shortly.
+          </p>
+          <button
+            onClick={onClose}
+            className="bg-purple-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300"
+          >
+            Close
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
 
   // Render current step component
   const renderStepContent = () => {
@@ -206,18 +276,11 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
           />
         );
       case 6:
-        return (
-          <ConfirmationStep
-            formData={formData}
-            onClose={onClose}
-          />
-        );
+        return <ConfirmationStep onClose={onClose} formData={formData} />;
       default:
         return null;
     }
   };
-
-  if (!isOpen) return null;
 
   return (
     <AnimatePresence>

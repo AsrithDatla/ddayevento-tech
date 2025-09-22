@@ -1,5 +1,5 @@
 import React from 'react';
-import { useBrandTheme } from '../../hooks/useBrandTheme';
+
 
 interface BrandHeadingProps {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -16,10 +16,10 @@ export const BrandHeading: React.FC<BrandHeadingProps> = ({
   className = '',
   children,
 }) => {
-  const { getHeadingClass } = useBrandTheme();
+  // const { getHeadingClass } = useBrandTheme();
 
   // Auto-size based on heading level if size not specified
-  const autoSize = size || (['3xl', '2xl', 'xl', 'lg', 'md', 'sm'][level - 1] as any);
+  const autoSize = size || (['3xl', '2xl', 'xl', 'lg', 'md', 'sm'][level - 1] as 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl');
 
   const sizeClasses = {
     sm: 'text-lg',

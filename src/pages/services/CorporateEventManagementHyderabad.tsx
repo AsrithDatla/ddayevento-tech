@@ -86,7 +86,7 @@ const CorporateEventManagementHyderabad: React.FC = () => {
               className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
               D-Day Evento is Hyderabad's leading corporate event management company, specializing in professional business events across Gachibowli IT Hub, Kondapur, Hitech City, and Financial District. We deliver exceptional corporate experiences that drive business success.
-            </p>
+            </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <motion.button

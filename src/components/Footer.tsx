@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ArrowRight, Calendar } from 'lucide-react';
+import { Heart, Phone, Mail, MapPin, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 // Font Awesome Snapchat icon component
 const SnapchatIcon = ({ size = 16, className = "" }) => (
@@ -31,8 +31,8 @@ const Footer: React.FC = () => {
     ]
   };
 
-  // State for the quote modal - will be used when implementing the modal
-  const [, setIsQuoteModalOpen] = React.useState(false);
+  // This state can be used to open a quote modal, for example.
+  // const [, setIsQuoteModalOpen] = React.useState(false);
 
   return (
     <footer className="relative">

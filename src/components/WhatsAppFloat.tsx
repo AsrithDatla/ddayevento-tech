@@ -57,12 +57,19 @@ const WhatsAppFloat: React.FC<WhatsAppFloatProps> = ({
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
     // Track click event for analytics and lead scoring
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'whatsapp_click', {
-        event_category: 'engagement',
-        event_label: 'floating_button',
-        value: 1
-      });
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+type GTag = (...args: (string | number | Record<string, unknown>)[]) => void;
+
+// ...
+
+      const gtag = (window as { gtag?: GTag }).gtag;
+      if (typeof gtag === 'function') {
+        gtag('event', 'whatsapp_click', {
+          event_category: 'engagement',
+          event_label: 'floating_button',
+          value: 1
+        });
+      }
     }
     
     // Track WhatsApp engagement for lead scoring

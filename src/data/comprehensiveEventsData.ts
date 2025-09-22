@@ -434,6 +434,50 @@ export const comprehensiveEventsData: EventCategory[] = [
     ]
   },
   {
+    id: 'traditional-events',
+    name: 'Traditional Events',
+    description: 'All major traditional ceremonies and rituals',
+    image: '/images/categories/traditional.jpg',
+    events: [
+      {
+        eventId: 'upanayanam',
+        eventName: 'Upanayanam',
+        description: 'Traditional coming-of-age ceremony for boys',
+        estimatedBudget: { min: 25000, max: 80000 },
+        coreServices: [
+          { id: 'invitation', name: 'Invitation', category: 'core' },
+          { id: 'decor-flower-backdrop', name: 'Flower Décor Backdrop', category: 'core' },
+          { id: 'photography', name: 'Photography', category: 'core' },
+          { id: 'food-catering', name: 'Food Catering', category: 'core' },
+          { id: 'pandit', name: 'Pandit', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'return-gifts', name: 'Return Gifts', category: 'extra' },
+          { id: 'makeup-artist', name: 'Makeup Artist', category: 'extra' },
+          { id: 'tent-house-material', name: 'Tent House Material', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'seemantham',
+        eventName: 'Seemantham',
+        description: 'Traditional baby shower ceremony',
+        estimatedBudget: { min: 20000, max: 60000 },
+        coreServices: [
+          { id: 'invitation', name: 'Invitation', category: 'core' },
+          { id: 'decor-flower-backdrop', name: 'Flower Décor Backdrop', category: 'core' },
+          { id: 'photography', name: 'Photography', category: 'core' },
+          { id: 'food-catering', name: 'Food Catering', category: 'core' },
+          { id: 'pandit', name: 'Pandit', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'return-gifts', name: 'Return Gifts', category: 'extra' },
+          { id: 'makeup-artist', name: 'Makeup Artist', category: 'extra' },
+          { id: 'tent-house-material', name: 'Tent House Material', category: 'extra' }
+        ]
+      }
+    ]
+  },
+  {
     id: 'baby-events',
     name: 'Baby Events',
     description: 'Celebrating new life with traditional and modern baby ceremonies',
@@ -669,9 +713,9 @@ const remainingEventCategories: EventCategory[] = [
     image: '/images/categories/college-events.jpg',
     events: [
       {
-        eventId: 'college-events',
-        eventName: 'College Events - Annual Day, Sports Day, Cultural Events, Fresher\'s Day, Farewell Day, Convocation',
-        description: 'Complete college event management with modern setups',
+        eventId: 'annual-day',
+        eventName: 'Annual Day',
+        description: 'Complete management for college annual day functions.',
         estimatedBudget: { min: 50000, max: 200000 },
         coreServices: [
           { id: 'trendy-backdrop-led', name: 'Trendy Backdrop/LED Screen, Truss/Theme Backdrop', category: 'core' }
@@ -687,6 +731,93 @@ const remainingEventCategories: EventCategory[] = [
           { id: 'tent-house-material', name: 'Tent house material', category: 'extra' },
           { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' }
         ]
+      },
+      {
+        eventId: 'sports-day',
+        eventName: 'Sports Day',
+        description: 'Organizing and managing college sports day events.',
+        estimatedBudget: { min: 40000, max: 180000 },
+        coreServices: [
+          { id: 'sound-system-mic', name: 'Sound system and mic', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'food-catering-snacks', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'tent-house-material', name: 'Tent house material', category: 'extra' },
+          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'cultural-events',
+        eventName: 'Cultural Events',
+        description: 'Full support for cultural festivals and events.',
+        estimatedBudget: { min: 60000, max: 250000 },
+        coreServices: [
+          { id: 'trendy-backdrop-led', name: 'Trendy Backdrop/LED Screen, Truss/Theme Backdrop', category: 'core' },
+          { id: 'dj', name: 'DJ', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'food-catering-snacks', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'photobooth', name: 'Photobooth', category: 'extra' },
+          { id: 'led-screen', name: 'LED Screen', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'tent-house-material', name: 'Tent house material', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'freshers-day',
+        eventName: 'Fresher\'s Day',
+        description: 'Memorable welcome parties for new students.',
+        estimatedBudget: { min: 45000, max: 150000 },
+        coreServices: [
+          { id: 'trendy-backdrop-led', name: 'Trendy Backdrop/LED Screen, Truss/Theme Backdrop', category: 'core' },
+          { id: 'dj', name: 'DJ', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'food-catering-snacks', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'farewell-day',
+        eventName: 'Farewell Day',
+        description: 'Elegant and fun farewell parties for graduating students.',
+        estimatedBudget: { min: 45000, max: 160000 },
+        coreServices: [
+          { id: 'trendy-backdrop-led', name: 'Trendy Backdrop/LED Screen, Truss/Theme Backdrop', category: 'core' },
+          { id: 'dj', name: 'DJ', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'food-catering-snacks', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'convocation',
+        eventName: 'Convocation',
+        description: 'Formal graduation and convocation ceremonies.',
+        estimatedBudget: { min: 70000, max: 220000 },
+        coreServices: [
+          { id: 'stage-setup', name: 'Stage setup with backdrop', category: 'core' },
+          { id: 'sound-system-mic', name: 'Sound system and mic', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'food-catering-snacks', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'led-screen', name: 'LED Screen', category: 'extra' },
+          { id: 'tent-house-material', name: 'Tent house material', category: 'extra' }
+        ]
       }
     ]
   },
@@ -697,28 +828,64 @@ const remainingEventCategories: EventCategory[] = [
     image: '/images/categories/corporate-events.jpg',
     events: [
       {
-        eventId: 'corporate-events',
-        eventName: 'Corporate Events - Office Openings, Team Lunches & Dinners, Corporate Parties, Day Outings',
-        description: 'Professional corporate event solutions with complete management',
-        estimatedBudget: { min: 30000, max: 300000 },
+        eventId: 'office-openings',
+        eventName: 'Office Openings',
+        description: 'Grand opening ceremonies for new office spaces.',
+        estimatedBudget: { min: 40000, max: 150000 },
         coreServices: [
           { id: 'theme-decor', name: 'Theme Decor', category: 'core' },
-          { id: 'flex-backdrop-led', name: 'Flex Backdrop/LED Screen', category: 'core' },
-          { id: 'sound-system', name: 'Sound System', category: 'core' },
-          { id: 'food-catering-comprehensive', name: 'Food Catering/Snacks/Outside Lunch/Dinner', category: 'core' }
+          { id: 'sound-system', name: 'Sound System', category: 'core' }
         ],
         extraServices: [
           { id: 'invitation', name: 'Invitation', category: 'extra' },
           { id: 'photographer', name: 'Photographer', category: 'extra' },
-          { id: 'anchor', name: 'Anchor', category: 'extra' },
-          { id: 'tent-house-material', name: 'Tent house material', category: 'extra' },
-          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' },
-          { id: 'team-building', name: 'Team Building Activities', category: 'extra' },
-          { id: 'awards', name: 'Awards', category: 'extra' },
-          { id: 'customised-gifts', name: 'Customised Gifts/Return Gifts', category: 'extra' },
-          { id: 'dj', name: 'DJ', category: 'extra' },
-          { id: 'stationary-items', name: 'Stationary Items - Paper Pads, Pens etc', category: 'extra' },
+          { id: 'food-catering-comprehensive', name: 'Food Catering/Snacks', category: 'extra' },
+          { id: 'customised-gifts', name: 'Customised Gifts', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'team-lunches-dinners',
+        eventName: 'Team Lunches & Dinners',
+        description: 'Organizing team meals at preferred locations.',
+        estimatedBudget: { min: 20000, max: 100000 },
+        coreServices: [
+          { id: 'food-catering-comprehensive', name: 'Food Catering/Snacks/Outside Lunch/Dinner', category: 'core' }
+        ],
+        extraServices: [
           { id: 'transport-service', name: 'Transport Service', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'corporate-parties',
+        eventName: 'Corporate Parties',
+        description: 'Annual corporate parties and celebrations.',
+        estimatedBudget: { min: 50000, max: 300000 },
+        coreServices: [
+          { id: 'theme-decor', name: 'Theme Decor', category: 'core' },
+          { id: 'flex-backdrop-led', name: 'Flex Backdrop/LED Screen', category: 'core' },
+          { id: 'sound-system', name: 'Sound System', category: 'core' },
+          { id: 'food-catering-comprehensive', name: 'Food Catering/Snacks', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'photographer', name: 'Photographer', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' },
+          { id: 'awards', name: 'Awards', category: 'extra' },
+          { id: 'dj', name: 'DJ', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'day-outings',
+        eventName: 'Day Outings',
+        description: 'Team building and recreational day outings.',
+        estimatedBudget: { min: 30000, max: 200000 },
+        coreServices: [
+          { id: 'food-catering-comprehensive', name: 'Food Catering/Snacks', category: 'core' },
+          { id: 'team-building', name: 'Team Building Activities', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'transport-service', name: 'Transport Service', category: 'extra' },
+          { id: 'photographer', name: 'Photographer', category: 'extra' }
         ]
       }
     ]
@@ -730,29 +897,87 @@ const remainingEventCategories: EventCategory[] = [
     image: '/images/categories/special-days.jpg',
     events: [
       {
-        eventId: 'special-days',
-        eventName: 'Special Days - Surprise Parties, Kitty Parties, House Parties, Candle Light Dinners, Valentines/Proposal, Retirement',
-        description: 'Personalized celebrations for special occasions and milestones',
-        estimatedBudget: { min: 15000, max: 100000 },
+        eventId: 'surprise-parties',
+        eventName: 'Surprise Parties',
+        description: 'Planning and executing memorable surprise parties.',
+        estimatedBudget: { min: 15000, max: 80000 },
         coreServices: [
-          { id: 'invitation', name: 'Invitation', category: 'core' },
           { id: 'balloon-backdrop-sofa', name: 'Balloon Backdrop + Sofa/Chair', category: 'core' },
-          { id: 'photography', name: 'Photography', category: 'core' },
-          { id: 'food-catering', name: 'Food Catering', category: 'core' },
-          { id: 'return-gifts', name: 'Return Gifts', category: 'core' },
           { id: 'cake', name: 'Cake', category: 'core' }
         ],
         extraServices: [
-          { id: 'makeup-artist', name: 'Makeup Artist', category: 'extra' },
-          { id: 'instant-photobooth', name: 'Instant Photobooth/360 Degree Photobooth', category: 'extra' },
+          { id: 'invitation', name: 'Invitation', category: 'extra' },
+          { id: 'photography', name: 'Photography', category: 'extra' },
+          { id: 'food-catering', name: 'Food Catering', category: 'extra' },
+          { id: 'return-gifts', name: 'Return Gifts', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'kitty-parties',
+        eventName: 'Kitty Parties',
+        description: 'Organizing themed and entertaining kitty parties.',
+        estimatedBudget: { min: 10000, max: 50000 },
+        coreServices: [
+          { id: 'food-catering', name: 'Food Catering', category: 'core' }
+        ],
+        extraServices: [
           { id: 'anchor', name: 'Anchor', category: 'extra' },
-          { id: 'tent-house-material', name: 'Tent house material', category: 'extra' },
+          { id: 'entertainment-activities', name: 'Any Entertainment Activity/Games', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'house-parties',
+        eventName: 'House Parties',
+        description: 'Complete setup for lively and fun house parties.',
+        estimatedBudget: { min: 20000, max: 100000 },
+        coreServices: [
+          { id: 'balloon-backdrop-sofa', name: 'Balloon Backdrop + Sofa/Chair', category: 'core' },
+          { id: 'food-catering', name: 'Food Catering', category: 'core' }
+        ],
+        extraServices: [
           { id: 'dj-sound-system', name: 'DJ/Sound System', category: 'extra' },
-          { id: 'photobooth-props', name: 'Photobooth props', category: 'extra' },
-          { id: 'generator', name: 'Generator', category: 'extra' },
-          { id: 'car-parking', name: 'Car Parking', category: 'extra' },
-          { id: 'led-screen', name: 'LED Screen', category: 'extra' },
+          { id: 'photobooth-props', name: 'Photobooth props', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'candle-light-dinners',
+        eventName: 'Candle Light Dinners',
+        description: 'Romantic and intimate candle light dinner setups.',
+        estimatedBudget: { min: 10000, max: 40000 },
+        coreServices: [
+          { id: 'food-catering', name: 'Food Catering', category: 'core' },
+          { id: 'balloon-backdrop-sofa', name: 'Decoration setup', category: 'core' }
+        ],
+        extraServices: [
           { id: 'live-musical-instruments', name: 'Live Musical Instruments', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'valentines-proposal',
+        eventName: 'Valentines/Proposal',
+        description: 'Creative and romantic setups for proposals and Valentine\'s Day.',
+        estimatedBudget: { min: 15000, max: 70000 },
+        coreServices: [
+          { id: 'balloon-backdrop-sofa', name: 'Decoration setup', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'photography', name: 'Photography', category: 'extra' },
+          { id: 'cake', name: 'Cake', category: 'extra' }
+        ]
+      },
+      {
+        eventId: 'retirement',
+        eventName: 'Retirement',
+        description: 'Honoring and celebrating retirement milestones.',
+        estimatedBudget: { min: 25000, max: 120000 },
+        coreServices: [
+          { id: 'invitation', name: 'Invitation', category: 'core' },
+          { id: 'food-catering', name: 'Food Catering', category: 'core' }
+        ],
+        extraServices: [
+          { id: 'photography', name: 'Photography', category: 'extra' },
+          { id: 'anchor', name: 'Anchor', category: 'extra' },
+          { id: 'return-gifts', name: 'Return Gifts', category: 'extra' }
         ]
       }
     ]

@@ -10,22 +10,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:3000', // vercel dev default port
         changeOrigin: true,
-        configure: (proxy, options) => {
-          // Mock API responses for development
-          proxy.on('proxyReq', (proxyReq, req, res) => {
-            if (req.url === '/api/send-quote' && req.method === 'POST') {
-              // Simulate successful quote submission
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ 
-                success: true, 
-                message: 'Quote request sent successfully' 
-              }));
-            }
-          });
-        }
-      }
-    }
-  }
+        secure: false,
+      },
+    },
+  },
 });

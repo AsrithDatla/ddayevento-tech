@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Calendar, Users, Heart, Gift, Music, Camera, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle, Users, Heart, Gift, Music, Camera, Sparkles } from 'lucide-react';
 
 const WeddingEvents: React.FC = () => {
   const { pathname } = useLocation();

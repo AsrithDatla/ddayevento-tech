@@ -22,14 +22,19 @@ export const useBrandTheme = () => {
     // Helper functions
     getColor: (colorPath: string) => {
       const keys = colorPath.split('.');
-      let value: any = brandColors;
+      let value: Record<string, unknown> | string | undefined = brandColors;
       
       for (const key of keys) {
-        value = value[key];
+        if (typeof value === 'object' && value !== null) {
+          value = value[key] as Record<string, unknown> | string | undefined;
+        } else {
+          value = undefined;
+          break;
+        }
         if (value === undefined) break;
       }
       
-      return value || brandColors.primary;
+      return typeof value === 'string' ? value : brandColors.primary;
     },
     
     // CSS custom property helpers

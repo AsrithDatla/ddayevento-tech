@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Users, Star, Calendar, Phone, Building2, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Users, Building2, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Premium venues we offer in Hyderabad
 const premiumVenues = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, CheckCircle, Star, Palette, Camera, Music, UtensilsCrossed, Gift, Lightbulb } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Palette, Camera, Music, UtensilsCrossed, Gift, Lightbulb } from 'lucide-react';
 import { getServiceSectionById } from '../../data/navConfig';
 
 const ServiceDetailPage: React.FC = () => {

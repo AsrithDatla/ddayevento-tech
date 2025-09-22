@@ -156,68 +156,64 @@ export const watiChatbotFlow: WATIFlow[] = [
 
 // WATI Webhook Configuration
 export const watiWebhookConfig = {
-  baseUrl: process.env.REACT_APP_WATI_BASE_URL || 'https://live-server-113452.wati.io',
-  apiKey: process.env.REACT_APP_WATI_API_KEY || '',
-  webhookUrl: process.env.REACT_APP_WATI_WEBHOOK_URL || '/api/wati/webhook',
-  phoneNumber: '917386813689',
-  
-  // Message templates
-  templates: {
-    welcome: 'welcome_template',
-    quote_confirmation: 'quote_confirmation_template',
-    follow_up: 'follow_up_template'
-  },
-  
-  // Auto-response settings
-  autoResponse: {
-    enabled: true,
-    businessHours: {
-      start: '09:00',
-      end: '21:00',
-      timezone: 'Asia/Kolkata'
-    },
-    offlineMessage: '🌙 Thanks for contacting D-Day Evento! \n\nWe\'re currently offline but will respond first thing in the morning. \n\nFor urgent inquiries, please call: +91-7386813689'
-  }
+  baseUrl: 'https://api.wati.io',
+  apiKey: process.env.WATI_API_KEY || 'your_wati_api_key',
+  phoneNumber: process.env.WATI_PHONE_NUMBER || 'your_wati_phone_number'
 };
 
-// Lead scoring configuration
-export const leadScoringConfig = {
-  eventTypes: {
-    'wedding': 10,
-    'corporate': 8,
-    'birthday': 6,
-    'anniversary': 7,
-    'other': 5
-  },
-  budgetRanges: {
-    'high': 10,      // 200k+
-    'medium': 7,     // 100k-200k
-    'low': 4         // <100k
-  },
-  urgency: {
-    'immediate': 10,  // Within 1 month
-    'soon': 7,        // 1-3 months
-    'planning': 4     // 3+ months
-  }
-};
-
-// Helper functions for WATI integration
+// WATI Helper Functions
 export const watiHelpers = {
-  // Format phone number for WATI
   formatPhoneNumber: (phone: string): string => {
-    return phone.replace(/\D/g, '').replace(/^0/, '91');
+    // Remove non-digit characters and add country code if missing
+    let cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length === 10) {
+      cleaned = `91${cleaned}`;
+    }
+    return cleaned;
   },
-  
-  // Calculate lead score
+
+  isGreeting: (message: string): boolean => {
+    const greetings = ['hi', 'hello', 'hey', 'start'];
+    return greetings.some(g => message.includes(g));
+  },
+
+  isThankYou: (message: string): boolean => {
+    const thanks = ['thanks', 'thank you', 'appreciate it'];
+    return thanks.some(t => message.includes(t));
+  },
+
+  isPriceInquiry: (message: string): boolean => {
+    const inquiries = ['price', 'cost', 'budget', 'quote', 'how much'];
+    return inquiries.some(i => message.includes(i));
+  },
+
+  isAvailabilityInquiry: (message: string): boolean => {
+    const inquiries = ['available', 'availability', 'date', 'schedule'];
+    return inquiries.some(i => message.includes(i));
+  },
+
+  isContactRequest: (message: string): boolean => {
+    const requests = ['contact', 'speak', 'expert', 'call', 'phone'];
+    return requests.some(r => message.includes(r));
+  },
+
+  responses: {
+    greeting: '🎉 Welcome to D-Day Evento! How can we help you create your perfect celebration?',
+    thankYou: 'You\'re welcome! Is there anything else I can help you with?',
+    priceInquiry: 'To give you an accurate quote, could you please tell me more about your event? (Type of event, date, number of guests)',
+    availabilityInquiry: 'To check our availability, please provide the date of your event.',
+    contactRequest: 'Sure! Our event expert will call you shortly. Please provide your name and a convenient time to call.',
+    default: 'Thanks for your message! Our team will get back to you shortly.'
+  },
+
   calculateLeadScore: (eventType: string, budget: string, urgency: string): number => {
-    const eventScore = leadScoringConfig.eventTypes[eventType as keyof typeof leadScoringConfig.eventTypes] || 5;
-    const budgetScore = leadScoringConfig.budgetRanges[budget as keyof typeof leadScoringConfig.budgetRanges] || 4;
-    const urgencyScore = leadScoringConfig.urgency[urgency as keyof typeof leadScoringConfig.urgency] || 4;
-    
-    return eventScore + budgetScore + urgencyScore;
+    let score = 0;
+    if (eventType === 'wedding' || eventType === 'corporate') score += 40;
+    if (budget === 'high') score += 30;
+    if (urgency === 'soon') score += 20;
+    return score;
   },
-  
-  // Generate WhatsApp link with pre-filled message
+
   generateWhatsAppLink: (phone: string, message: string): string => {
     const formattedPhone = watiHelpers.formatPhoneNumber(phone);
     const encodedMessage = encodeURIComponent(message);

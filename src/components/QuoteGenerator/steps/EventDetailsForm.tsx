@@ -22,7 +22,7 @@ const EventDetailsForm: React.FC<EventDetailsFormProps> = ({
   maxDate.setFullYear(maxDate.getFullYear() + 2);
   const maxDateString = maxDate.toISOString().split('T')[0];
 
-  const handleInputChange = (field: keyof QuoteFormData, value: any) => {
+  const handleInputChange = (field: keyof Omit<QuoteFormData, 'selectedServices' | 'contactInfo'>, value: string | number) => {
     updateFormData({ [field]: value });
   };
 

@@ -35,7 +35,7 @@ export const useQuoteForm = () => {
     }
 
     // Aggregate services from all selected sub-events
-    const allServices: { [category: string]: { category: string; services: any[] } } = {};
+    const allServices: { [category: string]: { category: string; services: {id: string; name: string}[] } } = {};
     
     formData.subEvents.forEach(subEventId => {
       const subEvent = selectedEvent.subEvents?.find(sub => sub.id === subEventId);
@@ -103,10 +103,12 @@ export const useQuoteForm = () => {
       if (response.ok) {
         return { success: true };
       } else {
-        return { success: false, error: 'Failed to submit quote' };
+        const errorData = await response.json().catch(() => ({ message: 'Failed to submit quote' }));
+        return { success: false, error: errorData.message };
       }
-    } catch (error) {
-      return { success: false, error: 'Network error' };
+    } catch (err) {
+      const error = err as Error;
+      return { success: false, error: error.message || 'Network error' };
     }
   };
 

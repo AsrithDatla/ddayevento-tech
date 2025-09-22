@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Sparkles, MapPin, Heart, Users, Calendar } from 'lucide-react';
 import QuoteModal from './QuoteGenerator/QuoteModal';
-import { FloatingTrustBadge } from './TrustIndicators';
 
 const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
+
+  // This effect ensures the video restarts when the component is re-mounted
+  // (e.g., when navigating back to the home page)
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      // By setting the src again, we force the iframe to reload and autoplay.
+      const originalSrc = videoElement.src;
+      videoElement.src = ''; // Clear src first
+      videoElement.src = originalSrc; // Re-assign to trigger reload
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <section id="home" className="hero-section min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Background with Gradient */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-black/30"></div>
-        {/* Authentic background image overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{
-            backgroundImage: 'url("https://images.pexels.com/photos/1616343/pexels-photo-1616343.jpeg?w=1920&h=1080&fit=crop")'
-          }}
-        />
+      {/* Background Video */}
+      <div className="absolute inset-0 overflow-hidden">
+        <iframe
+          ref={videoRef} // Add ref to the iframe
+          src="https://player.cloudinary.com/embed/?cloud_name=djycmy2gr&public_id=samples%2Fcld-sample-video&profile=cld-default&autoplay=true&loop=true&muted=true&show_logo=false&show_controls=false"
+          className="absolute top-1/2 left-1/2 w-full h-full min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="background-video"
+        ></iframe>
+        <div className="absolute inset-0 bg-black/50"></div> {/* Overlay for text visibility */}
       </div>
 
       {/* Floating Elements */}

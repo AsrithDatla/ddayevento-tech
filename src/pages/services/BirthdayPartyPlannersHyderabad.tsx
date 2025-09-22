@@ -86,7 +86,7 @@ const BirthdayPartyPlannersHyderabad: React.FC = () => {
               className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
               D-Day Evento is Hyderabad's most creative birthday party planning company, specializing in memorable birthday celebrations for kids and adults across Gachibowli, Kondapur, Jubilee Hills, and all of Hyderabad. We make every birthday special with unique themes and personalized touches.
-            </p>
+            </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <motion.button

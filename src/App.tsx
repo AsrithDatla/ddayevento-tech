@@ -1,8 +1,7 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ValueProp from './components/ValueProp';
 import EventCategories from './components/EventCategories';
 import ServicesGrid from './components/ServicesGrid';
 import PopularClubhouses from './components/PopularClubhouses';
@@ -13,7 +12,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import Blogs from './pages/Blogs';
-import TrustIndicators, { TrustBanner, LocalTrustIndicators, SecurityTrustIndicators } from './components/TrustIndicators';
+import { TrustBanner } from './components/TrustIndicators';
 import DesignSystem from './components/DesignSystem';
 
 // Lazy load event and service pages
@@ -24,10 +23,11 @@ const WeddingEvents = lazy(() => import('./pages/events/WeddingEvents'));
 const BirthdayEvents = lazy(() => import('./pages/events/BirthdayEvents'));
 const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
+const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <TrustBanner />
       <Header />
       <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
@@ -51,6 +51,7 @@ function App() {
           <Route path="/events/birthdays" element={<BirthdayEvents />} />
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
+          <Route path="/services/planning-management" element={<EventPlanningPage />} />
           <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
           <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />
         </Routes>

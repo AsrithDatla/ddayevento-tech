@@ -4,6 +4,10 @@ export interface NavSection {
   items: string[];
 }
 
+export interface ServiceSection extends NavSection {
+  href: string;
+}
+
 // Desktop Events Navigation (as shown in desktop dropdown)
 export const desktopEventsNavSections: NavSection[] = [
   {
@@ -90,126 +94,81 @@ export const desktopEventsNavSections: NavSection[] = [
 ];
 
 // Desktop Services Navigation (as shown in desktop dropdown)
-export const desktopServicesNavSections: NavSection[] = [
+export const desktopServicesNavSections: ServiceSection[] = [
   {
-    id: 'decoration',
-    label: 'Decoration',
+    id: 'planning-management',
+    label: 'Event Planning & Management',
+    href: '/services/planning-management',
     items: [
-      'Theme-Based Stage Decoration',
-      'Balloon Decoration',
-      'Floral Decoration',
-      'Fabric Drapes & Canopies',
-      'LED / Neon Signage',
-      'Entry Gate Setup',
-      'Welcome Board & Easel Setup',
-      'Table Styling',
-      'Photo Booth / Backdrop Walls',
-      'Themed Props & Cutouts',
-      'Hanging / Ceiling Decor',
-      'LED Letters & Numbers',
-      'Decor Lighting'
-    ]
+      'Why Every Detail Counts',
+      'The Reality',
+      'Our Signature Approach',
+      'Events That Speak',
+      'Behind the Scenes',
+      'Our Client Experience With D-DAY EVENTO',
+      'Why Choose D DAY Evento',
+    ],
   },
   {
-    id: 'cakes',
-    label: 'Cakes',
-    items: [
-      'Custom Theme Cakes',
-      'Fondant / Cream Cakes',
-      'Dessert Table Styling',
-      'Cupcakes, Brownies, Macarons',
-      'Name Cakes / Number Cakes',
-      'Eggless / Egg Options',
-      'Smash Cake for Babies',
-      'Instant Cake Cutting Setup'
-    ]
+    id: 'decoration-design',
+    label: 'Decoration & Design',
+    href: '/services/decoration-design',
+    items: [],
   },
   {
-    id: 'photography-videography',
+    id: 'photo-video',
     label: 'Photography & Videography',
-    items: [
-      'Regular Photography',
-      'Regular Videography',
-      'Candid Photography',
-      'Candid Videography',
-      'Teaser / Trailer Video',
-      'Drone Photography & Video',
-      'Instant Photo Printing Booth',
-      'Live Streaming',
-      'Photo Album Design & Printing',
-      'Same-Day Edits'
-    ]
+    href: '/services/photo-video',
+    items: [],
   },
   {
-    id: 'return-gifts',
-    label: 'Return Gifts',
-    items: [
-      'Personalized Gifts',
-      'Theme-Based Gift Boxes',
-      'Sweet Boxes / Custom Hampers',
-      'Eco-Friendly Gifts',
-      'Toys / Stationery Sets',
-      'Utility Gift Packs',
-      'Trousseau Packing',
-      'Premium Packing & Tagging',
-      'Gift Counters with Attendants'
-    ]
+    id: 'entertainment-activities',
+    label: 'Entertainment & Activities',
+    href: '/services/entertainment-activities',
+    items: [],
   },
   {
     id: 'food-catering',
     label: 'Food & Catering',
-    items: [
-      'Veg / Non-Veg Catering',
-      'South Indian',
-      'North Indian',
-      'Continental',
-      'Italian',
-      'Indo-Chinese',
-      'Pan Asian',
-      'Live Counters/Stalls',
-      'Cutlery',
-      'Waiter / Staff Management'
-    ]
+    href: '/services/food-catering',
+    items: [],
   },
   {
     id: 'makeup-styling',
     label: 'Makeup & Styling',
-    items: [
-      'Party Makeup',
-      'Bridal Makeup',
-      'Groom Makeup & Styling',
-      'Saree/Half Saree Draping',
-      'Hair Styling & Hairdo',
-      'Mehendi Artist',
-      'Nail Art Station',
-      'Touch-Up Corner',
-      'Group Makeup',
-      'Makeup Trials'
-    ]
+    href: '/services/makeup-styling',
+    items: [],
+  },
+  {
+    id: 'cakes-confectionery',
+    label: 'Cakes & Confectionery',
+    href: '/services/cakes-confectionery',
+    items: [],
+  },
+  {
+    id: 'return-gifts',
+    label: 'Return Gifts & Souvenirs',
+    href: '/services/return-gifts',
+    items: [],
+  },
+  {
+    id: 'rentals',
+    label: 'Tent House Materials & Rentals',
+    href: '/services/rentals',
+    items: [],
   },
   {
     id: 'venue-booking',
     label: 'Venue Booking & Setup',
-    items: [
-      'Venue Selection & Booking Assistance',
-      'Banquet Hall Coordination',
-      'Outdoor / Garden Venue Setup',
-      'Farmhouse Booking',
-      'Stage & Seating Arrangement',
-      'Parking Arrangement'
-    ]
+    href: '/services/venue-booking',
+    items: [],
   },
   {
-    id: 'entertainment',
-    label: 'Entertainment & Activities',
-    items: [
-      'Music & Sound',
-      'Grand Entry Concepts',
-      'Artists',
-      'Characters',
-      'Games'
-    ]
-  }
+    id: 'specialized-services',
+    label: 'Specialized Services',
+    href: '/services/specialized-services',
+    items: [],
+  },
 ];
 
 // Mobile Navigation - Using same structure as desktop
@@ -236,7 +195,15 @@ export const generateEventUrl = (sectionId: string, itemName: string) => {
   return `/events/${sectionId}/${slug}`;
 };
 
-export const generateServiceUrl = (sectionId: string, itemName: string) => {
-  const slug = itemName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  return `/services/${sectionId}/${slug}`;
+export const generateServiceUrl = (sectionId: string, itemName:string) => {
+  const section = desktopServicesNavSections.find(s => s.id === sectionId);
+  if (!section) return '/';
+
+  const slug = itemName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+    
+  return `${section.href}#${slug}`;
 };

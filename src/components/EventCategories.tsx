@@ -123,6 +123,7 @@ const EventCategories: React.FC = () => {
             <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story
           </p>
         </motion.div>
+      </div>
 
         {/* Image Slider - Hidden on mobile, visible on desktop */}
         <section id="carousel" className="hidden md:block my-8">
@@ -174,6 +175,7 @@ const EventCategories: React.FC = () => {
             </div>
           </div>
         </section>
+      <div className="container mx-auto px-6 relative">
 
         {/* Mobile Grid - Visible on mobile, hidden on desktop */}
         <div className="grid grid-cols-2 gap-4 md:hidden my-8">
@@ -203,7 +205,7 @@ const EventCategories: React.FC = () => {
           ))}
         </div>
 
-       
+      
 
       </div>
     </section>

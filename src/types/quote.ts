@@ -11,17 +11,13 @@ export interface ContactInfo {
   whatsapp?: string;
 }
 
-export interface BudgetRange {
-  min: number;
-  max: number;
-}
-
 export interface SelectedService {
   id: string;
   name: string;
   category: 'core' | 'extra';
-  estimatedPrice?: number;
   isSelected: boolean;
+  eventName?: string;
+  description?: string;
 }
 
 export interface QuoteFormData {
@@ -44,9 +40,6 @@ export interface QuoteFormData {
   // Step 5: Contact
   contactInfo: ContactInfo;
   specialRequests: string;
-  
-  // Calculated
-  estimatedTotal: number;
 }
 
 export interface QuoteRequest extends QuoteFormData {
@@ -75,10 +68,6 @@ export interface EventService {
   coreServices: ServiceItem[];
   extraServices: ServiceItem[];
   description: string;
-  estimatedBudget: {
-    min: number;
-    max: number;
-  };
 }
 
 export interface EventCategory {

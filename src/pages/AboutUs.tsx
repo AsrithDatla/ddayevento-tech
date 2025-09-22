@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { 
   Users, 
   CheckCircle, 
@@ -19,7 +18,6 @@ import {
   Sparkles,
   Cake,
   Car,
-  Mail,
   ArrowRight,
   Quote
 } from 'lucide-react';

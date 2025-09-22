@@ -11,7 +11,9 @@ interface EventTypeSelectionProps {
 }
 
 // Icon mapping for event categories
-const categoryIcons: Record<string, React.ComponentType<any>> = {
+import { LucideIcon } from 'lucide-react';
+// ...
+const categoryIcons: Record<string, LucideIcon> = {
   'wedding-events': Heart,
   'house-warming': Building,
   'baby-events': Baby,
