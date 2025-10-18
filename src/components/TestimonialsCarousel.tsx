@@ -80,26 +80,15 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6"
-          >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
             What Our Clients{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
               Say
             </span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-          >
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Over 400+ successful events in Hyderabad. Here's what our happy clients have to say about their experience with D-Day Evento.
-          </motion.p>
+          </p>
         </div>
 
         {/* Event Type Filters */}

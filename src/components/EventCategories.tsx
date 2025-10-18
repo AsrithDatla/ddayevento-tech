@@ -106,13 +106,7 @@ const EventCategories: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-6 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
 
           <h2 className="font-display text-5xl md:text-6xl font-bold text-black mb-8 leading-tight">
             Event Categories
@@ -122,7 +116,7 @@ const EventCategories: React.FC = () => {
             From intimate family gatherings to grand celebrations across Hyderabad, we specialize in creating
             <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story
           </p>
-        </motion.div>
+        </div>
       </div>
 
         {/* Image Slider - Hidden on mobile, visible on desktop */}
@@ -180,17 +174,11 @@ const EventCategories: React.FC = () => {
         {/* Mobile Grid - Visible on mobile, hidden on desktop */}
         <div className="grid grid-cols-2 gap-4 md:hidden my-8">
           {categories.map((category, index) => (
-            <motion.div
+            <div
               key={category.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className={`relative overflow-hidden rounded-lg cursor-pointer group ${index % 2 === 0 ? 'mt-0' : 'mt-4'
+              className={`relative overflow-hidden rounded-lg cursor-pointer group hover:scale-105 transition-transform duration-300 ${index % 2 === 0 ? 'mt-0' : 'mt-4'
                 }`}
               onClick={() => handleCategoryClick(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               <img
                 src={category.image}
@@ -201,7 +189,7 @@ const EventCategories: React.FC = () => {
               <p className="absolute bottom-2 left-2 text-sm font-bold z-10" style={{ color: '#FFFFFF', textShadow: '0 2px 6px rgba(0, 0, 0, 0.8), 0 0 3px rgba(0, 0, 0, 0.9)' }}>
                 {category.title}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 

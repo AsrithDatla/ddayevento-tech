@@ -1,94 +1,115 @@
 export interface NavSection {
   id: string;
   label: string;
-  items: string[];
+  items: NavItem[];
+  icon?: string;
+  description?: string;
+}
+
+export interface NavItem {
+  name: string;
+  href?: string;
+  description?: string;
+  featured?: boolean;
 }
 
 export interface ServiceSection extends NavSection {
   href: string;
 }
 
-// Desktop Events Navigation (as shown in desktop dropdown)
+// Desktop Events Navigation (Apple-inspired hierarchical structure)
 export const desktopEventsNavSections: NavSection[] = [
   {
     id: 'traditional-events',
     label: 'Traditional Events',
+    icon: '🏠',
+    description: 'Sacred ceremonies and cultural celebrations',
     items: [
-      'Cradle Ceremony',
-      'Naming Ceremony',
-      'Annaprasana',
-      'Baby Shower',
-      'Sreemantham',
-      'Half Saree Function',
-      'Dhoti Function',
-      'Upanayanam Ceremony',
-      'House Warming',
-      'Gruhapravesham',
-      '---', // Visual separator
-      'View All Traditional Events'
+      { name: 'House Warming/ Griha Pravesham', href: '/events/traditional/house-warming', description: 'Blessing your new home' },
+      { name: 'Baby Shower/ Sreemantham', href: '/events/traditional/baby-shower', description: 'Celebrating new life', featured: true },
+      { name: 'Cradle Ceremony/ Naming Ceremony/ Annaprasana', href: '/events/traditional/cradle-ceremony', description: 'First milestones' },
+      { name: 'Half Saree Ceremony/ Doti Ceremony', href: '/events/traditional/half-saree', description: 'Coming of age celebration' },
+      { name: 'Upanayanam', href: '/events/traditional/upanayanam', description: 'Sacred thread ceremony' }
     ]
   },
   {
     id: 'weddings-events',
-    label: 'Weddings Events',
+    label: 'Wedding Events',
+    icon: '💍',
+    description: 'Complete wedding celebration journey',
     items: [
-      'Engagement',
-      'Pellikoduku',
-      'Pellikuthuru',
-      'Haldi',
-      'Mehendi',
-      'Bachelors Party',
-      'Sangeet',
-      'Bharath',
-      'Wedding Day',
-      'Reception'
+      { name: 'Engagement', href: '/events/wedding/engagement', description: 'The beginning of forever', featured: true },
+      { name: 'Pellikoduku', href: '/events/wedding/pellikoduku', description: 'Groom\'s celebration' },
+      { name: 'Pellikuthuru', href: '/events/wedding/pellikuthuru', description: 'Bride\'s celebration' },
+      { name: 'Haldi', href: '/events/wedding/haldi', description: 'Golden turmeric ceremony' },
+      { name: 'Mehendi', href: '/events/wedding/mehendi', description: 'Intricate henna designs' },
+      { name: 'Bachelors Party', href: '/events/wedding/bachelors', description: 'Last night of freedom' },
+      { name: 'Sangeet', href: '/events/wedding/sangeet', description: 'Musical celebration' },
+      { name: 'Bharath', href: '/events/wedding/bharath', description: 'Traditional ceremony' },
+      { name: 'Wedding Day', href: '/events/wedding/wedding-day', description: 'The main celebration', featured: true },
+      { name: 'Reception', href: '/events/wedding/reception', description: 'Grand celebration' }
     ]
   },
   {
     id: 'birthdays',
-    label: 'Birthdays',
+    label: 'Birthday Celebrations',
+    icon: '🎂',
+    description: 'Making every year special',
     items: [
-      'Baby Welcoming Event',
-      'Cake smash',
-      '1st Year Birthday Parties',
-      'Kids Yearly Birthdays',
-      'Adult Birthday Parties'
+      { name: 'Baby Welcoming Event', href: '/events/birthdays', description: 'First hello to the world' },
+      { name: 'Cake Smash', href: '/events/birthdays', description: 'Messy first birthday fun', featured: true },
+      { name: '1st Year Birthday Parties', href: '/events/birthdays', description: 'Milestone celebration' },
+      { name: 'Kids Yearly Birthdays', href: '/events/birthdays', description: 'Themed party magic' },
+      { name: 'Adult Birthday Parties', href: '/events/birthdays', description: 'Sophisticated celebrations' }
     ]
   },
   {
     id: 'corporate-events',
     label: 'Corporate Events',
+    icon: '🏢',
+    description: 'Professional gatherings and team building',
     items: [
-      'Corporate Party',
-      'Team Day Outings',
-      'Office Parties',
-      'Team Lunch/Dinner',
-      'Daily Catering Boxes'
+      { name: 'Corporate Party', href: '/events/corporate-events', description: 'Company celebrations' },
+      { name: 'Team Day Outings', href: '/events/corporate-events', description: 'Building stronger teams', featured: true },
+      { name: 'Office Parties', href: '/events/corporate-events', description: 'Workplace celebrations' },
+      { name: 'Team Lunch/Dinner', href: '/events/corporate-events', description: 'Casual team bonding' },
+      { name: 'Daily Catering Boxes', href: '/events/corporate-events', description: 'Regular meal solutions' },
+      { name: 'Conferences & Seminars', href: '/events/corporate-events', description: 'Professional conferences and seminars' },
+      { name: 'Product Launches', href: '/events/corporate-events', description: 'Strategic product launch events' },
+      { name: 'Annual Day Celebrations', href: '/events/corporate-events', description: 'Company annual celebrations', featured: true },
+      { name: 'Award Ceremonies', href: '/events/corporate-events', description: 'Recognition and award events' },
+      { name: 'Team Building Activities', href: '/events/corporate-events', description: 'Engaging team building programs' },
+      { name: 'Networking Events', href: '/events/corporate-events', description: 'Business networking opportunities' },
+      { name: 'Gala Dinners', href: '/events/corporate-events', description: 'Elegant corporate gala events' }
     ]
   },
   {
     id: 'special-days',
-    label: 'Special Days',
+    label: 'Special Occasions',
+    icon: '✨',
+    description: 'Unique moments deserve unique celebrations',
     items: [
-      'Surprise Parties',
-      'Kitty Parties',
-      'House Parties',
-      'Candle Light Dinners',
-      'Valentines/Proposal',
-      'Retirement Day',
-      'Anniversaries'
+      { name: 'Surprise Parties', href: '/events/special/surprise', description: 'Unforgettable surprises', featured: true },
+      { name: 'Kitty Parties', href: '/events/special/kitty', description: 'Ladies social gatherings' },
+      { name: 'House Parties', href: '/events/special/house-party', description: 'Intimate home celebrations' },
+      { name: 'Candle Light Dinners', href: '/events/special/candlelight', description: 'Romantic evenings' },
+      { name: 'Valentines/Proposal', href: '/events/special/valentine', description: 'Love celebrations' },
+      { name: 'Retirement Day', href: '/events/special/retirement', description: 'Honoring service' },
+      { name: 'Anniversaries', href: '/events/special/anniversary', description: 'Celebrating milestones' }
     ]
   },
   {
     id: 'college-events',
     label: 'College Events',
+    icon: '🎓',
+    description: 'Academic celebrations and milestones',
     items: [
-      'Annual Day',
-      'Sports Day',
-      'Cultural Day',
-      'Freshers Day',
-      'Farewell Day',
-      'Convocation Day'
+      { name: 'Annual Day', href: '/events/college/annual-day', description: 'Yearly celebrations' },
+      { name: 'Sports Day', href: '/events/college/sports-day', description: 'Athletic competitions' },
+      { name: 'Cultural Day', href: '/events/college/cultural-day', description: 'Arts and culture showcase', featured: true },
+      { name: 'Freshers Day', href: '/events/college/freshers', description: 'Welcome new students' },
+      { name: 'Farewell Day', href: '/events/college/farewell', description: 'Goodbye celebrations' },
+      { name: 'Convocation Day', href: '/events/college/convocation', description: 'Graduation ceremony' }
     ]
   }
 ];
@@ -98,75 +119,67 @@ export const desktopServicesNavSections: ServiceSection[] = [
   {
     id: 'planning-management',
     label: 'Event Planning & Management',
-    href: '/services/planning-management',
-    items: [
-      'Why Every Detail Counts',
-      'The Reality',
-      'Our Signature Approach',
-      'Events That Speak',
-      'Behind the Scenes',
-      'Our Client Experience With D-DAY EVENTO',
-      'Why Choose D DAY Evento',
-    ],
+    href: '/services#planning-management',
+    items: [],
   },
   {
     id: 'decoration-design',
     label: 'Decoration & Design',
-    href: '/services/decoration-design',
+    href: '/services#decoration-design',
     items: [],
   },
   {
     id: 'photo-video',
     label: 'Photography & Videography',
-    href: '/services/photo-video',
+    href: '/services#photo-video',
     items: [],
   },
   {
     id: 'entertainment-activities',
     label: 'Entertainment & Activities',
-    href: '/services/entertainment-activities',
+    href: '/services#entertainment-activities',
     items: [],
   },
   {
     id: 'food-catering',
     label: 'Food & Catering',
-    href: '/services/food-catering',
+    href: '/services#food-catering',
     items: [],
   },
   {
     id: 'makeup-styling',
     label: 'Makeup & Styling',
-    href: '/services/makeup-styling',
+    href: '/services#makeup-styling',
     items: [],
   },
   {
     id: 'cakes-confectionery',
     label: 'Cakes & Confectionery',
-    href: '/services/cakes-confectionery',
+    href: '/services#cakes-confectionery',
     items: [],
   },
   {
     id: 'return-gifts',
     label: 'Return Gifts & Souvenirs',
-    href: '/services/return-gifts',
+    href: '/services#return-gifts',
     items: [],
   },
   {
     id: 'rentals',
     label: 'Tent House Materials & Rentals',
-    href: '/services/rentals',
+    href: '/services#rentals',
     items: [],
   },
   {
     id: 'venue-booking',
     label: 'Venue Booking & Setup',
-    href: '/services/venue-booking',
+    href: '/services#venue-booking',
     items: [],
   },
   {
     id: 'specialized-services',
     label: 'Specialized Services',
-    href: '/services/specialized-services',
+    href: '/services#specialized-services',
     items: [],
   },
 ];
@@ -186,16 +199,11 @@ export const getServiceSectionById = (id: string) => {
 
 // Generate URLs for navigation items
 export const generateEventUrl = (sectionId: string, itemName: string) => {
-  // Special case for the Traditional Events page link
-  if (itemName === 'View All Traditional Events') {
-    return '/events/traditional-events';
-  }
-  
   const slug = itemName.toLowerCase().replace(/\s+/g, '-');
   return `/events/${sectionId}/${slug}`;
 };
 
-export const generateServiceUrl = (sectionId: string, itemName:string) => {
+export const generateServiceUrl = (sectionId: string, itemName: string) => {
   const section = desktopServicesNavSections.find(s => s.id === sectionId);
   if (!section) return '/';
 
@@ -204,6 +212,6 @@ export const generateServiceUrl = (sectionId: string, itemName:string) => {
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
-    
+
   return `${section.href}#${slug}`;
 };
