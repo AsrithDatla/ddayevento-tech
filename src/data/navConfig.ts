@@ -38,16 +38,12 @@ export const desktopEventsNavSections: NavSection[] = [
     icon: '💍',
     description: 'Complete wedding celebration journey',
     items: [
-      { name: 'Engagement', href: '/events/wedding/engagement', description: 'The beginning of forever', featured: true },
-      { name: 'Pellikoduku', href: '/events/wedding/pellikoduku', description: 'Groom\'s celebration' },
-      { name: 'Pellikuthuru', href: '/events/wedding/pellikuthuru', description: 'Bride\'s celebration' },
-      { name: 'Haldi', href: '/events/wedding/haldi', description: 'Golden turmeric ceremony' },
-      { name: 'Mehendi', href: '/events/wedding/mehendi', description: 'Intricate henna designs' },
-      { name: 'Bachelors Party', href: '/events/wedding/bachelors', description: 'Last night of freedom' },
-      { name: 'Sangeet', href: '/events/wedding/sangeet', description: 'Musical celebration' },
-      { name: 'Bharath', href: '/events/wedding/bharath', description: 'Traditional ceremony' },
-      { name: 'Wedding Day', href: '/events/wedding/wedding-day', description: 'The main celebration', featured: true },
-      { name: 'Reception', href: '/events/wedding/reception', description: 'Grand celebration' }
+      { name: 'Engagement Ceremony', href: '/events/wedding/engagement', description: 'The beginning of forever', featured: true },
+      { name: 'Bride & Groom Events', href: '/events/wedding/bride-groom', description: 'Individual pre-wedding celebrations' },
+      { name: 'Haldi & Mehendi', href: '/events/wedding/haldi-mehendi', description: 'Traditional ceremonies with vibrant colors', featured: true },
+      { name: 'Sangeet / Cocktail / Bachelor\'s Party', href: '/events/wedding/sangeet-cocktail', description: 'Musical celebrations and parties' },
+      { name: 'Wedding Ceremony', href: '/events/wedding/ceremony', description: 'The sacred union celebration', featured: true },
+      { name: 'Reception / Bharath', href: '/events/wedding/reception', description: 'Grand celebration with family and friends' }
     ]
   },
   {

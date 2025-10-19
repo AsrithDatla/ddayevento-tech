@@ -25,6 +25,14 @@ const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
 const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
 
+// Wedding sub-pages
+const EngagementCeremony = lazy(() => import('./pages/events/wedding/EngagementCeremony'));
+const BrideGroom = lazy(() => import('./pages/events/wedding/BrideGroom'));
+const HaldiMehendi = lazy(() => import('./pages/events/wedding/HaldiMehendi'));
+const SangeetCocktail = lazy(() => import('./pages/events/wedding/SangeetCocktail'));
+const WeddingCeremony = lazy(() => import('./pages/events/wedding/WeddingCeremony'));
+const Reception = lazy(() => import('./pages/events/wedding/Reception'));
+
 function App() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -52,6 +60,15 @@ function App() {
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
           <Route path="/services/planning-management" element={<EventPlanningPage />} />
+          
+          {/* Wedding sub-pages */}
+          <Route path="/events/wedding/engagement" element={<EngagementCeremony />} />
+          <Route path="/events/wedding/bride-groom" element={<BrideGroom />} />
+          <Route path="/events/wedding/haldi-mehendi" element={<HaldiMehendi />} />
+          <Route path="/events/wedding/sangeet-cocktail" element={<SangeetCocktail />} />
+          <Route path="/events/wedding/ceremony" element={<WeddingCeremony />} />
+          <Route path="/events/wedding/reception" element={<Reception />} />
+          
           <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
           <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />
         </Routes>
