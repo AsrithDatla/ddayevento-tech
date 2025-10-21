@@ -23,6 +23,7 @@ const WeddingEvents = lazy(() => import('./pages/events/WeddingEvents'));
 const BirthdayEvents = lazy(() => import('./pages/events/BirthdayEvents'));
 const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
+
 const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
 
 // Wedding sub-pages
@@ -53,14 +54,18 @@ function App() {
           } />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/reviews" element={<div className="pt-32 text-center">Reviews page coming soon...</div>} />
+          <Route path="/contact" element={<div className="pt-32 text-center">Contact page coming soon...</div>} />
+          <Route path="/services" element={<div className="pt-32 text-center">Services page coming soon...</div>} />
           <Route path="/design-system" element={<DesignSystem />} />
           <Route path="/events/traditional-events" element={<TraditionalEvents />} />
           <Route path="/events/wedding-events" element={<WeddingEvents />} />
           <Route path="/events/birthdays" element={<BirthdayEvents />} />
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
+          <Route path="/events/college-events" element={<div className="pt-32 text-center">College Events page coming soon...</div>} />
           <Route path="/services/planning-management" element={<EventPlanningPage />} />
-          
+
           {/* Wedding sub-pages */}
           <Route path="/events/wedding/engagement" element={<EngagementCeremony />} />
           <Route path="/events/wedding/bride-groom" element={<BrideGroom />} />
@@ -68,7 +73,7 @@ function App() {
           <Route path="/events/wedding/sangeet-cocktail" element={<SangeetCocktail />} />
           <Route path="/events/wedding/ceremony" element={<WeddingCeremony />} />
           <Route path="/events/wedding/reception" element={<Reception />} />
-          
+
           <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
           <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />
         </Routes>

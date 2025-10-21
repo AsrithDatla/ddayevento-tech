@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Menu, X, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import QuoteModal from './QuoteGenerator/QuoteModal';
 import {
   desktopEventsNavSections,
@@ -45,15 +46,15 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <img className="h-26" src="/mainlogo.png" alt="D-Day Evento" />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-black hover:text-brand-teal font-semibold">HOME</a>
-            <a href="/about" className="text-black hover:text-brand-teal font-semibold">ABOUT US</a>
+            <Link to="/" className="text-black hover:text-brand-teal font-semibold">HOME</Link>
+            <Link to="/about" className="text-black hover:text-brand-teal font-semibold">ABOUT US</Link>
 
             {/* Events Dropdown */}
             <div className="relative group"
@@ -86,12 +87,12 @@ const Header: React.FC = () => {
                               <h3 className="text-xl font-bold text-brand-primary mb-4">{section.label}</h3>
                               <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                                 {section.items.map((item, index) => (
-                                  <a key={index} href={item.href || generateEventUrl(section.id, item.name)} onClick={() => setIsEventsOpen(false)}
+                                  <Link key={index} to={item.href || generateEventUrl(section.id, item.name)} onClick={() => setIsEventsOpen(false)}
                                     className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors group">
                                     <div className="w-1.5 h-1.5 bg-brand-gold rounded-full" />
                                     <span className="text-gray-700 group-hover:text-brand-primary font-medium text-sm">{item.name}</span>
                                     <ArrowRight size={14} className="ml-auto text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                  </a>
+                                  </Link>
                                 ))}
                               </div>
                             </div>
@@ -122,12 +123,12 @@ const Header: React.FC = () => {
                     <div className="p-6">
                       <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                         {desktopServicesNavSections.map((service) => (
-                          <a key={service.id} href={service.href} onClick={() => setIsServicesOpen(false)}
+                          <Link key={service.id} to={service.href} onClick={() => setIsServicesOpen(false)}
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group border border-transparent hover:border-brand-gold/20">
                             <div className="w-2 h-2 bg-brand-gold rounded-full flex-shrink-0" />
                             <span className="text-gray-700 group-hover:text-brand-primary font-medium text-sm leading-relaxed">{service.label}</span>
                             <ArrowRight size={14} className="ml-auto text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -136,9 +137,9 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            <a href="/blogs" className="text-black hover:text-brand-teal font-semibold">BLOGS</a>
-            <a href="/reviews" className="text-black hover:text-brand-teal font-semibold">REVIEWS</a>
-            <a href="/contact" className="text-black hover:text-brand-teal font-semibold">CONTACT US</a>
+            <Link to="/blogs" className="text-black hover:text-brand-teal font-semibold">BLOGS</Link>
+            <Link to="/reviews" className="text-black hover:text-brand-teal font-semibold">REVIEWS</Link>
+            <Link to="/contact" className="text-black hover:text-brand-teal font-semibold">CONTACT US</Link>
           </nav>
 
           {/* CTA & Mobile Menu */}
@@ -165,8 +166,8 @@ const Header: React.FC = () => {
             id="mobile-menu"
             className="md:hidden mt-4 border-t border-gray-200 pt-4">
             <div className="flex flex-col gap-2">
-              <a href="/" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>HOME</a>
-              <a href="/about" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT US</a>
+              <Link to="/" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>HOME</Link>
+              <Link to="/about" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT US</Link>
 
               {/* Mobile Events Accordion */}
               <div>
@@ -181,8 +182,8 @@ const Header: React.FC = () => {
                         <h4 className="font-bold text-brand-primary text-sm py-2">{section.label}</h4>
                         <div className="flex flex-col items-start space-y-1 pb-2">
                           {section.items.map((item, index) => (
-                            <a key={index} href={item.href || generateEventUrl(section.id, item.name)} onClick={() => setIsMobileMenuOpen(false)}
-                              className="block text-sm py-1.5 text-gray-600 hover:text-brand-primary w-full text-left">{item.name}</a>
+                            <Link key={index} to={item.href || generateEventUrl(section.id, item.name)} onClick={() => setIsMobileMenuOpen(false)}
+                              className="block text-sm py-1.5 text-gray-600 hover:text-brand-primary w-full text-left">{item.name}</Link>
                           ))}
                         </div>
                       </div>
@@ -202,8 +203,8 @@ const Header: React.FC = () => {
                     <div className="pt-2">
                       <div className="flex flex-col items-start space-y-1 pb-2">
                         {desktopServicesNavSections.map((service) => (
-                          <a key={service.id} href={service.href} onClick={() => setIsMobileMenuOpen(false)}
-                            className="block text-sm py-1.5 text-gray-600 hover:text-brand-primary w-full text-left">{service.label}</a>
+                          <Link key={service.id} to={service.href} onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-sm py-1.5 text-gray-600 hover:text-brand-primary w-full text-left">{service.label}</Link>
                         ))}
                       </div>
                     </div>
@@ -211,9 +212,9 @@ const Header: React.FC = () => {
                 )}
               </div>
 
-              <a href="/blogs" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>BLOGS</a>
-              <a href="/reviews" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>REVIEWS</a>
-              <a href="/contact" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT US</a>
+              <Link to="/blogs" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>BLOGS</Link>
+              <Link to="/reviews" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>REVIEWS</Link>
+              <Link to="/contact" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT US</Link>
 
               <button
                 onClick={() => { setIsQuoteModalOpen(true); setIsMobileMenuOpen(false); }}

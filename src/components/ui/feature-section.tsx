@@ -104,9 +104,8 @@ export function FeatureSteps({
               </motion.div>
             ))}
           </div>
-          <div className="order-1 md:order-2 space-y-6">
-            {/* Image Section */}
-            <div className="relative h-[200px] md:h-[300px] lg:h-[350px] overflow-hidden rounded-lg">
+          <div className="order-1 md:order-2 flex items-center justify-center">
+            <div className="relative h-[200px] md:h-[300px] lg:h-[400px] w-full max-w-lg overflow-hidden rounded-lg">
               <AnimatePresence mode="wait">
                 {features.map(
                   (feature, index) =>
@@ -130,58 +129,43 @@ export function FeatureSteps({
                 )}
               </AnimatePresence>
             </div>
-
-            {/* Quote and Info Section */}
-            <div className="bg-gradient-to-br from-brand-primary-50 to-brand-accent-50 rounded-xl p-6 border border-brand-primary/20">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-xl font-bold">"</span>
-                </div>
-                <div>
-                  <p className="text-gray-700 italic leading-relaxed mb-2">
-                    "Every culture has its own unique rituals, and at D DAY EVENTO, we ensure every moment is celebrated beautifully."
-                  </p>
-                  <p className="text-brand-primary font-semibold text-sm">
-                    — D Day Evento Team
-                  </p>
-                </div>
-              </div>
-              
-              {/* Current Event Highlight */}
-              <div className="border-t border-brand-primary/20 pt-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{currentFeature + 1}</span>
-                  </div>
-                  <h4 className="font-bold text-gray-900">
-                    {features[currentFeature]?.title || features[currentFeature]?.step}
-                  </h4>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {features[currentFeature]?.content}
-                </p>
-                
-                {/* Progress Bar */}
-                <div className="mt-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs text-gray-500">Progress</span>
-                    <span className="text-xs text-brand-primary font-semibold">
-                      {currentFeature + 1} of {features.length}
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <motion.div
-                      className="bg-brand-primary h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${((currentFeature + 1) / features.length) * 100}%` }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* Quote Section at Bottom */}
+        <motion.div
+          className="mt-12 sm:mt-16 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl border border-orange-200/50 relative overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-orange-400/10 to-transparent rounded-bl-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-red-400/10 to-transparent rounded-tr-3xl"></div>
+
+            <div className="relative z-10 text-center">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-white text-2xl sm:text-3xl font-bold">"</span>
+              </div>
+
+              <blockquote className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed mb-6 font-medium">
+                "Every culture has its own unique rituals, and at D DAY EVENTO, we ensure every moment is celebrated beautifully. Each ceremony flows seamlessly into the next, creating a tapestry of memories that will be cherished for generations."
+              </blockquote>
+
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent w-12"></div>
+                <div className="w-2 h-2 bg-brand-primary rounded-full"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent w-12"></div>
+              </div>
+
+              <cite className="text-brand-primary font-semibold text-sm sm:text-base not-italic">
+                — D Day Evento Team
+              </cite>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   )

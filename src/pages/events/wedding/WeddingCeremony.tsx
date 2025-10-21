@@ -12,7 +12,7 @@ const WeddingCeremony: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white">  
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
@@ -137,7 +137,7 @@ const WeddingCeremony: React.FC = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section>3
 
       {/* Wedding Rituals */}
       <section className="py-16 sm:py-20 bg-gray-50">

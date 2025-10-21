@@ -195,6 +195,26 @@ export const getServiceSectionById = (id: string) => {
 
 // Generate URLs for navigation items
 export const generateEventUrl = (sectionId: string, itemName: string) => {
+  // Handle special cases for main event categories
+  if (sectionId === 'weddings-events') {
+    return '/events/wedding-events';
+  }
+  if (sectionId === 'traditional-events') {
+    return '/events/traditional-events';
+  }
+  if (sectionId === 'birthdays') {
+    return '/events/birthdays';
+  }
+  if (sectionId === 'corporate-events') {
+    return '/events/corporate-events';
+  }
+  if (sectionId === 'special-days') {
+    return '/events/special-days';
+  }
+  if (sectionId === 'college-events') {
+    return '/events/college-events';
+  }
+  
   const slug = itemName.toLowerCase().replace(/\s+/g, '-');
   return `/events/${sectionId}/${slug}`;
 };

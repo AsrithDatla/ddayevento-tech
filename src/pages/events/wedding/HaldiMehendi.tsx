@@ -18,7 +18,7 @@ const HaldiMehendi: React.FC = () => {
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760457960/WhatsApp_Image_2025-09-17_at_4.36.14_PM_1_yjjxec.jpg"
             alt="Haldi and Mehendi ceremony planning Hyderabad - D Day Evento"
             className="w-full h-full object-cover object-center brightness-75 contrast-110"
             loading="eager"
@@ -98,7 +98,7 @@ const HaldiMehendi: React.FC = () => {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760457940/WhatsApp_Image_2025-09-17_at_4.36.05_PM_1_dbazcm.jpg"
                 alt="Beautiful Haldi ceremony setup"
                 className="w-full h-96 object-cover rounded-2xl shadow-xl"
               />
@@ -178,7 +178,7 @@ const HaldiMehendi: React.FC = () => {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760457940/WhatsApp_Image_2025-09-17_at_4.36.04_PM_csgqiw.jpg"
                 alt="Beautiful Mehendi ceremony"
                 className="w-full h-96 object-cover rounded-2xl shadow-xl"
               />
@@ -216,25 +216,25 @@ const HaldiMehendi: React.FC = () => {
               {
                 title: "Venue Decoration",
                 description: "Vibrant yellow and green themed decorations with fresh flowers",
-                image: "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=400",
+                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457939/WhatsApp_Image_2025-09-17_at_4.36.04_PM_1_xdn3gb.jpg",
                 color: "yellow"
               },
               {
                 title: "Professional Mehendi Artists",
                 description: "Skilled artists creating beautiful traditional and modern designs",
-                image: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.jpeg?auto=compress&cs=tinysrgb&w=400",
+                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457940/WhatsApp_Image_2025-09-17_at_4.36.03_PM_kfaicu.jpg",
                 color: "green"
               },
               {
                 title: "Traditional Music",
                 description: "Live dhol players and traditional wedding songs",
-                image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=400",
+                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457943/WhatsApp_Image_2025-09-17_at_4.36.03_PM_3_huoja0.jpg",
                 color: "yellow"
               },
               {
                 title: "Photography & Videography",
                 description: "Capturing every colorful moment and candid expression",
-                image: "https://images.pexels.com/photos/1616343/pexels-photo-1616343.jpeg?auto=compress&cs=tinysrgb&w=400",
+                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457938/WhatsApp_Image_2025-09-17_at_4.36.03_PM_2_qbcrwz.jpg",
                 color: "green"
               },
               {
