@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Sparkles, Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Sparkles, Camera, X, ChevronLeft, ChevronRight, Heart, Users, Calendar, Star } from 'lucide-react';
 
 const EngagementCeremony: React.FC = () => {
     const { pathname } = useLocation();
@@ -136,8 +136,13 @@ const EngagementCeremony: React.FC = () => {
             </section>
 
             {/* The Meaning of Engagement */}
-            <section className="py-16 sm:py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="py-16 sm:py-20 bg-white relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,_rgba(139,69,19,0.3)_2px,_transparent_2px),_radial-gradient(circle_at_75%_75%,_rgba(255,140,0,0.3)_2px,_transparent_2px)]" style={{ backgroundSize: '60px 60px' }}></div>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -145,27 +150,55 @@ const EngagementCeremony: React.FC = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                         >
-                            <div className="flex items-center mb-6">
-                                <span className="text-2xl mr-3">🌸</span>
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight">
-                                    The Meaning of{' '}
+                            <div className="mb-8">
+                                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-full px-4 py-2 mb-6">
+                                    <Heart className="w-4 h-4 text-brand-primary" />
+                                    <span className="text-sm font-medium text-brand-primary">Sacred Beginning</span>
+                                </div>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight mb-6">
+                                    The Sacred Meaning of{' '}
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">Engagement</span>
                                 </h2>
+                                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                                    An engagement is more than a ceremony—it's the sacred moment when two souls publicly declare their intention to become one.
+                                </p>
                             </div>
 
-                            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-                                <div className="flex items-start space-x-4">
-                                    <div className="w-2 h-2 bg-brand-primary rounded-full mt-3 flex-shrink-0"></div>
-                                    <p>A formal promise to marry, witnessed by loved ones.</p>
-                                </div>
-                                <div className="flex items-start space-x-4">
-                                    <div className="w-2 h-2 bg-brand-primary rounded-full mt-3 flex-shrink-0"></div>
-                                    <p>An introduction of families and their bond.</p>
-                                </div>
-                                <div className="flex items-start space-x-4">
-                                    <div className="w-2 h-2 bg-brand-primary rounded-full mt-3 flex-shrink-0"></div>
-                                    <p>A celebration of new beginnings – blending tradition with modern elegance.</p>
-                                </div>
+                            <div className="space-y-6">
+                                {[
+                                    {
+                                        icon: <Users className="w-6 h-6 text-brand-primary" />,
+                                        title: "A Promise Witnessed",
+                                        description: "A formal commitment to marry, blessed and witnessed by family and friends who will support your journey."
+                                    },
+                                    {
+                                        icon: <Heart className="w-6 h-6 text-brand-primary" />,
+                                        title: "Families Unite",
+                                        description: "The beautiful moment when two families come together, creating bonds that will last generations."
+                                    },
+                                    {
+                                        icon: <Star className="w-6 h-6 text-brand-primary" />,
+                                        title: "New Beginnings",
+                                        description: "A celebration of love that honors tradition while embracing the unique story of your relationship."
+                                    }
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="flex items-start space-x-4 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-white border border-gray-100 hover:shadow-md transition-all duration-300"
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    >
+                                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-brand-primary/10 to-brand-secondary/10 rounded-full flex items-center justify-center">
+                                            {item.icon}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                                            <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </motion.div>
 
@@ -174,36 +207,56 @@ const EngagementCeremony: React.FC = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative"
                         >
-                            <img
-                                src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760459618/WhatsApp_Image_2025-09-17_at_3.23.52_PM_1_nttm2b.jpg"
-                                alt="Traditional engagement ceremony"
-                                className="w-full h-96 object-cover rounded-2xl shadow-xl"
-                            />
+                            <div className="relative">
+                                <img
+                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760459618/WhatsApp_Image_2025-09-17_at_3.23.52_PM_1_nttm2b.jpg"
+                                    alt="Traditional engagement ceremony"
+                                    className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-2xl"></div>
+
+                                {/* Floating Elements */}
+                                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                                    <span className="text-sm font-semibold text-brand-primary">Sacred Moments</span>
+                                </div>
+
+                                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg">
+                                    <p className="text-sm font-medium text-gray-800">Where Forever Begins</p>
+                                </div>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
             </section>
 
             {/* How Engagements Are Celebrated */}
-            <section className="py-16 sm:py-20 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+                {/* Background Elements */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-brand-primary/20 to-transparent rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-brand-secondary/20 to-transparent rounded-full blur-3xl"></div>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.div
-                        className="text-center mb-12"
+                        className="text-center mb-16"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className="flex items-center justify-center mb-6">
-                            <span className="text-2xl mr-3">🎉</span>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight">
-                                How Engagements Are{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">Celebrated</span>
-                            </h2>
+                        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-6 py-3 mb-8">
+                            <Calendar className="w-5 h-5 text-brand-primary" />
+                            <span className="text-sm font-medium text-gray-700">Celebration Styles</span>
                         </div>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Every engagement has its own flavor depending on the family's culture and vision.
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight mb-6">
+                            How Engagements Are{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">Celebrated</span>
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                            Every engagement reflects the unique personality and cultural heritage of the couple. We help you choose the perfect style that resonates with your love story.
                         </p>
                     </motion.div>
 
@@ -211,40 +264,58 @@ const EngagementCeremony: React.FC = () => {
                         {[
                             {
                                 title: "Traditional Engagement",
-                                description: "Priests conducting rituals, exchanging rings, gifting clothes and sweets.",
-                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459622/WhatsApp_Image_2025-09-17_at_3.23.52_PM_d0gd2o.jpg"
+                                description: "Sacred rituals conducted by experienced priests, with ring exchange ceremonies, traditional gift exchanges, and authentic cultural elements that honor your heritage.",
+                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459622/WhatsApp_Image_2025-09-17_at_3.23.52_PM_d0gd2o.jpg",
+                                features: ["Sacred Rituals", "Ring Exchange", "Traditional Gifts", "Cultural Authenticity"]
                             },
                             {
                                 title: "Modern Ring Ceremony",
-                                description: "A stylish celebration with décor, cake cutting, and music.",
-                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459614/WhatsApp_Image_2025-09-17_at_3.23.51_PM_2_q17pm2.jpg"
+                                description: "Contemporary celebrations featuring elegant décor, professional photography, live music, and stylish presentations that blend tradition with modern sophistication.",
+                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459614/WhatsApp_Image_2025-09-17_at_3.23.51_PM_2_q17pm2.jpg",
+                                features: ["Elegant Décor", "Professional Photography", "Live Music", "Modern Style"]
                             },
                             {
-                                title: "Destination/Theme Engagement",
-                                description: "At a resort, beach, or heritage venue with customized décor.",
-                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459620/WhatsApp_Image_2025-09-17_at_3.23.52_PM_2_uppm7o.jpg"
+                                title: "Destination Engagement",
+                                description: "Unique venues like heritage palaces, beach resorts, or garden settings with customized themes that create an unforgettable backdrop for your special moment.",
+                                image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459620/WhatsApp_Image_2025-09-17_at_3.23.52_PM_2_uppm7o.jpg",
+                                features: ["Unique Venues", "Custom Themes", "Scenic Backdrops", "Memorable Settings"]
                             }
                         ].map((type, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                                className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: index * 0.2 }}
+                                whileHover={{ y: -5 }}
                             >
-                                <img
-                                    src={type.image}
-                                    alt={type.title}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                                <div className="relative overflow-hidden">
+                                    <img
+                                        src={type.image}
+                                        alt={type.title}
+                                        className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                                        <span className="text-xs font-semibold text-brand-primary">Popular Choice</span>
+                                    </div>
+                                </div>
+                                <div className="p-8">
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
                                         {type.title}
                                     </h3>
-                                    <p className="text-gray-600 leading-relaxed">
+                                    <p className="text-gray-600 leading-relaxed mb-6">
                                         {type.description}
                                     </p>
+                                    <div className="space-y-2">
+                                        {type.features.map((feature, featureIndex) => (
+                                            <div key={featureIndex} className="flex items-center space-x-2">
+                                                <div className="w-2 h-2 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-full"></div>
+                                                <span className="text-sm text-gray-600">{feature}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
@@ -263,7 +334,6 @@ const EngagementCeremony: React.FC = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <div className="flex items-center justify-center mb-6">
-                            <span className="text-2xl mr-3">🌟</span>
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight">
                                 Ideas to Make Your{' '}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">Engagement Special</span>
@@ -425,7 +495,6 @@ const EngagementCeremony: React.FC = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <div className="flex items-center justify-center mb-6">
-                            <span className="text-2xl mr-3">💼</span>
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 tracking-tight leading-tight">
                                 How{' '}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">D DAY EVENTO</span>{' '}
@@ -485,7 +554,7 @@ const EngagementCeremony: React.FC = () => {
                 <div className="absolute inset-0 opacity-5">
                     <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23d97706%22%20fill-opacity%3D%220.4%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%220%22%20cy%3D%2230%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2230%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%220%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2260%22%20r%3D%224%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
                 </div>
-                
+
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     {/* Header */}
                     <motion.div
@@ -532,7 +601,7 @@ const EngagementCeremony: React.FC = () => {
                                 <div className="relative">
                                     {/* Modern accent line */}
                                     <div className="w-12 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-full mb-4"></div>
-                                    
+
                                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                                         {benefit.title}
                                     </h3>
@@ -555,16 +624,16 @@ const EngagementCeremony: React.FC = () => {
                         {/* Decorative Elements */}
                         <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-orange-400/10 to-transparent rounded-bl-3xl"></div>
                         <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-red-400/10 to-transparent rounded-tr-3xl"></div>
-                        
+
                         <div className="relative z-10 text-center">
                             <div className="w-16 h-16 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-full flex items-center justify-center mx-auto mb-6">
                                 <span className="text-white text-3xl font-bold">"</span>
                             </div>
-                            
+
                             <blockquote className="text-lg sm:text-xl md:text-2xl text-gray-800 font-semibold leading-relaxed mb-6">
                                 "At D DAY EVENTO, your engagement is not just a ceremony. It's the beginning of a story we design with beauty, detail, and joy."
                             </blockquote>
-                            
+
                             <div className="flex items-center justify-center space-x-3">
                                 <div className="h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent w-16"></div>
                                 <div className="w-2 h-2 bg-brand-primary rounded-full"></div>
@@ -698,4 +767,4 @@ const EngagementCeremony: React.FC = () => {
     );
 };
 export
- default EngagementCeremony;
+    default EngagementCeremony;
