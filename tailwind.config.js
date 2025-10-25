@@ -61,6 +61,10 @@ export default {
         'brand-gold': '#FFD700',
         'brand-gold-dark': '#DAA520',
         'brand-gold-light': '#FFF8DC',
+        'brand-teal': '#008B8B',
+        'brand-teal-50': '#F0FDFA',
+        'brand-coral': '#FF6B6B',
+        'brand-coral-50': '#FFF5F5',
       },
       fontFamily: {
         // Modern Typography Stack - Plus Jakarta Sans

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "react-router-dom"
 import { cn } from "../../lib/utils"
 
 interface Feature {
@@ -9,6 +10,7 @@ interface Feature {
   title?: string
   content: string
   image: string
+  link?: string
 }
 
 interface FeatureStepsProps {
@@ -91,14 +93,18 @@ export function FeatureSteps({
                   <p className="text-sm md:text-lg text-gray-600 mb-4">
                     {feature.content}
                   </p>
-                  {index === currentFeature && (
-                    <motion.button
+                  {index === currentFeature && feature.link && (
+                    <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-brand-primary hover:bg-brand-secondary text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 text-sm"
                     >
-                      Learn More
-                    </motion.button>
+                      <Link
+                        to={feature.link}
+                        className="bg-brand-primary hover:bg-brand-secondary text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 text-sm inline-block"
+                      >
+                        Learn More
+                      </Link>
+                    </motion.div>
                   )}
                 </div>
               </motion.div>

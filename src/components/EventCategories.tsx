@@ -11,43 +11,43 @@ const EventCategories: React.FC = () => {
     {
       id: 1,
       title: 'Wedding Events',
-      image: 'https://images.pexels.com/photos/1616343/pexels-photo-1616343.jpeg?w=400&h=260&fit=crop',
-      alt: 'Wedding Events',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760459356/WhatsApp_Image_2025-09-17_at_3.25.03_PM_wkj4rb.jpg',
+      alt: 'Wedding Events - D Day Evento Hyderabad',
       link: '/events/wedding-events'
     },
     {
       id: 2,
       title: 'Traditional Events',
-      image: 'https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg?w=400&h=260&fit=crop',
-      alt: 'Traditional Events',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461011/WhatsApp_Image_2025-08-26_at_7.20.19_PM_sug7s3.jpg',
+      alt: 'Traditional Events - Half Saree Ceremony by D Day Evento',
       link: '/events/traditional-events'
     },
     {
       id: 3,
       title: 'Birthdays',
-      image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?w=400&h=260&fit=crop',
-      alt: 'Birthday Celebrations',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461419/WhatsApp_Image_2025-08-26_at_7.20.25_PM_pytvci.jpg',
+      alt: 'Birthday Celebrations - D Day Evento',
       link: '/events/birthdays'
     },
     {
       id: 4,
       title: 'Special Days',
-      image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=400&h=260&fit=crop',
-      alt: 'Special Occasions',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461264/WhatsApp_Image_2025-08-28_at_9.42.48_PM_zj1w25.jpg',
+      alt: 'Special Occasions - Griha Pravesham by D Day Evento',
       link: '/events/special-days'
     },
     {
       id: 5,
       title: 'College Events',
-      image: 'https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?w=400&h=260&fit=crop',
-      alt: 'College Events',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1761398564/WhatsApp_Image_2025-08-29_at_12.07.56_AM_w8dfp0.jpg',
+      alt: 'College Events - D Day Evento',
       link: '/events/college-events'
     },
     {
       id: 6,
       title: 'Corporate Events',
-      image: 'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?w=400&h=260&fit=crop',
-      alt: 'Corporate Events',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461094/WhatsApp_Image_2025-08-26_at_3.01.17_PM_ucfwlf.jpg',
+      alt: 'Corporate Events - D Day Evento',
       link: '/events/corporate-events'
     }
   ];

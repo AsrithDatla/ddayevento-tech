@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* CSS Custom Properties for Redesigned Brand Colors & Typography */
 :root {
   /* Core Brand Colors - White, Black, Teal, Gold */

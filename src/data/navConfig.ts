@@ -25,11 +25,11 @@ export const desktopEventsNavSections: NavSection[] = [
     icon: '🏠',
     description: 'Sacred ceremonies and cultural celebrations',
     items: [
-      { name: 'House Warming/ Griha Pravesham', href: '/events/traditional/house-warming', description: 'Blessing your new home' },
-      { name: 'Baby Shower/ Sreemantham', href: '/events/traditional/baby-shower', description: 'Celebrating new life', featured: true },
-      { name: 'Cradle Ceremony/ Naming Ceremony/ Annaprasana', href: '/events/traditional/cradle-ceremony', description: 'First milestones' },
-      { name: 'Half Saree Ceremony/ Doti Ceremony', href: '/events/traditional/half-saree', description: 'Coming of age celebration' },
-      { name: 'Upanayanam', href: '/events/traditional/upanayanam', description: 'Sacred thread ceremony' }
+      { name: 'Griha Pravesham / House Warming Ceremony', href: '/events/traditional/griha-pravesham', description: 'Blessing your new home', featured: true },
+      { name: 'Half Saree Ceremony', href: '/events/traditional/half-saree', description: 'Celebrating womanhood' },
+      { name: 'Dhoti Ceremony', href: '/events/traditional/dhoti-ceremony', description: 'Boys stepping into tradition' },
+      { name: 'Cradle Ceremony/ Annaprasana/ Naming Ceremony', href: '/events/traditional/cradle-ceremony', description: 'First milestones', featured: true },
+      { name: 'Baby Shower–Sreemantham', href: '/events/traditional/baby-shower', description: 'Celebrating new life' }
     ]
   },
   {
@@ -85,13 +85,13 @@ export const desktopEventsNavSections: NavSection[] = [
     icon: '✨',
     description: 'Unique moments deserve unique celebrations',
     items: [
-      { name: 'Surprise Parties', href: '/events/special/surprise', description: 'Unforgettable surprises', featured: true },
-      { name: 'Kitty Parties', href: '/events/special/kitty', description: 'Ladies social gatherings' },
-      { name: 'House Parties', href: '/events/special/house-party', description: 'Intimate home celebrations' },
-      { name: 'Candle Light Dinners', href: '/events/special/candlelight', description: 'Romantic evenings' },
-      { name: 'Valentines/Proposal', href: '/events/special/valentine', description: 'Love celebrations' },
-      { name: 'Retirement Day', href: '/events/special/retirement', description: 'Honoring service' },
-      { name: 'Anniversaries', href: '/events/special/anniversary', description: 'Celebrating milestones' }
+      { name: 'Surprise Parties', description: 'Unforgettable surprises', featured: true },
+      { name: 'Kitty Parties', description: 'Ladies social gatherings' },
+      { name: 'House Parties', description: 'Intimate home celebrations' },
+      { name: 'Candle Light Dinners', description: 'Romantic evenings' },
+      { name: 'Valentines/Proposal', description: 'Love celebrations' },
+      { name: 'Retirement Day', description: 'Honoring service' },
+      { name: 'Anniversaries', description: 'Celebrating milestones' }
     ]
   },
   {
@@ -100,12 +100,12 @@ export const desktopEventsNavSections: NavSection[] = [
     icon: '🎓',
     description: 'Academic celebrations and milestones',
     items: [
-      { name: 'Annual Day', href: '/events/college/annual-day', description: 'Yearly celebrations' },
-      { name: 'Sports Day', href: '/events/college/sports-day', description: 'Athletic competitions' },
-      { name: 'Cultural Day', href: '/events/college/cultural-day', description: 'Arts and culture showcase', featured: true },
-      { name: 'Freshers Day', href: '/events/college/freshers', description: 'Welcome new students' },
-      { name: 'Farewell Day', href: '/events/college/farewell', description: 'Goodbye celebrations' },
-      { name: 'Convocation Day', href: '/events/college/convocation', description: 'Graduation ceremony' }
+      { name: 'Annual Day', description: 'Yearly celebrations' },
+      { name: 'Sports Day', description: 'Athletic competitions' },
+      { name: 'Cultural Day', description: 'Arts and culture showcase', featured: true },
+      { name: 'Freshers Day', description: 'Welcome new students' },
+      { name: 'Farewell Day', description: 'Goodbye celebrations' },
+      { name: 'Convocation Day', description: 'Graduation ceremony' }
     ]
   }
 ];

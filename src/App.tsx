@@ -23,6 +23,7 @@ const WeddingEvents = lazy(() => import('./pages/events/WeddingEvents'));
 const BirthdayEvents = lazy(() => import('./pages/events/BirthdayEvents'));
 const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
+const CollegeEvents = lazy(() => import('./pages/events/CollegeEvents'));
 
 const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
 
@@ -33,6 +34,13 @@ const HaldiMehendi = lazy(() => import('./pages/events/wedding/HaldiMehendi'));
 const SangeetCocktail = lazy(() => import('./pages/events/wedding/SangeetCocktail'));
 const WeddingCeremony = lazy(() => import('./pages/events/wedding/WeddingCeremony'));
 const Reception = lazy(() => import('./pages/events/wedding/Reception'));
+
+// Traditional sub-pages
+const GrihaPravesham = lazy(() => import('./pages/events/traditional/GrihaPravesham'));
+const HalfSaree = lazy(() => import('./pages/events/traditional/HalfSaree'));
+const DhotiCeremony = lazy(() => import('./pages/events/traditional/DhotiCeremony'));
+const CradleCeremony = lazy(() => import('./pages/events/traditional/CradleCeremony'));
+const BabyShower = lazy(() => import('./pages/events/traditional/BabyShower'));
 
 function App() {
   return (
@@ -63,7 +71,7 @@ function App() {
           <Route path="/events/birthdays" element={<BirthdayEvents />} />
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
-          <Route path="/events/college-events" element={<div className="pt-32 text-center">College Events page coming soon...</div>} />
+          <Route path="/events/college-events" element={<CollegeEvents />} />
           <Route path="/services/planning-management" element={<EventPlanningPage />} />
 
           {/* Wedding sub-pages */}
@@ -73,6 +81,13 @@ function App() {
           <Route path="/events/wedding/sangeet-cocktail" element={<SangeetCocktail />} />
           <Route path="/events/wedding/ceremony" element={<WeddingCeremony />} />
           <Route path="/events/wedding/reception" element={<Reception />} />
+
+          {/* Traditional sub-pages */}
+          <Route path="/events/traditional/griha-pravesham" element={<GrihaPravesham />} />
+          <Route path="/events/traditional/half-saree" element={<HalfSaree />} />
+          <Route path="/events/traditional/dhoti-ceremony" element={<DhotiCeremony />} />
+          <Route path="/events/traditional/cradle-ceremony" element={<CradleCeremony />} />
+          <Route path="/events/traditional/baby-shower" element={<BabyShower />} />
 
           <Route path="/events/:sectionId/:eventSlug" element={<EventDetailPage />} />
           <Route path="/services/:sectionId/:serviceSlug" element={<ServiceDetailPage />} />

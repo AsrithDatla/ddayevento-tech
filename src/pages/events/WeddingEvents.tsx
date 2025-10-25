@@ -137,37 +137,43 @@ const WeddingEvents: React.FC = () => {
       step: "Engagement",
       title: "Engagement",
       content: "The official beginning of your forever. Where promises are made and rings are exchanged, marking the start of your journey together.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459618/WhatsApp_Image_2025-09-17_at_3.23.52_PM_1_nttm2b.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760459618/WhatsApp_Image_2025-09-17_at_3.23.52_PM_1_nttm2b.jpg",
+      link: "/events/wedding/engagement"
     },
     {
       step: "Bride & Groom Ceremonies",
       title: "Bride & Groom Traditional Ceremonies",
       content: "Customs that honor your roots. Individual celebrations that prepare both families for the sacred union ahead.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457948/WhatsApp_Image_2025-09-17_at_4.36.07_PM_2_r3k44u.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457948/WhatsApp_Image_2025-09-17_at_4.36.07_PM_2_r3k44u.jpg",
+      link: "/events/wedding/bride-groom"
     },
     {
       step: "Haldi & Mehendi",
       title: "Haldi & Mehendi",
       content: "Fun-filled, colorful traditions with family and friends. Where turmeric brings blessings and henna creates beautiful patterns of love.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457934/WhatsApp_Image_2025-09-17_at_4.36.02_PM_2_vmk4rz.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457934/WhatsApp_Image_2025-09-17_at_4.36.02_PM_2_vmk4rz.jpg",
+      link: "/events/wedding/haldi-mehendi"
     },
     {
       step: "Sangeet / Cocktail / Bachelor's Party",
       title: "Sangeet / Cocktail / Bachelor's Party",
       content: "Where music, dance, and laughter take over. Celebrations that bring both families together in joy, music, and unforgettable moments.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457960/WhatsApp_Image_2025-09-17_at_4.36.13_PM_anf6oz.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457960/WhatsApp_Image_2025-09-17_at_4.36.13_PM_anf6oz.jpg",
+      link: "/events/wedding/sangeet-cocktail"
     },
     {
       step: "Wedding Ceremony",
       title: "Wedding Ceremony",
       content: "The sacred union of two souls. The most sacred moment where vows are taken and two hearts become one forever.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457960/WhatsApp_Image_2025-09-17_at_4.36.12_PM_aitnbp.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760457960/WhatsApp_Image_2025-09-17_at_4.36.12_PM_aitnbp.jpg",
+      link: "/events/wedding/ceremony"
     },
     {
       step: "Reception / Bharath",
       title: "Reception / Bharath",
       content: "A grand celebration to honor the new couple. Where the newlyweds are welcomed into society and celebrated by all who love them.",
-      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760458794/WhatsApp_Image_2025-09-17_at_3.27.41_PM_1_jyzw69.jpg"
+      image: "https://res.cloudinary.com/dvfx89ago/image/upload/v1760458794/WhatsApp_Image_2025-09-17_at_3.27.41_PM_1_jyzw69.jpg",
+      link: "/events/wedding/reception"
     }
   ];
 

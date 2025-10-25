@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Camera, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
-const SpecialDays: React.FC = () => {
+const CollegeEvents: React.FC = () => {
     const { pathname } = useLocation();
     const [imageLoadErrors, setImageLoadErrors] = useState<Set<number>>(new Set());
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -12,56 +12,42 @@ const SpecialDays: React.FC = () => {
 
     const IMAGES_PER_LOAD = 6;
 
-    // Special Days Gallery - 29 images
-    const specialDaysGallery = [
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460347/WhatsApp_Image_2025-08-27_at_12.57.03_AM_rsayvt.jpg', title: 'Anniversary Celebration Planning Hyderabad', alt: 'Elegant anniversary celebration with flowers and warm lighting - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460345/WhatsApp_Image_2025-08-27_at_12.56.59_AM_qrevrx.jpg', title: 'Kitty Party Event Management Hyderabad', alt: 'Stylish kitty party setup with playful décor - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460342/WhatsApp_Image_2025-08-27_at_12.56.59_AM_1_ihn39u.jpg', title: 'House Party Planning Services Hyderabad', alt: 'Complete house party setup with music and catering - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460337/WhatsApp_Image_2025-08-27_at_12.56.54_AM_vbpq8y.jpg', title: 'Surprise Party Event Coordination Hyderabad', alt: 'Perfect surprise party execution with precise timing - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460339/WhatsApp_Image_2025-08-27_at_12.56.58_AM_a4ct7z.jpg', title: 'Retirement Day Celebration Planning Hyderabad', alt: 'Dignified retirement celebration with graceful décor - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460334/WhatsApp_Image_2025-08-27_at_12.56.49_AM_kxkod4.jpg', title: 'Special Occasion Event Services Hyderabad', alt: 'Professional special day event management - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460331/WhatsApp_Image_2025-08-27_at_12.56.44_AM_oljxzk.jpg', title: 'Intimate Celebration Planning Hyderabad', alt: 'Beautiful intimate celebration setup - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460331/WhatsApp_Image_2025-08-27_at_12.56.43_AM_er4fvl.jpg', title: 'Small Event Management Hyderabad', alt: 'Perfect small event coordination and execution - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460327/WhatsApp_Image_2025-08-27_at_12.56.43_AM_1_loapza.jpg', title: 'Family Gathering Event Planning Hyderabad', alt: 'Warm family gathering celebration setup - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460324/WhatsApp_Image_2025-08-27_at_12.56.42_AM_umekit.jpg', title: 'Personal Milestone Celebration Hyderabad', alt: 'Personal milestone celebration planning - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460321/WhatsApp_Image_2025-08-27_at_12.56.40_AM_iqiv1y.jpg', title: 'Special Day Event Coordination Hyderabad', alt: 'Complete special day event services - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460320/WhatsApp_Image_2025-08-27_at_12.56.40_AM_1_fghryk.jpg', title: 'Celebration Event Management Hyderabad', alt: 'Professional celebration event planning - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460316/WhatsApp_Image_2025-08-27_at_12.56.37_AM_qimyyo.jpg', title: 'Party Planning Services Hyderabad', alt: 'Complete party planning and execution services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460314/WhatsApp_Image_2025-08-27_at_12.56.32_AM_z6nltu.jpg', title: 'Event Service Provider Hyderabad', alt: 'Hyderabad\'s number one event service provider - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460311/WhatsApp_Image_2025-08-27_at_12.56.27_AM_ix6kwk.jpg', title: 'Special Occasion Services Hyderabad', alt: 'Comprehensive special occasion event services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460308/WhatsApp_Image_2025-08-27_at_12.56.26_AM_zykzqk.jpg', title: 'Event Decoration Services Hyderabad', alt: 'Beautiful event decoration and setup services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460307/WhatsApp_Image_2025-08-27_at_12.56.21_AM_agilek.jpg', title: 'Catering Event Services Hyderabad', alt: 'Professional catering and event services - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460303/WhatsApp_Image_2025-08-27_at_12.56.16_AM_jd2fhc.jpg', title: 'Entertainment Event Planning Hyderabad', alt: 'Complete entertainment and event planning - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460301/WhatsApp_Image_2025-08-27_at_12.56.16_AM_1_ymux5u.jpg', title: 'Photography Event Services Hyderabad', alt: 'Professional photography and event services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460300/WhatsApp_Image_2025-08-27_at_12.56.15_AM_pslpig.jpg', title: 'Music Event Coordination Hyderabad', alt: 'Music and entertainment event coordination - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460296/WhatsApp_Image_2025-08-27_at_12.56.15_AM_2_nx0spi.jpg', title: 'Décor Event Services Hyderabad', alt: 'Professional décor and styling services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460294/WhatsApp_Image_2025-08-27_at_12.56.15_AM_1_pergsh.jpg', title: 'Lighting Event Setup Hyderabad', alt: 'Beautiful lighting and ambiance setup - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460292/WhatsApp_Image_2025-08-27_at_12.56.14_AM_wmoj7x.jpg', title: 'Floral Event Decoration Hyderabad', alt: 'Elegant floral decoration services - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460289/WhatsApp_Image_2025-08-27_at_12.56.14_AM_1_nidgy4.jpg', title: 'Dining Event Setup Hyderabad', alt: 'Special dining setup and arrangement - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460287/WhatsApp_Image_2025-08-27_at_12.56.13_AM_vyt94x.jpg', title: 'Seamless Event Execution Hyderabad', alt: 'Seamless event execution and coordination - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460286/WhatsApp_Image_2025-08-27_at_12.56.13_AM_1_oprko5.jpg', title: 'Flawless Event Management Hyderabad', alt: 'Flawless event management and execution - D Day Evento Hyderabad' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460355/WhatsApp_Image_2025-08-27_at_12.57.05_AM_pbcjxb.jpg', title: 'Trusted Event Service Provider Hyderabad', alt: 'Trusted event service provider in Hyderabad - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460352/WhatsApp_Image_2025-08-27_at_12.57.04_AM_sdn1h6.jpg', title: 'Professional Event Services Hyderabad', alt: 'Professional event services and coordination - D Day Evento' },
-        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460351/WhatsApp_Image_2025-08-27_at_12.57.04_AM_1_tjnmn6.jpg', title: 'Complete Event Solutions Hyderabad', alt: 'Complete event solutions and services - D Day Evento Hyderabad' }
+    // College Events Gallery - 16 images
+    const collegeEventsGallery = [
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460567/WhatsApp_Image_2025-08-27_at_12.23.23_AM_woknvv.jpg', title: 'College Annual Day Celebration Hyderabad', alt: 'Grand college annual day celebration - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460542/WhatsApp_Image_2025-08-27_at_12.23.18_AM_1_xekwje.jpg', title: 'Cultural Fest Event Management Hyderabad', alt: 'Vibrant cultural fest with student performances - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460562/WhatsApp_Image_2025-08-27_at_12.23.21_AM_wmy1jz.jpg', title: 'College DJ Night Party Hyderabad', alt: 'High-energy DJ night for college students - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460559/WhatsApp_Image_2025-08-27_at_12.23.21_AM_2_dyeazy.jpg', title: 'Farewell Party Planning Hyderabad', alt: 'Memorable farewell party for graduating students - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460556/WhatsApp_Image_2025-08-27_at_12.23.21_AM_1_ibh1s3.jpg', title: 'Freshers Party Event Coordination Hyderabad', alt: 'Welcome freshers party with exciting activities - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460553/WhatsApp_Image_2025-08-27_at_12.23.20_AM_q4zwjy.jpg', title: 'College Sports Day Event Management Hyderabad', alt: 'Energetic college sports day celebration - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460551/WhatsApp_Image_2025-08-27_at_12.23.20_AM_1_u0eun3.jpg', title: 'Convocation Ceremony Planning Hyderabad', alt: 'Dignified convocation ceremony organization - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460564/WhatsApp_Image_2025-08-27_at_12.23.23_AM_1_errtgj.jpg', title: 'College Stage Setup Services Hyderabad', alt: 'Professional stage setup for college events - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460548/WhatsApp_Image_2025-08-27_at_12.23.19_AM_qvy2kc.jpg', title: 'College Event Decoration Hyderabad', alt: 'Creative college event decorations and themes - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460545/WhatsApp_Image_2025-08-27_at_12.23.19_AM_1_fao5dj.jpg', title: 'College Photography Services Hyderabad', alt: 'Professional college event photography - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460542/WhatsApp_Image_2025-08-27_at_12.23.18_AM_errxii.jpg', title: 'College Catering Services Hyderabad', alt: 'Student-friendly catering for college events - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460537/WhatsApp_Image_2025-08-27_at_12.23.17_AM_mrhanc.jpg', title: 'College Entertainment Services Hyderabad', alt: 'High-energy entertainment for college celebrations - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460535/WhatsApp_Image_2025-08-27_at_12.23.17_AM_1_x2sosd.jpg', title: 'College Sound System Setup Hyderabad', alt: 'Professional sound systems for college events - D Day Evento Hyderabad' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460532/WhatsApp_Image_2025-08-27_at_12.23.16_AM_poitl8.jpg', title: 'College Live Music Events Hyderabad', alt: 'Live music and band performances for colleges - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460530/WhatsApp_Image_2025-08-27_at_12.23.16_AM_2_mdqedj.jpg', title: 'College Interactive Activities Hyderabad', alt: 'Fun interactive activities for college students - D Day Evento' },
+        { url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460529/WhatsApp_Image_2025-08-27_at_12.23.16_AM_1_d17fro.jpg', title: 'College Event Management Hyderabad', alt: 'Complete college event management services - D Day Evento Hyderabad' }
     ];
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [pathname]);
-
-    const handleImageError = (index: number) => {
+    }, [pathname]);    
+const handleImageError = (index: number) => {
         setImageLoadErrors(prev => new Set([...prev, index]));
     };
 
     const handleViewMore = () => {
         setIsLoading(true);
         setTimeout(() => {
-            setVisibleImages(prev => Math.min(prev + IMAGES_PER_LOAD, specialDaysGallery.length));
+            setVisibleImages(prev => Math.min(prev + IMAGES_PER_LOAD, collegeEventsGallery.length));
             setIsLoading(false);
         }, 500);
     };
 
-    const hasMoreImages = visibleImages < specialDaysGallery.length;
+    const hasMoreImages = visibleImages < collegeEventsGallery.length;
 
     // Handle keyboard navigation for lightbox
     useEffect(() => {
@@ -73,7 +59,7 @@ const SpecialDays: React.FC = () => {
             } else if (e.key === 'ArrowLeft') {
                 setSelectedImage(prev => prev === null ? null : Math.max(0, prev - 1));
             } else if (e.key === 'ArrowRight') {
-                setSelectedImage(prev => prev === null ? null : Math.min(specialDaysGallery.length - 1, prev + 1));
+                setSelectedImage(prev => prev === null ? null : Math.min(collegeEventsGallery.length - 1, prev + 1));
             }
         };
 
@@ -88,7 +74,7 @@ const SpecialDays: React.FC = () => {
             document.removeEventListener('keydown', handleKeyPress);
             document.body.style.overflow = 'unset';
         };
-    }, [selectedImage, specialDaysGallery.length]);
+    }, [selectedImage, collegeEventsGallery.length]);
 
     const openLightbox = (index: number) => {
         setSelectedImage(index);
@@ -99,22 +85,21 @@ const SpecialDays: React.FC = () => {
     };
 
     const nextImage = () => {
-        setSelectedImage(prev => prev === null ? null : Math.min(specialDaysGallery.length - 1, prev + 1));
+        setSelectedImage(prev => prev === null ? null : Math.min(collegeEventsGallery.length - 1, prev + 1));
     };
 
     const prevImage = () => {
         setSelectedImage(prev => prev === null ? null : Math.max(0, prev - 1));
-    };
-
-    return (
+    };    
+return (
         <div className="bg-white">
             {/* Hero Section - Full Width Responsive */}
             <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
                 {/* Full Width Background Image */}
                 <div className="absolute inset-0 w-full h-full">
                     <img
-                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460334/WhatsApp_Image_2025-08-27_at_12.56.49_AM_kxkod4.jpg"
-                        alt="Special Days Events - D Day Evento Hyderabad"
+                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460567/WhatsApp_Image_2025-08-27_at_12.23.23_AM_woknvv.jpg"
+                        alt="College Events - Power Packed Celebrations - D Day Evento Hyderabad"
                         className="w-full h-full object-cover object-center brightness-75 contrast-110"
                         loading="eager"
                     />
@@ -132,7 +117,7 @@ const SpecialDays: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.9)' }}
                         >
-                            Special Days with{' '}
+                            College Events with{' '}
                             <span className="text-yellow-300 drop-shadow-2xl block sm:inline" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.9)' }}>
                                 D DAY EVENTO
                             </span>
@@ -144,7 +129,7 @@ const SpecialDays: React.FC = () => {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             style={{ textShadow: '0 2px 15px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.9)' }}
                         >
-                            Some occasions are small in size but carry the biggest emotions. We are Hyderabad's #1 Event Service Providers — giving you the backbone services that turn a simple day into a lasting memory.
+                            College life is not just about books and exams — it's about creating memories that last a lifetime. We deliver impactful, power-packed services that transform college celebrations into unforgettable experiences.
                         </motion.p>
 
                         {/* CTA Button */}
@@ -154,14 +139,13 @@ const SpecialDays: React.FC = () => {
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
                             <button className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-white/20 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
-                                Power Your Special Day
+                                Power Up Your College Events
                             </button>
                         </motion.div>
                     </div>
                 </div>
-            </section>
-
-            {/* The Power Behind Your Special Day */}
+            </section>        
+    {/* What Students Achieve Through Celebrations */}
             <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
                 {/* Background elements */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50/20 via-transparent to-transparent" />
@@ -177,24 +161,24 @@ const SpecialDays: React.FC = () => {
                             transition={{ duration: 0.6 }}
                         >
                             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight leading-tight">
-                                The Power Behind{' '}
+                                What Students Achieve{' '}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary block sm:inline">
-                                    Your Special Day
+                                    Through Celebrations
                                 </span>
                             </h2>
 
                             <div className="space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed text-gray-700">
                                 <p className="text-lg sm:text-xl md:text-2xl text-gray-600 font-light">
-                                    At D DAY EVENTO, we are not planners, we are Hyderabad's #1 Event Service Providers.
+                                    Annual Days, Cultural Fests, DJ Nights, Farewell & Freshers Parties, Sports Day, and Convocation ceremonies are milestones that shape every student's journey.
                                 </p>
 
                                 <p className="text-sm sm:text-base">
-                                    We give you the backbone services that turn a simple day into a lasting memory.
+                                    These are the days when students celebrate achievements, showcase talent, build unity, and experience the thrill of true celebration.
                                 </p>
 
                                 <div className="bg-gradient-to-br from-brand-primary/5 via-brand-secondary/5 to-brand-gold/5 p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-brand-primary/10">
                                     <p className="text-brand-primary font-semibold text-lg sm:text-xl text-center">
-                                        We don't plan your day, we power it with services that speak for themselves.
+                                        Making these moments larger-than-life needs the right setup. That's where D DAY EVENTO steps in.
                                     </p>
                                 </div>
                             </div>
@@ -210,8 +194,8 @@ const SpecialDays: React.FC = () => {
                         >
                             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                 <img
-                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460347/WhatsApp_Image_2025-08-27_at_12.57.03_AM_rsayvt.jpg"
-                                    alt="The power behind your special day - D Day Evento Hyderabad"
+                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460562/WhatsApp_Image_2025-08-27_at_12.23.21_AM_wmy1jz.jpg"
+                                    alt="What students achieve through celebrations - D Day Evento Hyderabad"
                                     className="w-full h-96 lg:h-[500px] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -219,9 +203,8 @@ const SpecialDays: React.FC = () => {
                         </motion.div>
                     </div>
                 </div>
-            </section>
-
-            {/* Why Choose D DAY EVENTO Services */}
+            </section>        
+    {/* How We Execute */}
             <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden">
                 {/* Background pattern */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(120,119,198,0.05),_transparent_50%)]" />
@@ -236,9 +219,9 @@ const SpecialDays: React.FC = () => {
                         className="text-center mb-12 sm:mb-16"
                     >
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight leading-tight">
-                            Why Choose{' '}
+                            How{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">
-                                D DAY EVENTO Services?
+                                We Execute
                             </span>
                         </h2>
                     </motion.div>
@@ -247,13 +230,13 @@ const SpecialDays: React.FC = () => {
                         {/* Content */}
                         <div className="space-y-6 text-lg leading-relaxed text-gray-700">
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-primary mb-4">Hyderabad's #1 Service Provider</h3>
-                                <p>Décor, catering, photography, entertainment & more. Complete backbone services under one roof.</p>
+                                <h3 className="text-xl font-bold text-brand-primary mb-4">Recognition & Pride</h3>
+                                <p>Showcasing talent, honouring achievements, and creating a sense of belonging for every student.</p>
                             </div>
 
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-secondary mb-4">End-to-End Execution</h3>
-                                <p>You enjoy, we handle every detail. From setup to cleanup, we manage it all seamlessly.</p>
+                                <h3 className="text-xl font-bold text-brand-secondary mb-4">Memories That Last</h3>
+                                <p>Entertainment, laughter, and vibes that live beyond graduation and stay with students forever.</p>
                             </div>
                         </div>
 
@@ -261,8 +244,8 @@ const SpecialDays: React.FC = () => {
                         <div className="relative">
                             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                 <img
-                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460345/WhatsApp_Image_2025-08-27_at_12.56.59_AM_qrevrx.jpg"
-                                    alt="Why choose D Day Evento services - Hyderabad"
+                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460559/WhatsApp_Image_2025-08-27_at_12.23.21_AM_2_dyeazy.jpg"
+                                    alt="How we execute college events - D Day Evento"
                                     className="w-full h-96 lg:h-[400px] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -275,8 +258,8 @@ const SpecialDays: React.FC = () => {
                         <div className="relative order-2 md:order-1">
                             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                 <img
-                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460342/WhatsApp_Image_2025-08-27_at_12.56.59_AM_1_ihn39u.jpg"
-                                    alt="Detail perfected event services - D Day Evento"
+                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460556/WhatsApp_Image_2025-08-27_at_12.23.21_AM_1_ibh1s3.jpg"
+                                    alt="Unity and energy in college events - D Day Evento"
                                     className="w-full h-96 lg:h-[400px] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -286,20 +269,19 @@ const SpecialDays: React.FC = () => {
                         {/* Content */}
                         <div className="space-y-6 text-lg leading-relaxed text-gray-700 order-1 md:order-2">
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-primary mb-4">Detail Perfected</h3>
-                                <p>Every flower, every dish, every light in place. Meticulous attention to every single detail.</p>
+                                <h3 className="text-xl font-bold text-brand-primary mb-4">Unity & Energy</h3>
+                                <p>Events that bring the entire student community together, creating bonds and shared experiences.</p>
                             </div>
 
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-secondary mb-4">Proven Experience</h3>
-                                <p>4+ years, trusted by hundreds of families & communities across Hyderabad.</p>
+                                <h3 className="text-xl font-bold text-brand-secondary mb-4">Your Vision, Our Precision</h3>
+                                <p>We understand your plans, your ideas, your vibe — we adopt it with precision and present it with bold accuracy.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            {/* Types of Special Days */}
+            </section>  
+          {/* Service Highlights */}
             <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
                 {/* Background elements */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-blue-50/20 via-transparent to-transparent" />
@@ -314,9 +296,9 @@ const SpecialDays: React.FC = () => {
                         className="text-center mb-12 sm:mb-16"
                     >
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight leading-tight">
-                            Types of Special Days{' '}
+                            Service{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary block sm:inline">
-                                We Power
+                                Highlights
                             </span>
                         </h2>
                     </motion.div>
@@ -325,20 +307,22 @@ const SpecialDays: React.FC = () => {
                         {/* Content */}
                         <div className="space-y-6">
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-primary mb-6">Intimate Celebrations</h3>
+                                <h3 className="text-xl font-bold text-brand-primary mb-6">Stage & Setup</h3>
                                 <div className="space-y-3 text-gray-700">
-                                    <p>• <strong>Anniversaries</strong> - Elegant flowers, warm lights, and dining that feels special</p>
-                                    <p>• <strong>Kitty Parties</strong> - Stylish setups, playful décor, and seamless service</p>
-                                    <p>• <strong>House Parties</strong> - Music, décor, catering — everything delivered and arranged</p>
+                                    <p>• <strong>Grand Stages</strong> - Professional stage setups that command attention</p>
+                                    <p>• <strong>LED Backdrops</strong> - High-definition visual displays and screens</p>
+                                    <p>• <strong>Thematic Props</strong> - Creative props that match your event theme</p>
+                                    <p>• <strong>Dynamic Lighting</strong> - Lighting that energizes the atmosphere</p>
                                 </div>
                             </div>
 
                             <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                <h3 className="text-xl font-bold text-brand-secondary mb-6">Special Occasions</h3>
+                                <h3 className="text-xl font-bold text-brand-secondary mb-6">Decorations & Catering</h3>
                                 <div className="space-y-3 text-gray-700">
-                                    <p>• <strong>Surprise Parties</strong> - Silent setup, precise timing, and flawless execution</p>
-                                    <p>• <strong>Retirement Day</strong> - Graceful décor, dignified service, and a celebration of respect</p>
-                                    <p>• <strong>Personal Milestones</strong> - Every special moment deserves professional execution</p>
+                                    <p>• <strong>Creative Décor</strong> - Trendy, theme-based décor that speaks the student language</p>
+                                    <p>• <strong>Photography & Videography</strong> - Capturing every cheer, dance step, and moment</p>
+                                    <p>• <strong>Food & Catering</strong> - Delicious spreads and student-friendly menus</p>
+                                    <p>• <strong>Live Counters</strong> - Interactive food stations that fuel the celebration</p>
                                 </div>
                             </div>
                         </div>
@@ -347,8 +331,8 @@ const SpecialDays: React.FC = () => {
                         <div className="relative">
                             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                 <img
-                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460337/WhatsApp_Image_2025-08-27_at_12.56.54_AM_vbpq8y.jpg"
-                                    alt="Types of special days - D Day Evento Hyderabad"
+                                    src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460553/WhatsApp_Image_2025-08-27_at_12.23.20_AM_q4zwjy.jpg"
+                                    alt="Service highlights for college events - D Day Evento Hyderabad"
                                     className="w-full h-96 lg:h-[500px] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -356,9 +340,8 @@ const SpecialDays: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </section>
-
-            {/* Gallery Section */}
+            </section>         
+   {/* Gallery Section */}
             <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="max-w-7xl mx-auto">
@@ -372,23 +355,23 @@ const SpecialDays: React.FC = () => {
                             {/* Apple-style overline */}
                             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8">
                                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" />
-                                <span className="text-xs sm:text-sm font-medium text-gray-700">Special Moments</span>
+                                <span className="text-xs sm:text-sm font-medium text-gray-700">Power Packed Celebrations</span>
                             </div>
 
                             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight leading-tight">
-                                Our Special Days{' '}
+                                Our College Events{' '}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary block sm:inline">
                                     Portfolio
                                 </span>
                             </h2>
                             <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light px-2">
-                                Turning simple days into lasting memories across Hyderabad
+                                Creating unforgettable college memories across Hyderabad
                             </p>
                         </motion.div>
 
                         {/* Gallery Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                            {specialDaysGallery.slice(0, visibleImages).map((image, index) => (
+                            {collegeEventsGallery.slice(0, visibleImages).map((image, index) => (
                                 <motion.div
                                     key={index}
                                     className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
@@ -414,7 +397,7 @@ const SpecialDays: React.FC = () => {
                                             <div className="w-full h-48 sm:h-56 md:h-64 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 flex items-center justify-center">
                                                 <div className="text-center">
                                                     <Camera className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-brand-primary mx-auto mb-2" />
-                                                    <p className="text-xs sm:text-sm text-gray-600 px-2 sm:px-4">Special Day Event</p>
+                                                    <p className="text-xs sm:text-sm text-gray-600 px-2 sm:px-4">College Event</p>
                                                 </div>
                                             </div>
                                         )}
@@ -455,7 +438,7 @@ const SpecialDays: React.FC = () => {
                         )}
 
                         {/* All Images Loaded Message */}
-                        {!hasMoreImages && specialDaysGallery.length > IMAGES_PER_LOAD && (
+                        {!hasMoreImages && collegeEventsGallery.length > IMAGES_PER_LOAD && (
                             <motion.div
                                 className="text-center mt-8 sm:mt-10 md:mt-12"
                                 initial={{ opacity: 0, y: 20 }}
@@ -465,15 +448,14 @@ const SpecialDays: React.FC = () => {
                             >
                                 <div className="inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-full">
                                     <Sparkles className="w-5 h-5 mr-2 text-brand-primary" />
-                                    You've seen all our special day celebrations!
+                                    You've seen all our college celebrations!
                                 </div>
                             </motion.div>
                         )}
                     </div>
                 </div>
-            </section>
-
-            {/* How D DAY EVENTO Powers Your Day */}
+            </section>      
+      {/* Entertainment & Activities */}
             <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
                 {/* Background elements */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-50/20 via-transparent to-transparent" />
@@ -488,11 +470,10 @@ const SpecialDays: React.FC = () => {
                     >
                         <div className="text-center mb-12 sm:mb-16">
                             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight leading-tight">
-                                How{' '}
+                                Entertainment &{' '}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary">
-                                    D DAY EVENTO
-                                </span>{' '}
-                                Powers Your Day
+                                    Activities
+                                </span>
                             </h2>
                         </div>
 
@@ -500,20 +481,20 @@ const SpecialDays: React.FC = () => {
                             {/* Content */}
                             <div className="space-y-6">
                                 <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                    <h3 className="text-xl font-bold text-brand-primary mb-6">Complete Service Backbone</h3>
+                                    <h3 className="text-xl font-bold text-brand-primary mb-6">High-Voltage Entertainment</h3>
                                     <div className="space-y-4 text-gray-700">
-                                        <p><strong>Décor & Setup:</strong> From elegant flowers to warm lighting, we create the perfect ambiance for your special day.</p>
-                                        <p><strong>Catering Services:</strong> Delicious food and seamless dining experiences that make every moment special.</p>
-                                        <p><strong>Entertainment & Music:</strong> Professional entertainment coordination that keeps your celebration lively and memorable.</p>
+                                        <p><strong>Sound Systems & DJ Setups:</strong> High-voltage sound systems that energize the entire venue.</p>
+                                        <p><strong>Live Music & Bands:</strong> Professional bands and live music performances that create electric atmosphere.</p>
+                                        <p><strong>Celebrity Performances:</strong> Special guest appearances and celebrity performances for memorable experiences.</p>
                                     </div>
                                 </div>
 
                                 <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
-                                    <h3 className="text-xl font-bold text-brand-secondary mb-6">Flawless Execution</h3>
+                                    <h3 className="text-xl font-bold text-brand-secondary mb-6">Interactive Engagement</h3>
                                     <div className="space-y-4 text-gray-700">
-                                        <p><strong>Silent Setup:</strong> For surprise parties, we work with precision and discretion to create the perfect surprise.</p>
-                                        <p><strong>Precise Timing:</strong> Every element delivered and arranged exactly when needed, ensuring seamless flow.</p>
-                                        <p><strong>Photography & Documentation:</strong> Capturing every precious moment with professional finesse.</p>
+                                        <p><strong>Anchors & Artists:</strong> Professional anchors and performers who keep the energy alive throughout the event.</p>
+                                        <p><strong>Fun Zones & Games:</strong> Interactive activities and game zones that keep students engaged and entertained.</p>
+                                        <p><strong>Interactive Activities:</strong> Engaging activities that bring the entire student community together.</p>
                                     </div>
                                 </div>
                             </div>
@@ -522,8 +503,8 @@ const SpecialDays: React.FC = () => {
                             <div className="relative">
                                 <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                     <img
-                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460339/WhatsApp_Image_2025-08-27_at_12.56.58_AM_a4ct7z.jpg"
-                                        alt="How D Day Evento powers your special day"
+                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460551/WhatsApp_Image_2025-08-27_at_12.23.20_AM_1_u0eun3.jpg"
+                                        alt="Entertainment and activities for college events"
                                         className="w-full h-96 lg:h-[500px] object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -534,14 +515,14 @@ const SpecialDays: React.FC = () => {
                         <div className="mt-12 bg-gradient-to-br from-brand-primary/5 via-brand-secondary/5 to-brand-gold/5 rounded-3xl p-8 sm:p-12 border border-brand-primary/10">
                             <div className="grid md:grid-cols-2 gap-8 items-center">
                                 <div>
-                                    <h3 className="text-xl font-bold text-brand-primary mb-4">Service Excellence & Trust</h3>
-                                    <p className="text-gray-700 mb-4"><strong>Proven Track Record:</strong> 4+ years of experience, trusted by hundreds of families and communities across Hyderabad.</p>
-                                    <p className="text-gray-700"><strong>Complete Peace of Mind:</strong> You focus on enjoying your special day while we handle every single detail with professional excellence.</p>
+                                    <h3 className="text-xl font-bold text-brand-primary mb-4">The D Day Evento Edge</h3>
+                                    <p className="text-gray-700 mb-4"><strong>Power-Packed Services:</strong> We don't just "arrange" events — we power them up. Every service is sharp, on-point, and impactful.</p>
+                                    <p className="text-gray-700"><strong>Memorable Experiences:</strong> With us, your college events won't just be celebrated, they'll be remembered for years to come.</p>
                                 </div>
                                 <div className="relative">
                                     <img
-                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460331/WhatsApp_Image_2025-08-27_at_12.56.44_AM_oljxzk.jpg"
-                                        alt="Service excellence and trust - D Day Evento"
+                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460564/WhatsApp_Image_2025-08-27_at_12.23.23_AM_1_errtgj.jpg"
+                                        alt="D Day Evento edge in college events"
                                         className="w-full h-64 object-cover rounded-2xl"
                                     />
                                 </div>
@@ -549,9 +530,8 @@ const SpecialDays: React.FC = () => {
                         </div>
                     </motion.div>
                 </div>
-            </section>
-
-            {/* What You Get */}
+            </section>     
+       {/* What You Get */}
             <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden">
                 {/* Background pattern */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(120,119,198,0.05),_transparent_50%)]" />
@@ -577,10 +557,10 @@ const SpecialDays: React.FC = () => {
                                 <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg p-8 border border-gray-200/30">
                                     <h3 className="text-xl font-bold text-brand-primary mb-6">What You Can Expect</h3>
                                     <div className="space-y-4 text-gray-700">
-                                        <p>✓ <strong>A stress-free celebration</strong> where you can focus on enjoying every moment</p>
-                                        <p>✓ <strong>Professional service execution</strong> that turns simple days into lasting memories</p>
-                                        <p>✓ <strong>Every detail perfected</strong> from flowers to food, lighting to entertainment</p>
-                                        <p>✓ <strong>Trusted expertise</strong> backed by 4+ years and hundreds of successful events</p>
+                                        <p>✓ <strong>Power-packed celebrations</strong> that match the energy and spirit of student life</p>
+                                        <p>✓ <strong>Professional execution</strong> from small cultural performances to mega college fests</p>
+                                        <p>✓ <strong>Unforgettable experiences</strong> that create memories lasting beyond graduation</p>
+                                        <p>✓ <strong>Complete event solutions</strong> designed to bring the entire student community together</p>
                                     </div>
                                 </div>
                             </div>
@@ -589,8 +569,8 @@ const SpecialDays: React.FC = () => {
                             <div className="relative">
                                 <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                                     <img
-                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460331/WhatsApp_Image_2025-08-27_at_12.56.43_AM_er4fvl.jpg"
-                                        alt="What you get with D Day Evento special days"
+                                        src="https://res.cloudinary.com/dvfx89ago/image/upload/v1760460548/WhatsApp_Image_2025-08-27_at_12.23.19_AM_qvy2kc.jpg"
+                                        alt="What you get with D Day Evento college events"
                                         className="w-full h-96 lg:h-[400px] object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -600,10 +580,10 @@ const SpecialDays: React.FC = () => {
 
                         <div className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white p-8 sm:p-12 rounded-3xl text-center mb-12 shadow-2xl">
                             <p className="text-xl text-white sm:text-2xl md:text-3xl font-bold mb-4">
-                                At D DAY EVENTO, We don't plan your day.
+                                At D DAY EVENTO, We don't just arrange college events.
                             </p>
                             <p className="text-lg sm:text-xl md:text-2xl font-medium text-white">
-                                We power it with services that speak for themselves.
+                                We power them up with services that create memories lasting a lifetime.
                             </p>
                         </div>
 
@@ -612,22 +592,21 @@ const SpecialDays: React.FC = () => {
                                 to="/contact"
                                 className="inline-flex items-center justify-center px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white font-semibold rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-base sm:text-lg w-full sm:w-auto max-w-sm sm:max-w-none mx-auto"
                             >
-                                Power Your Special Day With Us
+                                Power Up Your College Events
                                 <ArrowRight className="ml-2" size={16} />
                             </Link>
                         </div>
                     </motion.div>
                 </div>
-            </section>
-
-            {/* Lightbox Modal */}
+            </section>         
+   {/* Lightbox Modal */}
             {selectedImage !== null && (
                 <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
                     {/* Top Bar */}
                     <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/50 to-transparent p-4">
                         <div className="flex items-center justify-between">
                             <div className="text-white text-sm">
-                                {selectedImage + 1} of {specialDaysGallery.length}
+                                {selectedImage + 1} of {collegeEventsGallery.length}
                             </div>
                             <button
                                 onClick={closeLightbox}
@@ -653,7 +632,7 @@ const SpecialDays: React.FC = () => {
                         )}
 
                         {/* Next Button - Desktop */}
-                        {selectedImage < specialDaysGallery.length - 1 && (
+                        {selectedImage < collegeEventsGallery.length - 1 && (
                             <button
                                 onClick={nextImage}
                                 className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full items-center justify-center text-white transition-all duration-200 hidden md:flex"
@@ -666,8 +645,8 @@ const SpecialDays: React.FC = () => {
                         {/* Main Image */}
                         <motion.img
                             key={selectedImage}
-                            src={specialDaysGallery[selectedImage].url}
-                            alt={specialDaysGallery[selectedImage].alt}
+                            src={collegeEventsGallery[selectedImage].url}
+                            alt={collegeEventsGallery[selectedImage].alt}
                             className="max-w-full max-h-full object-contain"
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -690,7 +669,7 @@ const SpecialDays: React.FC = () => {
                         )}
 
                         {/* Right half - Next */}
-                        {selectedImage < specialDaysGallery.length - 1 && (
+                        {selectedImage < collegeEventsGallery.length - 1 && (
                             <div
                                 className="w-1/2 h-full flex items-center justify-end pr-4 ml-auto"
                                 onClick={nextImage}
@@ -713,4 +692,4 @@ const SpecialDays: React.FC = () => {
     );
 };
 
-export default SpecialDays;
+export default CollegeEvents;

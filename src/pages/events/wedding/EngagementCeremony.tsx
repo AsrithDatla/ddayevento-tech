@@ -766,5 +766,5 @@ const EngagementCeremony: React.FC = () => {
         </div>
     );
 };
-export
-    default EngagementCeremony;
+
+export default EngagementCeremony;

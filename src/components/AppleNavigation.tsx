@@ -10,9 +10,16 @@ const AppleNavigation: React.FC = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <div className="text-2xl font-bold text-brand-primary">
-                            D-DAY EVENTO
-                        </div>
+                        <a href="/" className="flex items-center gap-3">
+                            <img 
+                                src="/D-Day_Evento_logo.png" 
+                                alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
+                                className="h-8 md:h-10 w-auto object-contain transition-all duration-300"
+                            />
+                            <span className="text-brand-teal text-sm sm:text-lg md:text-xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">
+                                D-Day Evento
+                            </span>
+                        </a>
                     </div>
 
                     {/* Desktop Navigation */}
@@ -42,10 +49,10 @@ const AppleNavigation: React.FC = () => {
                                     <a href="/events/corporate-events" className="block p-2 rounded hover:bg-gray-50 text-sm">
                                         Corporate Events
                                     </a>
-                                    <a href="/events/special" className="block p-2 rounded hover:bg-gray-50 text-sm">
+                                    <a href="/events/special-days" className="block p-2 rounded hover:bg-gray-50 text-sm">
                                         Special Occasions
                                     </a>
-                                    <a href="/events/college" className="block p-2 rounded hover:bg-gray-50 text-sm">
+                                    <a href="/events/college-events" className="block p-2 rounded hover:bg-gray-50 text-sm">
                                         College Events
                                     </a>
                                 </div>

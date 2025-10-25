@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Menu, X, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import QuoteModal from './QuoteGenerator/QuoteModal';
 import {
   desktopEventsNavSections,
@@ -19,6 +19,7 @@ const Header: React.FC = () => {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,14 +41,35 @@ const Header: React.FC = () => {
     );
   };
 
+  // Function to scroll to section or navigate to home page first
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home first, then scroll
+      window.location.href = `/#${sectionId}`;
+    } else {
+      // If on home page, scroll directly
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 shadow-md backdrop-blur-sm' : 'bg-white'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-2">
-              <img className="h-26" src="/mainlogo.png" alt="D-Day Evento" />
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src="/D-Day_Evento_logo.png"
+                alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
+                className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
+              />
+              <span className="text-brand-teal text-lg sm:text-xl md:text-2xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">
+                D-Day Evento
+              </span>
             </Link>
           </div>
 
@@ -138,8 +160,18 @@ const Header: React.FC = () => {
             </div>
 
             <Link to="/blogs" className="text-black hover:text-brand-teal font-semibold">BLOGS</Link>
-            <Link to="/reviews" className="text-black hover:text-brand-teal font-semibold">REVIEWS</Link>
-            <Link to="/contact" className="text-black hover:text-brand-teal font-semibold">CONTACT US</Link>
+            <button 
+              onClick={() => scrollToSection('reviews')} 
+              className="text-black hover:text-brand-teal font-semibold"
+            >
+              REVIEWS
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className="text-black hover:text-brand-teal font-semibold"
+            >
+              CONTACT US
+            </button>
           </nav>
 
           {/* CTA & Mobile Menu */}
@@ -213,8 +245,18 @@ const Header: React.FC = () => {
               </div>
 
               <Link to="/blogs" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>BLOGS</Link>
-              <Link to="/reviews" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>REVIEWS</Link>
-              <Link to="/contact" className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT US</Link>
+              <button 
+                onClick={() => { scrollToSection('reviews'); setIsMobileMenuOpen(false); }} 
+                className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors text-left w-full"
+              >
+                REVIEWS
+              </button>
+              <button 
+                onClick={() => { scrollToSection('contact'); setIsMobileMenuOpen(false); }} 
+                className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors text-left w-full"
+              >
+                CONTACT US
+              </button>
 
               <button
                 onClick={() => { setIsQuoteModalOpen(true); setIsMobileMenuOpen(false); }}

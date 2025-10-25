@@ -1,38 +1,95 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Sparkles, MapPin, Heart, Users, Calendar } from 'lucide-react';
 import QuoteModal from './QuoteGenerator/QuoteModal';
 
 const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const videoRef = useRef<HTMLIFrameElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // This effect ensures the video restarts when the component is re-mounted
-  // (e.g., when navigating back to the home page)
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (videoElement) {
-      // By setting the src again, we force the iframe to reload and autoplay.
-      const originalSrc = videoElement.src;
-      videoElement.src = ''; // Clear src first
-      videoElement.src = originalSrc; // Re-assign to trigger reload
+  // Carousel images from different events
+  const carouselImages = [
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760459356/WhatsApp_Image_2025-09-17_at_3.25.03_PM_wkj4rb.jpg',
+      alt: 'Wedding Ceremony - D Day Evento',
+      title: 'Beautiful Wedding Ceremonies'
+    },
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461011/WhatsApp_Image_2025-08-26_at_7.20.19_PM_sug7s3.jpg',
+      alt: 'Half Saree Ceremony - D Day Evento',
+      title: 'Traditional Half Saree Celebrations'
+    },
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461264/WhatsApp_Image_2025-08-28_at_9.42.48_PM_zj1w25.jpg',
+      alt: 'Griha Pravesham - D Day Evento',
+      title: 'Grand Housewarming Ceremonies'
+    },
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461419/WhatsApp_Image_2025-08-26_at_7.20.25_PM_pytvci.jpg',
+      alt: 'Baby Shower - D Day Evento',
+      title: 'Sacred Baby Shower Celebrations'
+    },
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1761398564/WhatsApp_Image_2025-08-29_at_12.07.56_AM_w8dfp0.jpg',
+      alt: 'Dhoti Ceremony - D Day Evento',
+      title: 'Traditional Dhoti Ceremonies'
+    },
+    {
+      url: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461094/WhatsApp_Image_2025-08-26_at_3.01.17_PM_ucfwlf.jpg',
+      alt: 'Cradle Ceremony - D Day Evento',
+      title: 'Beautiful Cradle Ceremonies'
     }
-  }, []); // Empty dependency array means this runs once on mount
+  ];
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % carouselImages.length
+      );
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
 
   return (
     <section id="home" className="hero-section min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Background Video */}
+      {/* Background Image Carousel */}
       <div className="absolute inset-0 overflow-hidden">
-        <iframe
-          ref={videoRef} // Add ref to the iframe
-          src="https://player.cloudinary.com/embed/?cloud_name=djycmy2gr&public_id=samples%2Fcld-sample-video&profile=cld-default&autoplay=true&loop=true&muted=true&show_logo=false&show_controls=false"
-          className="absolute top-1/2 left-1/2 w-full h-full min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          title="background-video"
-        ></iframe>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src={carouselImages[currentImageIndex].url}
+              alt={carouselImages[currentImageIndex].alt}
+              className="w-full h-full object-cover object-center"
+              loading="eager"
+            />
+          </motion.div>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-black/50"></div> {/* Overlay for text visibility */}
+        
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex 
+                  ? 'bg-white scale-110' 
+                  : 'bg-white/50 hover:bg-white/75'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Floating Elements */}
