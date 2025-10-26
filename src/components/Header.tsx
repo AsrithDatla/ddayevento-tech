@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import QuoteModal from './QuoteGenerator/QuoteModal';
+import ImprovedQuoteModal from './QuoteGenerator/ImprovedQuoteModal';
 import {
   desktopEventsNavSections,
   desktopServicesNavSections,
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                 alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
                 className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
               />
-              <span className="text-brand-teal text-lg sm:text-xl md:text-2xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">
+              <span className="text-brand-teal text-lg sm:text-xl md:text-2xl font-normal font-logo whitespace-nowrap leading-none">
                 D-Day Evento
               </span>
             </Link>
@@ -269,7 +269,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Quote Modal */}
-      <QuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
+      <ImprovedQuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
     </header>
   );
 };

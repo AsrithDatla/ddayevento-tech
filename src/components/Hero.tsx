@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Sparkles, MapPin, Heart, Users, Calendar } from 'lucide-react';
-import QuoteModal from './QuoteGenerator/QuoteModal';
+import ImprovedQuoteModal from './QuoteGenerator/ImprovedQuoteModal';
 
 const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -255,7 +255,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Quote Modal */}
-      <QuoteModal 
+      <ImprovedQuoteModal 
         isOpen={isQuoteModalOpen} 
         onClose={() => setIsQuoteModalOpen(false)} 
       />

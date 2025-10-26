@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Camera, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import ImprovedQuoteModal from '../../../components/QuoteGenerator/ImprovedQuoteModal';
 
 const Reception: React.FC = () => {
     const { pathname } = useLocation();
@@ -9,6 +10,7 @@ const Reception: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
     const [visibleImages, setVisibleImages] = useState(6); // Show 6 images initially
     const [isLoading, setIsLoading] = useState(false);
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
     const IMAGES_PER_LOAD = 6; // Load 6 more images each time
 
@@ -153,7 +155,9 @@ const Reception: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
-                            <button className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-8 md:px-12 py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/40 w-full sm:w-auto max-w-xs sm:max-w-none">
+                            <button 
+                                onClick={() => setIsQuoteModalOpen(true)}
+                                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-8 md:px-12 py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/40 w-full sm:w-auto max-w-xs sm:max-w-none">
                                 Plan Your Grand Reception
                             </button>
                             <div className="text-white/90 text-sm font-light">
@@ -882,13 +886,13 @@ const Reception: React.FC = () => {
                             Let us orchestrate a reception celebration that becomes the perfect grand finale to your wedding journey, filled with glamour, joy, and unforgettable memories.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                            <Link
-                                to="/contact"
+                            <button
+                                onClick={() => setIsQuoteModalOpen(true)}
                                 className="bg-brand-accent hover:bg-brand-accent-dark text-black font-semibold px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 inline-flex items-center justify-center space-x-3 shadow-2xl"
                             >
                                 <span>Plan Your Grand Reception</span>
                                 <ArrowRight className="w-6 h-6" />
-                            </Link>
+                            </button>
                             <Link
                                 to="/gallery"
                                 className="bg-white/20 hover:bg-white/30 text-white font-semibold px-10 py-5 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center space-x-3"
@@ -903,6 +907,12 @@ const Reception: React.FC = () => {
                     </motion.div>
                 </div>
             </section>
+
+            {/* Quote Modal */}
+            <ImprovedQuoteModal 
+                isOpen={isQuoteModalOpen} 
+                onClose={() => setIsQuoteModalOpen(false)} 
+            />
         </div>
     );
 };

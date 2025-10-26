@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Camera, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import ImprovedQuoteModal from '../../../components/QuoteGenerator/ImprovedQuoteModal';
 
 const SangeetCocktail: React.FC = () => {
     const { pathname } = useLocation();
@@ -9,6 +10,7 @@ const SangeetCocktail: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
     const [visibleImages, setVisibleImages] = useState(6); // Show 6 images initially
     const [isLoading, setIsLoading] = useState(false);
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
     const IMAGES_PER_LOAD = 6; // Load 6 more images each time
 
@@ -149,7 +151,9 @@ const SangeetCocktail: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
-                            <button className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/30 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)' }}>
+                            <button 
+                                onClick={() => setIsQuoteModalOpen(true)}
+                                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/30 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)' }}>
                                 Plan Your Ultimate Party
                             </button>
                         </motion.div>
@@ -797,13 +801,13 @@ const SangeetCocktail: React.FC = () => {
                             Let us transform your sangeet or cocktail night into the most unforgettable celebration of your life.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link
-                                to="/contact"
+                            <button
+                                onClick={() => setIsQuoteModalOpen(true)}
                                 className="bg-brand-accent hover:bg-brand-accent-dark text-black font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 inline-flex items-center justify-center space-x-2"
                             >
                                 <span>Plan Your Party</span>
                                 <ArrowRight className="w-5 h-5" />
-                            </Link>
+                            </button>
                             <Link
                                 to="/gallery"
                                 className="bg-white/20 hover:bg-white/30 text-white font-semibold px-8 py-4 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center space-x-2"
@@ -815,6 +819,12 @@ const SangeetCocktail: React.FC = () => {
                     </motion.div>
                 </div>
             </section>
+
+            {/* Quote Modal */}
+            <ImprovedQuoteModal 
+                isOpen={isQuoteModalOpen} 
+                onClose={() => setIsQuoteModalOpen(false)} 
+            />
         </div>
     );
 };

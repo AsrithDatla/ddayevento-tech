@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
                   alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
                   className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
                 />
-                <span className="text-brand-teal text-2xl md:text-3xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">D-Day Evento</span>
+                <span className="text-brand-teal text-2xl md:text-3xl font-normal font-logo whitespace-nowrap leading-none">D-Day Evento</span>
               </a>
             </div>
             
