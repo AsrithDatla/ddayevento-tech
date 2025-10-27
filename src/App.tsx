@@ -12,7 +12,6 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import Blogs from './pages/Blogs';
-import { TrustBanner } from './components/TrustIndicators';
 import DesignSystem from './components/DesignSystem';
 
 // Lazy load event and service pages
@@ -25,7 +24,19 @@ const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
 const CollegeEvents = lazy(() => import('./pages/events/CollegeEvents'));
 
+// Service pages
 const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
+const DecorationDesignPage = lazy(() => import('./pages/services/DecorationDesignPage'));
+const PhotographyVideographyPage = lazy(() => import('./pages/services/PhotographyVideographyPage'));
+const EntertainmentActivitiesPage = lazy(() => import('./pages/services/EntertainmentActivitiesPage'));
+// const EntertainmentActivitiesPage = lazy(() => import('./pages/services/EntertainmentActivitiesPage'));
+const FoodCateringPage = lazy(() => import('./pages/services/FoodCateringPage'));
+const MakeupStylingPage = lazy(() => import('./pages/services/MakeupStylingPage'));
+const CakesConfectioneryPage = lazy(() => import('./pages/services/CakesConfectioneryPage'));
+// const ReturnGiftsPage = lazy(() => import('./pages/services/ReturnGiftsPage'));
+// const TentHouseRentalsPage = lazy(() => import('./pages/services/TentHouseRentalsPage'));
+// const VenueBookingPage = lazy(() => import('./pages/services/VenueBookingPage'));
+// const SpecializedServicesPage = lazy(() => import('./pages/services/SpecializedServicesPage'));
 
 // Wedding sub-pages
 const EngagementCeremony = lazy(() => import('./pages/events/wedding/EngagementCeremony'));
@@ -45,7 +56,6 @@ const BabyShower = lazy(() => import('./pages/events/traditional/BabyShower'));
 function App() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <TrustBanner />
       <Header />
       <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
         <Routes>
@@ -72,7 +82,23 @@ function App() {
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
           <Route path="/events/college-events" element={<CollegeEvents />} />
+          {/* Service pages */}
           <Route path="/services/planning-management" element={<EventPlanningPage />} />
+
+          {/* Completed service pages */}
+          <Route path="/services/decoration-design" element={<DecorationDesignPage />} />
+
+          <Route path="/services/photography-videography" element={<PhotographyVideographyPage />} />
+          <Route path="/services/entertainment-activities" element={<EntertainmentActivitiesPage />} />
+          <Route path="/services/food-catering" element={<FoodCateringPage />} />
+          <Route path="/services/makeup-styling" element={<MakeupStylingPage />} />
+          <Route path="/services/cakes-confectionery" element={<CakesConfectioneryPage />} />
+
+          {/* Temporary fallback for remaining service pages */}
+          <Route path="/services/return-gifts" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Return Gifts & Souvenirs Services</h1><p className="mt-4">Coming Soon...</p></div>} />
+          <Route path="/services/tent-house-rentals" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Tent House & Rentals Services</h1><p className="mt-4">Coming Soon...</p></div>} />
+          <Route path="/services/venue-booking" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Venue Booking & Setup Services</h1><p className="mt-4">Coming Soon...</p></div>} />
+          <Route path="/services/specialized-services" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Specialized Services</h1><p className="mt-4">Coming Soon...</p></div>} />
 
           {/* Wedding sub-pages */}
           <Route path="/events/wedding/engagement" element={<EngagementCeremony />} />

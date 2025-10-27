@@ -11,7 +11,7 @@ const EventCategories: React.FC = () => {
     {
       id: 1,
       title: 'Wedding Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760459356/WhatsApp_Image_2025-09-17_at_3.25.03_PM_wkj4rb.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760457927/WhatsApp_Image_2025-09-17_at_3.28.47_PM_1_t5pqht.jpg',
       alt: 'Wedding Events - D Day Evento Hyderabad',
       link: '/events/wedding-events'
     },
@@ -25,28 +25,28 @@ const EventCategories: React.FC = () => {
     {
       id: 3,
       title: 'Birthdays',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461419/WhatsApp_Image_2025-08-26_at_7.20.25_PM_pytvci.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460143/WhatsApp_Image_2025-09-16_at_4.57.08_PM_1_ole9we.jpg',
       alt: 'Birthday Celebrations - D Day Evento',
       link: '/events/birthdays'
     },
     {
       id: 4,
       title: 'Special Days',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461264/WhatsApp_Image_2025-08-28_at_9.42.48_PM_zj1w25.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460345/WhatsApp_Image_2025-08-27_at_12.56.59_AM_qrevrx.jpg',
       alt: 'Special Occasions - Griha Pravesham by D Day Evento',
       link: '/events/special-days'
     },
     {
       id: 5,
       title: 'College Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1761398564/WhatsApp_Image_2025-08-29_at_12.07.56_AM_w8dfp0.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460567/WhatsApp_Image_2025-08-27_at_12.23.23_AM_woknvv.jpg',
       alt: 'College Events - D Day Evento',
       link: '/events/college-events'
     },
     {
       id: 6,
       title: 'Corporate Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461094/WhatsApp_Image_2025-08-26_at_3.01.17_PM_ucfwlf.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460459/WhatsApp_Image_2025-08-27_at_12.16.30_AM_ivcmp1.jpg',
       alt: 'Corporate Events - D Day Evento',
       link: '/events/corporate-events'
     }
@@ -112,13 +112,12 @@ const EventCategories: React.FC = () => {
             Event Categories
             <span className="block md:inline text-brand-primary"> We Specialize In</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             From intimate family gatherings to grand celebrations across Hyderabad, we specialize in creating
             <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story
           </p>
         </div>
       </div>
-
         {/* Image Slider - Hidden on mobile, visible on desktop */}
         <section id="carousel" className="hidden md:block my-8">
           <div className="slider overflow-hidden py-8">

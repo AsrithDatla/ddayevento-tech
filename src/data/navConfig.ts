@@ -110,72 +110,72 @@ export const desktopEventsNavSections: NavSection[] = [
   }
 ];
 
-// Desktop Services Navigation (as shown in desktop dropdown)
+// Desktop Services Navigation (proper routes for individual service pages)
 export const desktopServicesNavSections: ServiceSection[] = [
   {
     id: 'planning-management',
     label: 'Event Planning & Management',
-    href: '/services#planning-management',
+    href: '/services/planning-management',
     items: [],
   },
   {
     id: 'decoration-design',
     label: 'Decoration & Design',
-    href: '/services#decoration-design',
+    href: '/services/decoration-design',
     items: [],
   },
   {
     id: 'photo-video',
     label: 'Photography & Videography',
-    href: '/services#photo-video',
+    href: '/services/photography-videography',
     items: [],
   },
   {
     id: 'entertainment-activities',
     label: 'Entertainment & Activities',
-    href: '/services#entertainment-activities',
+    href: '/services/entertainment-activities',
     items: [],
   },
   {
     id: 'food-catering',
     label: 'Food & Catering',
-    href: '/services#food-catering',
+    href: '/services/food-catering',
     items: [],
   },
   {
     id: 'makeup-styling',
     label: 'Makeup & Styling',
-    href: '/services#makeup-styling',
+    href: '/services/makeup-styling',
     items: [],
   },
   {
     id: 'cakes-confectionery',
     label: 'Cakes & Confectionery',
-    href: '/services#cakes-confectionery',
+    href: '/services/cakes-confectionery',
     items: [],
   },
   {
     id: 'return-gifts',
     label: 'Return Gifts & Souvenirs',
-    href: '/services#return-gifts',
+    href: '/services/return-gifts',
     items: [],
   },
   {
     id: 'rentals',
-    label: 'Tent House Materials & Rentals',
-    href: '/services#rentals',
+    label: 'Tent House & Rentals',
+    href: '/services/tent-house-rentals',
     items: [],
   },
   {
     id: 'venue-booking',
     label: 'Venue Booking & Setup',
-    href: '/services#venue-booking',
+    href: '/services/venue-booking',
     items: [],
   },
   {
     id: 'specialized-services',
     label: 'Specialized Services',
-    href: '/services#specialized-services',
+    href: '/services/specialized-services',
     items: [],
   },
 ];
@@ -221,13 +221,8 @@ export const generateEventUrl = (sectionId: string, itemName: string) => {
 
 export const generateServiceUrl = (sectionId: string, itemName: string) => {
   const section = desktopServicesNavSections.find(s => s.id === sectionId);
-  if (!section) return '/';
+  if (!section) return '/services';
 
-  const slug = itemName
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
-
-  return `${section.href}#${slug}`;
+  // For main service categories, return the main service page
+  return section.href;
 };

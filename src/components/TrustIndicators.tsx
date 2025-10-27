@@ -331,38 +331,7 @@ export const InlineTrustIndicators: React.FC<{ className?: string }> = ({ classN
   );
 };
 
-// Trust banner for top of pages
-export const TrustBanner: React.FC<{ className?: string }> = ({ className = '' }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={`bg-gradient-to-r from-brand-primary to-brand-secondary text-white py-3 ${className}`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center justify-center gap-8 text-sm">
-          <div className="flex items-center gap-2">
-            <Trophy size={16} className="text-brand-gold" />
-            <span>Hyderabad's #1 Event Planner</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Star size={16} className="text-yellow-400 fill-current" />
-            <span>4.9★ Rating (300+ Reviews)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users size={16} className="text-white" />
-            <span>500+ Events Completed</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle size={16} className="text-green-400" />
-            <span>Licensed & Insured</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+
 
 // Local focus trust indicators
 export const LocalTrustIndicators: React.FC<{ className?: string }> = ({ className = '' }) => {
