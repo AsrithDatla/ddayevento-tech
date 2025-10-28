@@ -14,6 +14,9 @@ import AboutUs from './pages/AboutUs';
 import Blogs from './pages/Blogs';
 import DesignSystem from './components/DesignSystem';
 
+// Quote page
+const QuotePage = lazy(() => import('./pages/QuotePage'));
+
 // Lazy load event and service pages
 const EventDetailPage = lazy(() => import('./pages/events/EventDetailPage'));
 const ServiceDetailPage = lazy(() => import('./pages/services/ServiceDetailPage'));
@@ -72,6 +75,7 @@ function App() {
           } />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/quote" element={<QuotePage />} />
           <Route path="/reviews" element={<div className="pt-32 text-center">Reviews page coming soon...</div>} />
           <Route path="/contact" element={<div className="pt-32 text-center">Contact page coming soon...</div>} />
           <Route path="/services" element={<div className="pt-32 text-center">Services page coming soon...</div>} />

@@ -152,8 +152,8 @@ const CradleCeremony: React.FC = () => {
             </motion.div>
           </div>
         </div>
-      </section> 
-     {/* Three Sacred Ceremonies Section */}
+      </section>
+      {/* Three Sacred Ceremonies Section */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -190,7 +190,7 @@ const CradleCeremony: React.FC = () => {
                   <p className="text-center">
                     The Cradle Ceremony marks the baby's first introduction to the family and the world.
                   </p>
-                  
+
                   <div className="bg-gradient-to-r from-brand-primary/5 to-gold/5 p-4 rounded-xl border-l-4 border-brand-primary">
                     <p className="font-semibold text-brand-primary text-center">
                       The beautifully decorated cradle is not just a piece of furniture—it's the child's first throne, where love, prayers, and blessings are showered endlessly.
@@ -220,7 +220,7 @@ const CradleCeremony: React.FC = () => {
                   <p className="text-center">
                     Annaprasana, or the first rice-feeding ceremony, is when the baby is introduced to food by parents and elders.
                   </p>
-                  
+
                   <div className="bg-gradient-to-r from-brand-secondary/5 to-brand-primary/5 p-4 rounded-xl border-l-4 border-brand-secondary">
                     <p className="font-semibold text-brand-secondary text-center">
                       This ritual symbolizes growth, prosperity, and health, making it one of the most heartfelt celebrations in a child's journey.
@@ -250,7 +250,7 @@ const CradleCeremony: React.FC = () => {
                   <p className="text-center">
                     A name is the soul of identity. The Naming Ceremony is when the baby receives the most precious gift from the family—a name that will be remembered for generations.
                   </p>
-                  
+
                   <div className="bg-gradient-to-r from-gold/10 to-brand-accent/10 p-4 rounded-xl border-l-4 border-gold">
                     <p className="font-semibold text-gold text-center">
                       It's the moment when the child's story begins.
@@ -475,8 +475,8 @@ const CradleCeremony: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </section> 
-     {/* Baby Ceremony Gallery */}
+      </section>
+      {/* Baby Ceremony Gallery */}
       <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">

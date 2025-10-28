@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, User } from 'lucide-react';
-import ImprovedQuoteModal from '../../components/QuoteGenerator/ImprovedQuoteModal';
+import { Link } from 'react-router-dom';
+
 
 const EventPlanningPage: React.FC = () => {
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   const [activeTab, setActiveTab] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -101,11 +102,11 @@ const EventPlanningPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
-                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-8 md:px-12 py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/40 w-full sm:w-auto max-w-xs sm:max-w-none">
+              <Link
+                to="/quote"
+                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-8 md:px-12 py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/40 w-full sm:w-auto max-w-xs sm:max-w-none text-center block">
                 Get Planning Quote
-              </button>
+              </Link>
               <div className="text-white/90 text-sm font-light">
                 4+ years orchestrating perfect celebrations
               </div>
@@ -721,13 +722,13 @@ const EventPlanningPage: React.FC = () => {
               "Events don't just happen — they are managed into perfection. Let D DAY EVENTO be the manager of your memories."
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
-                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-2xl"
+              <Link
+                to="/quote"
+                className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-center inline-flex items-center justify-center"
               >
                 Get Your Planning Quote
-                <ArrowRight className="ml-2 w-5 h-5 inline" />
-              </button>
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </div>
             <div className="text-gray-400 text-sm mt-4">
               Professional systems • Passionate execution • Stress-free guarantee
@@ -737,10 +738,7 @@ const EventPlanningPage: React.FC = () => {
       </section>
 
       {/* Quote Modal */}
-      <ImprovedQuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-      />
+
     </div>
   );
 };

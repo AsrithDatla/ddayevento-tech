@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import ImprovedQuoteModal from './QuoteGenerator/ImprovedQuoteModal';
+
 import {
   desktopEventsNavSections,
   desktopServicesNavSections,
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
   const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -176,11 +176,11 @@ const Header: React.FC = () => {
 
           {/* CTA & Mobile Menu */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsQuoteModalOpen(true)}
+            <Link
+              to="/quote"
               className="bg-brand-primary text-white px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-lg transition-all duration-300 hidden md:flex">
               GET QUOTE
-            </button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -258,18 +258,18 @@ const Header: React.FC = () => {
                 CONTACT US
               </button>
 
-              <button
-                onClick={() => { setIsQuoteModalOpen(true); setIsMobileMenuOpen(false); }}
-                className="w-full bg-brand-primary text-white py-3 mt-2 rounded-lg font-bold text-sm">
+              <Link
+                to="/quote"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full bg-brand-primary text-white py-3 mt-2 rounded-lg font-bold text-sm text-center block">
                 GET A FREE QUOTE
-              </button>
+              </Link>
             </div>
           </div>
         )}
       </div>
 
-      {/* Quote Modal */}
-      <ImprovedQuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
+
     </header>
   );
 };

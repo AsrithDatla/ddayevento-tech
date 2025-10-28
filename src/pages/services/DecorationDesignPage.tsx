@@ -406,7 +406,7 @@ const DecorationDesignPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>      
+      </section>
       {/* Behind the Scenes Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-brand-primary/5 via-white to-brand-accent/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -118,56 +118,56 @@ const EventCategories: React.FC = () => {
           </p>
         </div>
       </div>
-        {/* Image Slider - Hidden on mobile, visible on desktop */}
-        <section id="carousel" className="hidden md:block my-8">
-          <div className="slider overflow-hidden py-8">
-            <div
-              ref={sliderRef}
-              className="flex slide-track gap-5 items-end"
-              style={{ width: `${duplicatedCategories.length * 420}px` }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {duplicatedCategories.map((category, index) => (
-                <motion.div
-                  key={`${category.id}-${index}`}
-                  data-caid={category.id}
-                  className={`carousel-link cursor-pointer ${index % 2 === 0 ? 'mt-0' : 'mt-8'
-                    }`}
-                  onClick={() => handleCategoryClick(category)}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex carousel-slide-item">
-                    <div className="image-wrapper flex relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-                      <img
-                        className="w-full max-w-none object-cover"
-                        alt={category.alt}
-                        width="400"
-                        height="260"
-                        title={category.title}
-                        src={category.image}
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      <p className="absolute bottom-4 left-4 text-lg font-bold mb-0 z-10" style={{ color: '#FFFFFF', textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.9)' }}>
-                        {category.title}
-                      </p>
-                      {/* Hover indicator */}
-                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
-                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </div>
+      {/* Image Slider - Hidden on mobile, visible on desktop */}
+      <section id="carousel" className="hidden md:block my-8">
+        <div className="slider overflow-hidden py-8">
+          <div
+            ref={sliderRef}
+            className="flex slide-track gap-5 items-end"
+            style={{ width: `${duplicatedCategories.length * 420}px` }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {duplicatedCategories.map((category, index) => (
+              <motion.div
+                key={`${category.id}-${index}`}
+                data-caid={category.id}
+                className={`carousel-link cursor-pointer ${index % 2 === 0 ? 'mt-0' : 'mt-8'
+                  }`}
+                onClick={() => handleCategoryClick(category)}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex carousel-slide-item">
+                  <div className="image-wrapper flex relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+                    <img
+                      className="w-full max-w-none object-cover"
+                      alt={category.alt}
+                      width="400"
+                      height="260"
+                      title={category.title}
+                      src={category.image}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <p className="absolute bottom-4 left-4 text-lg font-bold mb-0 z-10" style={{ color: '#FFFFFF', textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.9)' }}>
+                      {category.title}
+                    </p>
+                    {/* Hover indicator */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
       <div className="container mx-auto px-6 relative">
 
         {/* Mobile Grid - Visible on mobile, hidden on desktop */}
@@ -192,7 +192,7 @@ const EventCategories: React.FC = () => {
           ))}
         </div>
 
-      
+
 
       </div>
     </section>

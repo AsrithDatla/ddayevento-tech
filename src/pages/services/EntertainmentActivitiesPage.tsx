@@ -39,7 +39,7 @@ const EntertainmentActivitiesPage: React.FC = () => {
                 The Soul and Heartbeat of Every Celebration
               </span>
             </motion.h1>
-            
+
             <motion.p
               className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 max-w-5xl mx-auto leading-relaxed font-light drop-shadow-xl px-2"
               initial={{ opacity: 0, y: 30 }}
@@ -56,7 +56,7 @@ const EntertainmentActivitiesPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <button 
+              <button
                 onClick={() => setIsQuoteModalOpen(true)}
                 className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-8 md:px-12 py-4 md:py-5 rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-brand-accent/40 w-full sm:w-auto max-w-xs sm:max-w-none">
                 Get Entertainment Quote
@@ -404,8 +404,8 @@ const EntertainmentActivitiesPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section> 
-     {/* Behind the Scenes Section */}
+      </section>
+      {/* Behind the Scenes Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-brand-primary/5 via-white to-brand-accent/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -557,8 +557,8 @@ const EntertainmentActivitiesPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>    
-  {/* Why Choose D DAY EVENTO Section */}
+      </section>
+      {/* Why Choose D DAY EVENTO Section */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -681,7 +681,7 @@ const EntertainmentActivitiesPage: React.FC = () => {
               "When the beats drop, the lights shine, and the laughter begins — that's not just entertainment, that's D DAY EVENTO."
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
+              <button
                 onClick={() => setIsQuoteModalOpen(true)}
                 className="bg-gradient-to-r from-brand-accent to-brand-secondary hover:from-brand-accent-dark hover:to-brand-primary text-black font-semibold px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-2xl"
               >
@@ -697,9 +697,9 @@ const EntertainmentActivitiesPage: React.FC = () => {
       </section>
 
       {/* Quote Modal */}
-      <ImprovedQuoteModal 
-        isOpen={isQuoteModalOpen} 
-        onClose={() => setIsQuoteModalOpen(false)} 
+      <ImprovedQuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
       />
     </div>
   );

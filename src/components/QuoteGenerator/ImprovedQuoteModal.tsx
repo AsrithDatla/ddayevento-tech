@@ -312,6 +312,8 @@ const ImprovedQuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
 
         setIsSubmitting(true);
         try {
+            console.log('Submitting quote data:', formData);
+
             const response = await fetch('/api/send-quote', {
                 method: 'POST',
                 headers: {
@@ -320,7 +322,19 @@ const ImprovedQuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                 body: JSON.stringify(formData),
             });
 
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            // Check if response is actually JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const textResponse = await response.text();
+                console.error('Non-JSON response:', textResponse);
+                throw new Error('Server returned non-JSON response. Please check if the API server is running.');
+            }
+
             const result = await response.json();
+            console.log('API response:', result);
 
             if (response.ok && result.success) {
                 setIsSubmitted(true);
@@ -332,8 +346,21 @@ const ImprovedQuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
             }
         } catch (error) {
             console.error('Error submitting quote:', error);
+
+            let errorMessage = 'Failed to submit quote request. Please try again.';
+
+            if (error instanceof Error) {
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
+                } else if (error.message.includes('Unexpected end of JSON input')) {
+                    errorMessage = 'Server error. Please ensure the API server is running and try again.';
+                } else {
+                    errorMessage = error.message;
+                }
+            }
+
             setErrors({
-                submit: error instanceof Error ? error.message : 'Failed to submit quote request. Please try again.'
+                submit: errorMessage
             });
         } finally {
             setIsSubmitting(false);
