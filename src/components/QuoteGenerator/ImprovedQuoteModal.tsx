@@ -7,6 +7,7 @@ import { mainServiceCategories, eventSpecificServices } from '../../data/service
 import EventCategorySelection from './steps/EventCategorySelection';
 import SubEventSelection from './steps/SubEventSelection';
 import EventDetailsForm from './steps/EventDetailsForm';
+import ContactForm from './steps/ContactForm';
 // import ServiceSelection from './steps/ServiceSelection'; // Not used
 
 interface QuoteModalProps {
@@ -308,7 +309,7 @@ const ImprovedQuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
     };
 
     const handleSubmit = async () => {
-        if (!validateStep(4)) return;
+        if (!validateStep(5)) return;
 
         setIsSubmitting(true);
         try {
@@ -603,91 +604,11 @@ const ImprovedQuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                                 )}
 
                                 {currentStep === 5 && (
-                                    <div className="space-y-6">
-                                        <div className="text-center mb-6">
-                                            <h3 className="text-2xl font-bold text-gray-800 mb-2">Contact Information</h3>
-                                            <p className="text-gray-600">How can we reach you?</p>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div>
-                                                <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
-                                                <input
-                                                    type="text"
-                                                    value={formData.contactInfo.name}
-                                                    onChange={(e) => updateFormData({
-                                                        contactInfo: { ...formData.contactInfo, name: e.target.value }
-                                                    })}
-                                                    placeholder="Enter your full name"
-                                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all ${errors.name ? 'border-red-300' : 'border-gray-200'
-                                                        }`}
-                                                />
-                                                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
-                                                <input
-                                                    type="tel"
-                                                    value={formData.contactInfo.phone}
-                                                    onChange={(e) => updateFormData({
-                                                        contactInfo: { ...formData.contactInfo, phone: e.target.value }
-                                                    })}
-                                                    placeholder="Enter phone number"
-                                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all ${errors.phone ? 'border-red-300' : 'border-gray-200'
-                                                        }`}
-                                                />
-                                                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
-                                                <input
-                                                    type="email"
-                                                    value={formData.contactInfo.email}
-                                                    onChange={(e) => updateFormData({
-                                                        contactInfo: { ...formData.contactInfo, email: e.target.value }
-                                                    })}
-                                                    placeholder="Enter email address"
-                                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all ${errors.email ? 'border-red-300' : 'border-gray-200'
-                                                        }`}
-                                                />
-                                                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-semibold text-gray-700 mb-2">WhatsApp Number (Optional)</label>
-                                                <input
-                                                    type="tel"
-                                                    value={formData.contactInfo.whatsapp || ''}
-                                                    onChange={(e) => updateFormData({
-                                                        contactInfo: { ...formData.contactInfo, whatsapp: e.target.value }
-                                                    })}
-                                                    placeholder="WhatsApp number (if different)"
-                                                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        {/* Summary */}
-                                        <div className="bg-gradient-to-r from-brand-primary/10 to-brand-gold/10 rounded-xl p-6 border border-brand-primary/20">
-                                            <h4 className="font-bold text-brand-primary text-lg mb-4">Quote Summary</h4>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                                                <div>
-                                                    <span className="font-semibold">Event:</span> {formData.eventCelebration}
-                                                </div>
-                                                <div>
-                                                    <span className="font-semibold">Date:</span> {formData.eventDate}
-                                                </div>
-                                                <div>
-                                                    <span className="font-semibold">Guests:</span> {formData.guestCount} people
-                                                </div>
-                                                <div>
-                                                    <span className="font-semibold">Services:</span> {formData.selectedServices.filter(s => s.isSelected).length} selected
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <ContactForm
+                                        formData={formData}
+                                        updateFormData={updateFormData}
+                                        errors={errors}
+                                    />
                                 )}
                             </motion.div>
                         </AnimatePresence>

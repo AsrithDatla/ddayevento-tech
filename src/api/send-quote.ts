@@ -111,7 +111,7 @@ export default async function handler(
 
   try {
     const formData = req.body as QuoteFormData;
-    
+
     if (!formData || !formData.contactInfo || !formData.eventCategory) {
       return res.status(400).json({ success: false, message: 'Invalid form data.' });
     }

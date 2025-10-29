@@ -318,7 +318,7 @@ const GrihaPravesham = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="font-semibold">Elegant Details</p>
+                    <p className="font-semibold text-white">Elegant Details</p>
                   </div>
                   <div className="absolute top-4 right-4 w-2 h-2 bg-brand-primary rounded-full"></div>
                 </div>
@@ -331,7 +331,7 @@ const GrihaPravesham = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="font-semibold">Magical Ambiance</p>
+                    <p className="font-semibold text-white">Magical Ambiance</p>
                   </div>
                   <div className="absolute top-4 right-4 w-2 h-2 bg-gold rounded-full"></div>
                 </div>
