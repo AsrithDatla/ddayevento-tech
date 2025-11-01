@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChefHat, Utensils, Heart, Shield, Eye, FileText } from 'lucide-react';
+// Icons removed for cleaner design
 import ImprovedQuoteModal from '../../components/QuoteGenerator/ImprovedQuoteModal';
+import { ArrowRight } from 'lucide-react';
+import { Heart } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 const FoodCateringPage: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -10,7 +13,8 @@ const FoodCateringPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenuModal, setShowMenuModal] = useState(false);
+  const [activeMenuType, setActiveMenuType] = useState<'food' | 'party'>('food');
 
   return (
     <div className="bg-white">
@@ -88,116 +92,221 @@ const FoodCateringPage: React.FC = () => {
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               From traditional South Indian feasts to global cuisines - discover our full range of culinary offerings
             </p>
-            
-            <motion.div
-              className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 max-w-md mx-auto mb-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <FileText className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Complete Menu Card</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Explore our comprehensive menu featuring traditional cuisines, live counters, desserts, and special dietary options.
-              </p>
-              <button
-                onClick={() => setShowMenu(!showMenu)}
-                className="bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center mx-auto"
-              >
-                <Eye className="w-5 h-5 mr-2" />
-                {showMenu ? 'Hide Menu' : 'View Menu'}
-              </button>
-            </motion.div>
           </motion.div>
 
-          {/* Menu Content */}
-          {showMenu && (
+          {/* Menu Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Food Menu Card */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              onClick={() => {
+                setActiveMenuType('food');
+                setShowMenuModal(true);
+              }}
             >
-              <div className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {/* Traditional Indian */}
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-brand-primary mb-4 border-b-2 border-brand-primary/20 pb-2">Traditional Indian</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-gray-900">South Indian Delights</h4>
-                        <p className="text-sm text-gray-600">Dosa, Idli, Vada, Sambar, Rasam, Coconut Chutney</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">North Indian Classics</h4>
-                        <p className="text-sm text-gray-600">Dal Makhani, Paneer Butter Masala, Naan, Biryani</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Traditional Sweets</h4>
-                        <p className="text-sm text-gray-600">Gulab Jamun, Rasgulla, Jalebi, Kheer, Halwa</p>
-                      </div>
-                    </div>
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 via-brand-secondary/5 to-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Content */}
+              <div className="relative p-8">
+                {/* Header with Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    Traditional & Global
                   </div>
+                  <div className="w-3 h-3 bg-brand-primary rounded-full animate-pulse"></div>
+                </div>
 
-                  {/* Global Cuisines */}
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-brand-secondary mb-4 border-b-2 border-brand-secondary/20 pb-2">Global Cuisines</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Italian Specialties</h4>
-                        <p className="text-sm text-gray-600">Wood-fired Pizza, Pasta, Risotto, Garlic Bread</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Continental Delights</h4>
-                        <p className="text-sm text-gray-600">Grilled Vegetables, Caesar Salad, Baked Dishes</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Pan-Asian Favorites</h4>
-                        <p className="text-sm text-gray-600">Sushi, Dim Sum, Thai Curry, Stir-fry Noodles</p>
-                      </div>
-                    </div>
+                {/* Title */}
+                <h3 className="text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-primary transition-colors duration-300">
+                  Food Menu
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  Comprehensive menu featuring traditional South Indian cuisines, North Indian classics, global dishes, live counters, and special dietary options.
+                </p>
+
+                {/* Features */}
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-primary rounded-full mr-3"></div>
+                    Traditional South & North Indian
                   </div>
-
-                  {/* Live Counters */}
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-brand-accent mb-4 border-b-2 border-brand-accent/20 pb-2">Live Counters</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Chaat Station</h4>
-                        <p className="text-sm text-gray-600">Pani Puri, Bhel Puri, Aloo Tikki, Dahi Vada</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">BBQ & Grill</h4>
-                        <p className="text-sm text-gray-600">Tandoor Items, Grilled Vegetables, Kebabs</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Dessert Counter</h4>
-                        <p className="text-sm text-gray-600">Live Jalebi, Ice Cream, Fresh Fruit Station</p>
-                      </div>
-                    </div>
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-secondary rounded-full mr-3"></div>
+                    Global Cuisines & Live Counters
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-accent rounded-full mr-3"></div>
+                    Desserts & Special Dietary Options
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-                  <p className="text-gray-600 italic">
-                    All menus can be customized based on your preferences, dietary requirements, and guest count.
-                  </p>
+                {/* CTA Button */}
+                <div className="bg-gradient-to-r from-brand-primary to-brand-secondary group-hover:from-brand-secondary group-hover:to-brand-primary text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-xl text-center">
+                  View Complete Food Menu
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-brand-primary/10 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            </motion.div>
+
+            {/* Party Menu Card */}
+            <motion.div
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              onClick={() => {
+                setActiveMenuType('party');
+                setShowMenuModal(true);
+              }}
+            >
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 via-brand-gold/5 to-brand-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Content */}
+              <div className="relative p-8">
+                {/* Header with Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="bg-gradient-to-r from-brand-accent to-brand-gold text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    Celebration Special
+                  </div>
+                  <div className="w-3 h-3 bg-brand-accent rounded-full animate-pulse"></div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-accent transition-colors duration-300">
+                  Party Menu
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  Special party packages with appetizers, main courses, beverages, and celebration treats perfect for birthdays, anniversaries, and gatherings.
+                </p>
+
+                {/* Features */}
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-accent rounded-full mr-3"></div>
+                    Party Starters & Finger Foods
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-gold rounded-full mr-3"></div>
+                    Buffet Specials & Live Stations
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700">
+                    <div className="w-2 h-2 bg-brand-primary rounded-full mr-3"></div>
+                    Beverages, Cakes & Sweet Treats
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <div className="bg-gradient-to-r from-brand-accent to-brand-gold group-hover:from-brand-gold group-hover:to-brand-accent text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-xl text-center">
+                  View Complete Party Menu
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-brand-accent/10 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Menu Modal */}
+      {showMenuModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-2 sm:p-4 lg:p-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="bg-white rounded-2xl w-full h-full max-w-7xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 flex-shrink-0">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                {activeMenuType === 'food' ? 'Food Menu' : 'Party Menu'}
+              </h3>
+              <div className="flex items-center gap-2 sm:gap-4">
+                <a
+                  href={activeMenuType === 'food' ? '/Foodmenu.pdf' : '/party-menu.pdf'}
+                  download={`D-Day-Evento-${activeMenuType === 'food' ? 'Food' : 'Party'}-Menu.pdf`}
+                  className={`${
+                    activeMenuType === 'food' 
+                      ? 'bg-brand-primary hover:bg-brand-secondary' 
+                      : 'bg-brand-accent hover:bg-brand-gold'
+                  } text-white px-3 sm:px-4 py-2 rounded-lg transition-colors duration-300 text-xs sm:text-sm font-medium`}
+                >
+                  Download
+                </a>
+                <button
+                  onClick={() => setShowMenuModal(false)}
+                  className="text-gray-500 hover:text-gray-700 transition-colors p-1"
+                >
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* PDF Viewer Container */}
+            <div className="flex-1 p-4 sm:p-6 overflow-hidden">
+              <div className="w-full h-full bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                <iframe
+                  src={activeMenuType === 'food' ? '/Foodmenu.pdf' : '/party-menu.pdf'}
+                  className="w-full h-full"
+                  title={`${activeMenuType === 'food' ? 'Food' : 'Party'} Menu PDF`}
+                />
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 sm:p-6 border-t border-gray-200 flex-shrink-0">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
+                  Having trouble viewing? 
+                  <a 
+                    href={activeMenuType === 'food' ? '/Foodmenu.pdf' : '/party-menu.pdf'} 
+                    target="_blank" 
+                    className={`${
+                      activeMenuType === 'food' ? 'text-brand-primary' : 'text-brand-accent'
+                    } hover:underline ml-1 font-medium`}
+                  >
+                    Open in new tab
+                  </a>
+                </p>
+                <div className="flex gap-3">
                   <button
                     onClick={() => setIsQuoteModalOpen(true)}
-                    className="mt-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-all duration-300"
+                    className={`${
+                      activeMenuType === 'food' 
+                        ? 'bg-brand-primary hover:bg-brand-secondary' 
+                        : 'bg-brand-accent hover:bg-brand-gold'
+                    } text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-colors duration-300 text-xs sm:text-sm font-medium`}
                   >
-                    Customize Your Menu
+                    Get Quote
+                  </button>
+                  <button
+                    onClick={() => setShowMenuModal(false)}
+                    className="border-2 border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-colors duration-300 text-xs sm:text-sm font-medium"
+                  >
+                    Close
                   </button>
                 </div>
               </div>
-            </motion.div>
-          )}
+            </div>
+          </motion.div>
         </div>
-      </section>
+      )}
 
       {/* Why Every Detail Counts Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-white via-brand-primary/5 to-brand-accent/10">
@@ -224,9 +333,11 @@ const FoodCateringPage: React.FC = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                   >
                     <div className="bg-gradient-to-br from-brand-primary/15 via-brand-secondary/10 to-brand-accent/15 p-8 rounded-3xl border-l-6 border-brand-primary transform hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-xl">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <Heart className="w-6 h-6 text-white" />
+                      <div className="space-y-4">
+                        <div className="bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 rounded-2xl p-1 w-fit">
+                          <div className="bg-white rounded-xl px-4 py-2">
+                            <span className="text-brand-primary font-bold text-sm">01</span>
+                          </div>
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-900 mb-3">Lasting Impressions</h3>
@@ -244,9 +355,11 @@ const FoodCateringPage: React.FC = () => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                   >
                     <div className="bg-gradient-to-br from-brand-secondary/15 via-brand-accent/10 to-brand-primary/15 p-8 rounded-3xl border-l-6 border-brand-secondary transform hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-xl">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-brand-secondary to-brand-accent rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <ChefHat className="w-6 h-6 text-black" />
+                      <div className="space-y-4">
+                        <div className="bg-gradient-to-r from-brand-secondary/20 to-brand-accent/20 rounded-2xl p-1 w-fit">
+                          <div className="bg-white rounded-xl px-4 py-2">
+                            <span className="text-brand-secondary font-bold text-sm">02</span>
+                          </div>
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-900 mb-3">Cultural Connection</h3>
@@ -264,9 +377,11 @@ const FoodCateringPage: React.FC = () => {
                     transition={{ duration: 0.6, delay: 0.6 }}
                   >
                     <div className="bg-gradient-to-br from-brand-accent/15 via-brand-primary/10 to-brand-secondary/15 p-8 rounded-3xl border-l-6 border-brand-accent transform hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-xl">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-brand-accent to-brand-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <Utensils className="w-6 h-6 text-black" />
+                      <div className="space-y-4">
+                        <div className="bg-gradient-to-r from-brand-accent/20 to-brand-primary/20 rounded-2xl p-1 w-fit">
+                          <div className="bg-white rounded-xl px-4 py-2">
+                            <span className="text-brand-accent font-bold text-sm">03</span>
+                          </div>
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-900 mb-3">Social Experience</h3>
@@ -660,12 +775,12 @@ const FoodCateringPage: React.FC = () => {
               {
                 feeling: "Proud & Appreciated",
                 description: "When guests compliment both the incredible taste and beautiful presentation",
-                icon: <ChefHat className="w-8 h-8" />
+                icon: <span className="text-3xl">👨‍🍳</span>
               },
               {
                 feeling: "Connected & Joyful",
                 description: "As food becomes the centerpiece that brings everyone together in celebration",
-                icon: <Utensils className="w-8 h-8" />
+                icon: <span className="text-3xl">🥂</span>
               }
             ].map((item, index) => (
               <motion.div

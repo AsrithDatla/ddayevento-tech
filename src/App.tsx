@@ -38,8 +38,11 @@ const MakeupStylingPage = lazy(() => import('./pages/services/MakeupStylingPage'
 const CakesConfectioneryPage = lazy(() => import('./pages/services/CakesConfectioneryPage'));
 const ReturnGiftsPage = lazy(() => import('./pages/services/ReturnGiftsPage'));
 const TentHouseRentalsPage = lazy(() => import('./pages/services/TentHouseRentalsPage'));
-// const VenueBookingPage = lazy(() => import('./pages/services/VenueBookingPage'));
-// const SpecializedServicesPage = lazy(() => import('./pages/services/SpecializedServicesPage'));
+const VenueBookingPage = lazy(() => import('./pages/services/VenueBookingPage'));
+const SpecializedServicesPage = lazy(() => import('./pages/services/SpecializedServicesPage'));
+
+// Other pages
+const VendorRegistrationPage = lazy(() => import('./pages/VendorRegistrationPage'));
 
 // Wedding sub-pages
 const EngagementCeremony = lazy(() => import('./pages/events/wedding/EngagementCeremony'));
@@ -99,10 +102,12 @@ function App() {
           <Route path="/services/cakes-confectionery" element={<CakesConfectioneryPage />} />
           <Route path="/services/return-gifts" element={<ReturnGiftsPage />} />
           <Route path="/services/tent-house-rentals" element={<TentHouseRentalsPage />} />
+          <Route path="/services/venue-booking" element={<VenueBookingPage />} />
 
-          {/* Temporary fallback for remaining service pages */}
-          <Route path="/services/venue-booking" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Venue Booking & Setup Services</h1><p className="mt-4">Coming Soon...</p></div>} />
-          <Route path="/services/specialized-services" element={<div className="pt-32 text-center"><h1 className="text-2xl font-bold">Specialized Services</h1><p className="mt-4">Coming Soon...</p></div>} />
+          <Route path="/services/specialized-services" element={<SpecializedServicesPage />} />
+
+          {/* Other pages */}
+          <Route path="/vendor-registration" element={<VendorRegistrationPage />} />
 
           {/* Wedding sub-pages */}
           <Route path="/events/wedding/engagement" element={<EngagementCeremony />} />

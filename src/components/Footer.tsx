@@ -28,6 +28,12 @@ const Footer: React.FC = () => {
       { name: 'Get Quote', href: '#quote' },
       { name: 'Reviews', href: '#reviews' },
       { name: 'Gallery', href: '#gallery' }
+    ],
+    'Partners': [
+      { name: 'Vendor Registration', href: '/vendor-registration' },
+      { name: 'Join Our Network', href: '/vendor-registration' },
+      { name: 'Partnership Info', href: '/vendor-registration' },
+      { name: 'Become a Vendor', href: '/vendor-registration' }
     ]
   };
 

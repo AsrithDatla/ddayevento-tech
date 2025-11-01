@@ -172,6 +172,12 @@ const Header: React.FC = () => {
             >
               CONTACT US
             </button>
+            <Link
+              to="/vendor-registration"
+              className="text-black hover:text-brand-teal font-semibold"
+            >
+              VENDOR
+            </Link>
           </nav>
 
           {/* CTA & Mobile Menu */}
@@ -257,6 +263,13 @@ const Header: React.FC = () => {
               >
                 CONTACT US
               </button>
+              <Link 
+                to="/vendor-registration" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors text-left w-full"
+              >
+                VENDOR
+              </Link>
 
               <Link
                 to="/quote"
