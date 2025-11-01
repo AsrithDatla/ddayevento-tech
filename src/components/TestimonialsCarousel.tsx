@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star, MapPin, Calendar, Quote } from 'lucide-react';
-import { testimonialsData, getTestimonialsByEventType, type Testimonial } from '../data/testimonialsData';
+import { ChevronLeft, ChevronRight, Star, MapPin, Calendar, Quote, RefreshCw, ExternalLink } from 'lucide-react';
+import { testimonialsData, getMixedTestimonials, type Testimonial } from '../data/testimonialsData';
+import { useGoogleReviews as useGoogleReviewsHook } from '../hooks/useGoogleReviews';
 
 interface TestimonialsCarouselProps {
   eventTypeFilter?: string;
@@ -9,6 +10,8 @@ interface TestimonialsCarouselProps {
   itemsPerView?: number;
   autoPlay?: boolean;
   autoPlayInterval?: number;
+  useGoogleReviews?: boolean;
+  showGoogleStats?: boolean;
 }
 
 const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
@@ -16,11 +19,24 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   showFilters = true,
   itemsPerView = 3,
   autoPlay = true,
-  autoPlayInterval = 5000
+  autoPlayInterval = 5000,
+  useGoogleReviews = true,
+  showGoogleStats = true
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedFilter, setSelectedFilter] = useState(eventTypeFilter);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(testimonialsData);
+
+  // Fetch Google Reviews
+  const {
+    reviews: googleReviews,
+    loading: googleLoading,
+    error: googleError,
+    totalRating,
+    totalReviews,
+    lastUpdated,
+    refetch: refetchGoogleReviews
+  } = useGoogleReviewsHook(useGoogleReviews, 30 * 60 * 1000); // Refresh every 30 minutes
 
   const eventTypes = [
     { value: 'all', label: 'All Events' },
@@ -31,12 +47,28 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
     { value: 'anniversary', label: 'Anniversaries' }
   ];
 
-  // Filter testimonials based on selected event type
+  // Combine and filter testimonials based on selected event type
   useEffect(() => {
-    const filtered = getTestimonialsByEventType(selectedFilter);
+    let combinedTestimonials: Testimonial[];
+    
+    if (useGoogleReviews && googleReviews.length > 0) {
+      // Mix Google reviews with local testimonials
+      combinedTestimonials = getMixedTestimonials(googleReviews, 4);
+    } else {
+      // Use only local testimonials
+      combinedTestimonials = testimonialsData;
+    }
+
+    // Apply event type filter
+    const filtered = selectedFilter === 'all' 
+      ? combinedTestimonials 
+      : combinedTestimonials.filter(testimonial => 
+          testimonial.eventType.toLowerCase().includes(selectedFilter.toLowerCase())
+        );
+    
     setTestimonials(filtered);
     setCurrentIndex(0);
-  }, [selectedFilter]);
+  }, [selectedFilter, googleReviews, useGoogleReviews]);
 
   // Auto-play functionality
   useEffect(() => {
@@ -86,9 +118,62 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
               Say
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             Over 400+ successful events in Hyderabad. Here's what our happy clients have to say about their experience with D-Day Evento.
           </p>
+
+          {/* Google Reviews Stats */}
+          {showGoogleStats && useGoogleReviews && (
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              {googleLoading ? (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <RefreshCw size={16} className="animate-spin" />
+                  <span className="text-sm">Loading live reviews...</span>
+                </div>
+              ) : googleError ? (
+                <div className="flex items-center gap-2 text-amber-600 bg-amber-50 px-4 py-2 rounded-full">
+                  <span className="text-sm">Showing cached reviews</span>
+                  <button
+                    onClick={refetchGoogleReviews}
+                    className="text-amber-700 hover:text-amber-800 transition-colors"
+                    title="Retry loading live reviews"
+                  >
+                    <RefreshCw size={14} />
+                  </button>
+                </div>
+              ) : totalReviews > 0 ? (
+                <div className="flex items-center gap-6 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      {renderStars(Math.round(totalRating))}
+                    </div>
+                    <span className="font-semibold text-gray-800">{totalRating.toFixed(1)}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {totalReviews} Google Reviews
+                  </div>
+                  <div className="flex items-center gap-1 text-blue-600">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span className="text-xs font-medium">Verified</span>
+                  </div>
+                  {lastUpdated && (
+                    <button
+                      onClick={refetchGoogleReviews}
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
+                      title={`Last updated: ${new Date(lastUpdated).toLocaleString()}`}
+                    >
+                      <RefreshCw size={14} />
+                    </button>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          )}
         </div>
 
         {/* Event Type Filters */}
@@ -161,14 +246,53 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     transition={{ delay: index * 0.1 }}
                     className="bg-white/70 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/30 relative mb-4"
                   >
-                    {/* Quote Icon */}
-                    <div className="absolute top-4 right-4 text-brand-primary/20">
-                      <Quote size={24} />
+                    {/* Quote Icon and Source Badge */}
+                    <div className="absolute top-4 right-4 flex items-center gap-2">
+                      {testimonial.source === 'google' && (
+                        <div className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                          </svg>
+                          Google
+                        </div>
+                      )}
+                      <div className="text-brand-primary/20">
+                        <Quote size={24} />
+                      </div>
                     </div>
 
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mb-4">
-                      {renderStars(testimonial.rating)}
+                    {/* Profile Photo and Rating */}
+                    <div className="flex items-start gap-4 mb-4">
+                      {testimonial.profilePhoto && (
+                        <img
+                          src={testimonial.profilePhoto}
+                          alt={testimonial.name}
+                          className="w-12 h-12 rounded-full object-cover border-2 border-brand-primary/20"
+                        />
+                      )}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-1 mb-2">
+                          {renderStars(testimonial.rating)}
+                        </div>
+                        <h4 className="font-semibold text-gray-800 text-lg flex items-center gap-2">
+                          {testimonial.authorUrl ? (
+                            <a
+                              href={testimonial.authorUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-brand-primary transition-colors flex items-center gap-1"
+                            >
+                              {testimonial.name}
+                              <ExternalLink size={14} />
+                            </a>
+                          ) : (
+                            testimonial.name
+                          )}
+                        </h4>
+                      </div>
                     </div>
 
                     {/* Review Text */}
@@ -178,10 +302,6 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
                     {/* Client Info */}
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-gray-800 text-lg">
-                        {testimonial.name}
-                      </h4>
-
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <MapPin size={14} />
                         <span>{testimonial.location}</span>

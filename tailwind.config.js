@@ -74,6 +74,9 @@ export default {
         display: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         hero: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        // Logo font - Great Vibes
+        logo: ['Great Vibes', 'cursive'],
+        script: ['Great Vibes', 'cursive'],
         // Font aliases for semantic usage
         primary: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         secondary: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],

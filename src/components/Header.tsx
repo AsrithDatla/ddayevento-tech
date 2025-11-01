@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import QuoteModal from './QuoteGenerator/QuoteModal';
+
 import {
   desktopEventsNavSections,
   desktopServicesNavSections,
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileEvents, setExpandedMobileEvents] = useState<string | null>(null);
   const [expandedMobileServices, setExpandedMobileServices] = useState<string | null>(null);
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                 alt="D-Day Evento - Hyderabad's Most Trusted Event Planners"
                 className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
               />
-              <span className="text-brand-teal text-lg sm:text-xl md:text-2xl font-normal font-['Pacifico'] whitespace-nowrap leading-none">
+              <span className="text-brand-teal text-lg sm:text-xl md:text-2xl font-normal font-logo whitespace-nowrap leading-none">
                 D-Day Evento
               </span>
             </Link>
@@ -172,15 +172,21 @@ const Header: React.FC = () => {
             >
               CONTACT US
             </button>
+            <Link
+              to="/vendor-registration"
+              className="text-black hover:text-brand-teal font-semibold"
+            >
+              VENDOR
+            </Link>
           </nav>
 
           {/* CTA & Mobile Menu */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsQuoteModalOpen(true)}
+            <Link
+              to="/quote"
               className="bg-brand-primary text-white px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-lg transition-all duration-300 hidden md:flex">
               GET QUOTE
-            </button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -257,19 +263,26 @@ const Header: React.FC = () => {
               >
                 CONTACT US
               </button>
+              <Link 
+                to="/vendor-registration" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold py-3 px-3 rounded-lg hover:bg-gray-100 transition-colors text-left w-full"
+              >
+                VENDOR
+              </Link>
 
-              <button
-                onClick={() => { setIsQuoteModalOpen(true); setIsMobileMenuOpen(false); }}
-                className="w-full bg-brand-primary text-white py-3 mt-2 rounded-lg font-bold text-sm">
+              <Link
+                to="/quote"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full bg-brand-primary text-white py-3 mt-2 rounded-lg font-bold text-sm text-center block">
                 GET A FREE QUOTE
-              </button>
+              </Link>
             </div>
           </div>
         )}
       </div>
 
-      {/* Quote Modal */}
-      <QuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
+
     </header>
   );
 };

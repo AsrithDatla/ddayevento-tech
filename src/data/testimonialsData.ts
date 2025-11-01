@@ -8,6 +8,10 @@ export interface Testimonial {
   image?: string;
   eventDate: string;
   venue?: string;
+  source?: 'local' | 'google';
+  profilePhoto?: string;
+  authorUrl?: string;
+  timestamp?: number;
 }
 
 export const testimonialsData: Testimonial[] = [
@@ -106,4 +110,33 @@ export const getFeaturedTestimonials = (count: number = 6): Testimonial[] => {
   return testimonialsData
     .filter(testimonial => testimonial.rating === 5)
     .slice(0, count);
+};
+
+// Combine local testimonials with Google Reviews
+export const combineTestimonials = (googleReviews: Testimonial[] = []): Testimonial[] => {
+  // Add source field to local testimonials
+  const localWithSource = testimonialsData.map(testimonial => ({
+    ...testimonial,
+    source: 'local' as const,
+    timestamp: new Date().getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000 // Random timestamp for sorting
+  }));
+
+  // Combine and sort by timestamp (most recent first)
+  const combined = [...localWithSource, ...googleReviews];
+  return combined.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+};
+
+// Get mixed testimonials with Google Reviews prioritized
+export const getMixedTestimonials = (googleReviews: Testimonial[] = [], localCount: number = 4): Testimonial[] => {
+  const localWithSource = testimonialsData.map(testimonial => ({
+    ...testimonial,
+    source: 'local' as const,
+    timestamp: new Date().getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000
+  }));
+
+  // Take recent Google reviews and mix with local ones
+  const recentGoogle = googleReviews.slice(0, 6);
+  const selectedLocal = localWithSource.slice(0, localCount);
+  
+  return [...recentGoogle, ...selectedLocal].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 };

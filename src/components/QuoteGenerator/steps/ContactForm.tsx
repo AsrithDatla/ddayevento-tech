@@ -23,6 +23,18 @@ const ContactForm: React.FC<ContactFormProps> = ({
     });
   };
 
+  // Email validation helper
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Phone validation helper
+  const isValidPhone = (phone: string) => {
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+  };
+
   const handleSpecialRequestsChange = (value: string) => {
     updateFormData({ specialRequests: value });
   };
@@ -86,6 +98,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
+            {formData.contactInfo.email && !isValidEmail(formData.contactInfo.email) && !errors.email && (
+              <p className="text-amber-600 text-sm mt-1">Please enter a valid email address</p>
+            )}
             <p className="text-xs text-gray-500 mt-1">
               We'll send your quote and updates to this email
             </p>
@@ -113,6 +128,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            )}
+            {formData.contactInfo.phone && !isValidPhone(formData.contactInfo.phone) && !errors.phone && (
+              <p className="text-amber-600 text-sm mt-1">Please enter a valid phone number</p>
             )}
             <p className="text-xs text-gray-500 mt-1">
               We'll call you to discuss your requirements in detail

@@ -12,8 +12,10 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import Blogs from './pages/Blogs';
-import { TrustBanner } from './components/TrustIndicators';
 import DesignSystem from './components/DesignSystem';
+
+// Quote page
+const QuotePage = lazy(() => import('./pages/QuotePage'));
 
 // Lazy load event and service pages
 const EventDetailPage = lazy(() => import('./pages/events/EventDetailPage'));
@@ -25,7 +27,22 @@ const CorporateEvents = lazy(() => import('./pages/events/CorporateEvents'));
 const SpecialDays = lazy(() => import('./pages/events/SpecialDays'));
 const CollegeEvents = lazy(() => import('./pages/events/CollegeEvents'));
 
+// Service pages
 const EventPlanningPage = lazy(() => import('./pages/services/EventPlanningPage'));
+const DecorationDesignPage = lazy(() => import('./pages/services/DecorationDesignPage'));
+const PhotographyVideographyPage = lazy(() => import('./pages/services/PhotographyVideographyPage'));
+const EntertainmentActivitiesPage = lazy(() => import('./pages/services/EntertainmentActivitiesPage'));
+// const EntertainmentActivitiesPage = lazy(() => import('./pages/services/EntertainmentActivitiesPage'));
+const FoodCateringPage = lazy(() => import('./pages/services/FoodCateringPage'));
+const MakeupStylingPage = lazy(() => import('./pages/services/MakeupStylingPage'));
+const CakesConfectioneryPage = lazy(() => import('./pages/services/CakesConfectioneryPage'));
+const ReturnGiftsPage = lazy(() => import('./pages/services/ReturnGiftsPage'));
+const TentHouseRentalsPage = lazy(() => import('./pages/services/TentHouseRentalsPage'));
+const VenueBookingPage = lazy(() => import('./pages/services/VenueBookingPage'));
+const SpecializedServicesPage = lazy(() => import('./pages/services/SpecializedServicesPage'));
+
+// Other pages
+const VendorRegistrationPage = lazy(() => import('./pages/VendorRegistrationPage'));
 
 // Wedding sub-pages
 const EngagementCeremony = lazy(() => import('./pages/events/wedding/EngagementCeremony'));
@@ -45,7 +62,6 @@ const BabyShower = lazy(() => import('./pages/events/traditional/BabyShower'));
 function App() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <TrustBanner />
       <Header />
       <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
         <Routes>
@@ -62,6 +78,7 @@ function App() {
           } />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/quote" element={<QuotePage />} />
           <Route path="/reviews" element={<div className="pt-32 text-center">Reviews page coming soon...</div>} />
           <Route path="/contact" element={<div className="pt-32 text-center">Contact page coming soon...</div>} />
           <Route path="/services" element={<div className="pt-32 text-center">Services page coming soon...</div>} />
@@ -72,7 +89,25 @@ function App() {
           <Route path="/events/corporate-events" element={<CorporateEvents />} />
           <Route path="/events/special-days" element={<SpecialDays />} />
           <Route path="/events/college-events" element={<CollegeEvents />} />
+          {/* Service pages */}
           <Route path="/services/planning-management" element={<EventPlanningPage />} />
+
+          {/* Completed service pages */}
+          <Route path="/services/decoration-design" element={<DecorationDesignPage />} />
+
+          <Route path="/services/photography-videography" element={<PhotographyVideographyPage />} />
+          <Route path="/services/entertainment-activities" element={<EntertainmentActivitiesPage />} />
+          <Route path="/services/food-catering" element={<FoodCateringPage />} />
+          <Route path="/services/makeup-styling" element={<MakeupStylingPage />} />
+          <Route path="/services/cakes-confectionery" element={<CakesConfectioneryPage />} />
+          <Route path="/services/return-gifts" element={<ReturnGiftsPage />} />
+          <Route path="/services/tent-house-rentals" element={<TentHouseRentalsPage />} />
+          <Route path="/services/venue-booking" element={<VenueBookingPage />} />
+
+          <Route path="/services/specialized-services" element={<SpecializedServicesPage />} />
+
+          {/* Other pages */}
+          <Route path="/vendor-registration" element={<VendorRegistrationPage />} />
 
           {/* Wedding sub-pages */}
           <Route path="/events/wedding/engagement" element={<EngagementCeremony />} />

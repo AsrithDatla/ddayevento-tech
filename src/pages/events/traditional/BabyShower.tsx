@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import ImprovedQuoteModal from '../../../components/QuoteGenerator/ImprovedQuoteModal';
 
 const BabyShower: React.FC = () => {
   const { pathname } = useLocation();
   const [imageLoadErrors, setImageLoadErrors] = useState<Set<number>>(new Set());
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [visibleImages, setVisibleImages] = useState(12); // Show 12 images initially
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const IMAGES_PER_LOAD = 12; // Load 12 more images each time
@@ -664,13 +666,13 @@ const BabyShower: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-center"
             >
-              <Link
-                to="/contact"
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
                 className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-lg"
               >
                 Celebrate Your Sacred Journey
                 <ArrowRight className="ml-2" size={20} />
-              </Link>
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -757,6 +759,12 @@ const BabyShower: React.FC = () => {
           />
         </div>
       )}
+
+      {/* Quote Modal */}
+      <ImprovedQuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   );
 };

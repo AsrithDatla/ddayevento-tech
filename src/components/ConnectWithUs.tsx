@@ -12,26 +12,86 @@ const ConnectWithUs: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Please tell us about your event';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setShowSuccess(true);
-    setFormData({ name: '', email: '', phone: '', eventType: '', message: '' });
+      const result = await response.json();
 
-    setTimeout(() => setShowSuccess(false), 3000);
+      if (result.success) {
+        setShowSuccess(true);
+        setFormData({ name: '', email: '', phone: '', eventType: '', message: '' });
+        setErrors({});
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        alert(result.message || 'There was an error sending your message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert('There was an error sending your message. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
   };
 
   return (
@@ -156,10 +216,19 @@ const ConnectWithUs: React.FC = () => {
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
                     <CheckCircle size={40} className="text-green-600" />
                   </div>
-                  <h4 className="text-heading-md font-bold text-gray-800 mb-4 font-display">Message Sent!</h4>
-                  <p className="text-gray-600 text-body-lg">
-                    We'll get back to you within 24 hours with a personalized consultation.
+                  <h4 className="text-heading-md font-bold text-gray-800 mb-4 font-display">Message Sent Successfully!</h4>
+                  <p className="text-gray-600 text-body-lg mb-4">
+                    Thank you for contacting D Day Evento! We've received your message and will get back to you within 2 hours.
                   </p>
+                  <div className="bg-brand-primary/10 rounded-lg p-4 text-sm text-brand-primary">
+                    <p className="font-semibold mb-2">What happens next:</p>
+                    <ul className="text-left space-y-1">
+                      <li>• You'll receive a confirmation email shortly</li>
+                      <li>• Our team will call you within 2 hours</li>
+                      <li>• We'll schedule a free consultation</li>
+                      <li>• Receive a detailed proposal within 24 hours</li>
+                    </ul>
+                  </div>
                   <div className="flex items-center justify-center gap-2 mt-4 text-brand-primary">
                     <Heart size={16} />
                     <span className="text-sm font-medium">Thank you for choosing D-Day Evento!</span>
@@ -178,9 +247,13 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation"
+                        className={`w-full p-4 text-base border rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation ${errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                          }`}
                         placeholder="Enter your full name"
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                      )}
                     </div>
 
                     <div>
@@ -193,9 +266,13 @@ const ConnectWithUs: React.FC = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full p-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation"
+                        className={`w-full p-4 text-base border rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 touch-manipulation ${errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                          }`}
                         placeholder="Enter your phone number"
                       />
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -209,9 +286,13 @@ const ConnectWithUs: React.FC = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50"
+                      className={`w-full p-4 border rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 hover:border-brand-primary/50 ${errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                       placeholder="Enter your email address"
                     />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -244,9 +325,13 @@ const ConnectWithUs: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       rows={5}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 resize-none hover:border-brand-primary/50"
+                      className={`w-full p-4 border rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-300 resize-none hover:border-brand-primary/50 ${errors.message ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                       placeholder="Describe your event vision, expected guests, date preferences, and any specific requirements..."
                     />
+                    {errors.message && (
+                      <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                    )}
                   </div>
 
                   <button
@@ -256,7 +341,10 @@ const ConnectWithUs: React.FC = () => {
                     aria-label={isSubmitting ? "Sending message..." : "Send message"}
                   >
                     {isSubmitting ? (
-                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending Message...
+                      </>
                     ) : (
                       <>
                         <Send size={20} />

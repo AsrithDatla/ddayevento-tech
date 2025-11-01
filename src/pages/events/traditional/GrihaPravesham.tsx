@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Home, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ImprovedQuoteModal from '../../../components/QuoteGenerator/ImprovedQuoteModal';
 
 const GrihaPravesham = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [visibleImages, setVisibleImages] = useState(9);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const images = [
     "https://res.cloudinary.com/dvfx89ago/image/upload/v1760461264/WhatsApp_Image_2025-08-28_at_9.42.48_PM_zj1w25.jpg",
@@ -147,13 +149,13 @@ const GrihaPravesham = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Link
-                to="/contact"
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
                 className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-white/20 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto inline-block"
                 style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}
               >
                 Plan Your Griha Pravesham
-              </Link>
+              </button>
             </motion.div>
           </div>
         </div>
@@ -316,7 +318,7 @@ const GrihaPravesham = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="font-semibold">Elegant Details</p>
+                    <p className="font-semibold text-white">Elegant Details</p>
                   </div>
                   <div className="absolute top-4 right-4 w-2 h-2 bg-brand-primary rounded-full"></div>
                 </div>
@@ -329,7 +331,7 @@ const GrihaPravesham = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="font-semibold">Magical Ambiance</p>
+                    <p className="font-semibold text-white">Magical Ambiance</p>
                   </div>
                   <div className="absolute top-4 right-4 w-2 h-2 bg-gold rounded-full"></div>
                 </div>
@@ -512,13 +514,13 @@ const GrihaPravesham = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-center"
             >
-              <Link
-                to="/contact"
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
                 className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-lg"
               >
                 Plan Your Dream Celebration
                 <ArrowRight className="ml-2" size={20} />
-              </Link>
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -741,6 +743,12 @@ const GrihaPravesham = () => {
           />
         </div>
       )}
+
+      {/* Quote Modal */}
+      <ImprovedQuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   );
 };

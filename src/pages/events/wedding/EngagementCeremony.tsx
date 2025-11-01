@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Sparkles, Camera, X, ChevronLeft, ChevronRight, Heart, Users, Calendar, Star } from 'lucide-react';
+import ImprovedQuoteModal from '../../../components/QuoteGenerator/ImprovedQuoteModal';
 
 const EngagementCeremony: React.FC = () => {
     const { pathname } = useLocation();
     const [imageLoadErrors, setImageLoadErrors] = useState<Set<number>>(new Set());
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -127,7 +129,9 @@ const EngagementCeremony: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
-                            <button className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-white/20 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
+                            <button 
+                                onClick={() => setIsQuoteModalOpen(true)}
+                                className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full border-2 border-white/40 transition-all duration-300 hover:scale-105 text-base sm:text-lg shadow-2xl hover:shadow-white/20 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
                                 Plan Your Engagement With Us
                             </button>
                         </motion.div>
@@ -752,17 +756,23 @@ const EngagementCeremony: React.FC = () => {
                             <button className="bg-white text-brand-primary hover:bg-gray-100 font-semibold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
                                 Start Planning Your Engagement
                             </button>
-                            <Link
-                                to="/contact"
+                            <button
+                                onClick={() => setIsQuoteModalOpen(true)}
                                 className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary font-semibold rounded-lg transition-all duration-300"
                             >
-                                Contact Us Today
+                                Get Quote Today
                                 <ArrowRight className="ml-2" size={20} />
-                            </Link>
+                            </button>
                         </div>
                     </motion.div>
                 </div>
             </section>
+
+            {/* Quote Modal */}
+            <ImprovedQuoteModal 
+                isOpen={isQuoteModalOpen} 
+                onClose={() => setIsQuoteModalOpen(false)} 
+            />
         </div>
     );
 };

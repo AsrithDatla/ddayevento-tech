@@ -7,33 +7,39 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 ## Homepage Content
 
 ### Hero Section
+
 **Primary Headline:** "Hyderabad's Most Trusted Event Planners"
 **Subheadline:** "Creating Unforgettable Celebrations Across Hyderabad, Gachibowli & HITEC City"
 **Value Proposition:** "From intimate gatherings in Banjara Hills to grand celebrations in Jubilee Hills, we bring your vision to life with unmatched expertise and local knowledge."
 
 **Trust Indicators:**
+
 - "400+ Successful Events in Hyderabad"
 - "4+ Years of Excellence in Telangana"
 - "24/7 Support Across Greater Hyderabad"
 - "Rated #1 Event Planner in Gachibowli"
 
 **CTA Buttons:**
+
 - Primary: "Get Free Quote in 2 Minutes"
 - Secondary: "View Hyderabad Portfolio"
 
 ### Services Overview Section
+
 **Headline:** "Complete Event Solutions Across Hyderabad"
 **Subheadline:** "From traditional Telugu weddings to corporate events in HITEC City, we handle every detail with local expertise and modern flair."
 
 **Service Cards Content:**
 
 1. **Wedding Planning in Hyderabad**
+
    - "Transform your dream wedding into reality with Hyderabad's most experienced wedding planners"
    - "Specializing in Telugu, Tamil, and North Indian weddings across Hyderabad"
    - "From Engagement to Reception - Complete wedding solutions"
    - Starting from ₹50,000
 
 2. **Corporate Events in HITEC City & Gachibowli**
+
    - "Elevate your business events with professional excellence in Hyderabad's IT corridor"
    - "Product launches, conferences, and team building events"
    - "Trusted by 100+ companies in HITEC City and Gachibowli"
@@ -48,6 +54,7 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 ## About Us Page Content
 
 ### Main Content
+
 **Headline:** "Hyderabad's Premier Event Management Company"
 
 **Opening Paragraph:**
@@ -82,18 +89,21 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 **Services Offered:**
 
 **Pre-Wedding Events:**
+
 - **Engagement Ceremonies in Hyderabad:** "Beautiful engagement setups at top venues across Banjara Hills and Jubilee Hills"
 - **Haldi Celebrations:** "Traditional haldi ceremonies with authentic Telugu customs and modern photography"
 - **Mehendi Functions:** "Intricate mehendi setups with live artists and entertainment in Hyderabad's best venues"
 - **Sangeeth Nights:** "Grand sangeeth celebrations with professional choreographers and sound systems"
 
 **Wedding Day Services:**
+
 - **Traditional Telugu Weddings:** "Complete wedding coordination honoring Andhra and Telangana traditions"
 - **Venue Selection:** "Access to Hyderabad's premium wedding venues and hidden gems"
 - **Catering Services:** "Authentic Hyderabadi cuisine and multi-cuisine options"
 - **Photography & Videography:** "Professional wedding documentation by Hyderabad's top photographers"
 
 **Popular Wedding Venues We Work With:**
+
 - "Taj Krishna, Hyderabad"
 - "ITC Kakatiya, Begumpet"
 - "Marriott Hotel, Hyderabad"
@@ -110,21 +120,25 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 **Corporate Services:**
 
 **Conference & Seminars:**
+
 - "State-of-the-art conference setups in Hyderabad's premium business hotels"
 - "Technical support and AV equipment for seamless presentations"
 - "Catering services tailored for corporate audiences"
 
 **Product Launches:**
+
 - "Impactful product launch events in HITEC City and Gachibowli"
 - "Media management and press coordination"
 - "Brand activation and experiential marketing"
 
 **Team Building Events:**
+
 - "Engaging team building activities across Hyderabad's resorts and venues"
 - "Outdoor adventures and indoor team challenges"
 - "Custom programs designed for IT companies and startups"
 
 **Annual Corporate Parties:**
+
 - "Year-end celebrations and award ceremonies"
 - "Theme-based corporate parties with entertainment"
 - "Venue selection from Hyderabad's top corporate event spaces"
@@ -152,7 +166,9 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 "Planning your dream wedding in Hyderabad? As the city's leading wedding planners, D-Day Evento has curated a list of the most stunning wedding venues across Hyderabad, from luxury hotels in Banjara Hills to heritage properties in the Old City."
 
 **Venue Highlights:**
+
 1. **Taj Krishna, Road No. 1, Banjara Hills**
+
    - "Luxury redefined in the heart of Hyderabad"
    - "Capacity: 500-1000 guests"
    - "Perfect for grand Telugu and North Indian weddings"
@@ -165,18 +181,23 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 ## Quote Modal Content
 
 ### Step 1: Event Type Selection
+
 **Headline:** "What Type of Event Are You Planning in Hyderabad?"
 
 **Event Categories:**
+
 - **Weddings & Pre-Wedding Events**
+
   - "Complete wedding solutions across Hyderabad"
   - "Engagement, Haldi, Mehendi, Sangeeth, Wedding, Reception"
 
 - **Corporate Events**
+
   - "Professional events in HITEC City & Gachibowli"
   - "Conferences, Product Launches, Team Building"
 
 - **Birthday Celebrations**
+
   - "Memorable birthday parties across Hyderabad"
   - "Kids' parties, Milestone birthdays, Surprise parties"
 
@@ -185,14 +206,18 @@ As a digital marketing agency specializing in the Hyderabad event management mar
   - "Baby showers, Naming ceremonies, House warming"
 
 ### Step 2: Event Details
+
 **Questions:**
+
 - "When is your event date?"
 - "Where in Hyderabad would you like to host your event?"
 - "How many guests are you expecting?"
 - "Do you have a venue in mind, or need venue suggestions?"
 
 ### Step 3: Service Selection
+
 **Core Services:**
+
 - ✓ Event Planning & Coordination
 - ✓ Venue Selection & Booking
 - ✓ Catering & Food Services
@@ -201,6 +226,7 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 - ✓ Entertainment & Music
 
 **Additional Services:**
+
 - ✓ Makeup & Styling
 - ✓ Transportation
 - ✓ Accommodation for Guests
@@ -208,7 +234,9 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 - ✓ Invitation Design & Printing
 
 ### Step 4: Budget Range
+
 **Budget Options:**
+
 - "₹25,000 - ₹50,000 (Intimate Celebrations)"
 - "₹50,000 - ₹1,00,000 (Medium Scale Events)"
 - "₹1,00,000 - ₹2,50,000 (Grand Celebrations)"
@@ -216,7 +244,9 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 - "I need a custom quote"
 
 ### Step 5: Contact Information
+
 **Form Fields:**
+
 - "Your Name"
 - "Phone Number"
 - "Email Address"
@@ -225,6 +255,7 @@ As a digital marketing agency specializing in the Hyderabad event management mar
 - "Special Requirements or Messages"
 
 ### Confirmation Message
+
 **Thank You Message:**
 "Thank you for choosing D-Day Evento! 🎉
 
@@ -246,6 +277,7 @@ We're excited to make your event unforgettable!"
 ## WhatsApp Chatbot Content
 
 ### Welcome Message
+
 "Hi! 👋 Welcome to D-Day Evento - Hyderabad's Premier Event Planners!
 
 I'm here to help you plan your perfect event. What type of celebration are you planning?
@@ -259,6 +291,7 @@ I'm here to help you plan your perfect event. What type of celebration are you p
 Reply with the number or type your event type!"
 
 ### Follow-up Messages
+
 **For Weddings:**
 "Wonderful! 💒 We're Hyderabad's most trusted wedding planners.
 
@@ -283,10 +316,12 @@ Let's make your corporate event a success!"
 ## Footer Content
 
 ### Company Information
+
 **Address:** "D-Day Evento Event Management
 Gachibowli, Hyderabad, Telangana 500032"
 
 **Contact Details:**
+
 - "📞 +91-7386813689"
 - "📧 info@ddayevento.com"
 - "🌐 www.ddayevento.com"
@@ -295,6 +330,7 @@ Gachibowli, Hyderabad, Telangana 500032"
 "Proudly serving Hyderabad, Secunderabad, Gachibowli, HITEC City, Banjara Hills, Jubilee Hills, Kondapur, Madhapur, and surrounding areas."
 
 **Quick Links:**
+
 - Wedding Planners Hyderabad
 - Corporate Event Management
 - Birthday Party Planners
@@ -303,6 +339,7 @@ Gachibowli, Hyderabad, Telangana 500032"
 - Catering Services Hyderabad
 
 ### Social Proof Footer
+
 "⭐⭐⭐⭐⭐ Rated 4.9/5 by 400+ Happy Clients
 🏆 Hyderabad's #1 Event Management Company
 📞 2-Hour Response Guarantee

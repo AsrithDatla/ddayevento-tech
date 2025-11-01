@@ -11,7 +11,7 @@ const EventCategories: React.FC = () => {
     {
       id: 1,
       title: 'Wedding Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760459356/WhatsApp_Image_2025-09-17_at_3.25.03_PM_wkj4rb.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760457927/WhatsApp_Image_2025-09-17_at_3.28.47_PM_1_t5pqht.jpg',
       alt: 'Wedding Events - D Day Evento Hyderabad',
       link: '/events/wedding-events'
     },
@@ -25,28 +25,28 @@ const EventCategories: React.FC = () => {
     {
       id: 3,
       title: 'Birthdays',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461419/WhatsApp_Image_2025-08-26_at_7.20.25_PM_pytvci.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460143/WhatsApp_Image_2025-09-16_at_4.57.08_PM_1_ole9we.jpg',
       alt: 'Birthday Celebrations - D Day Evento',
       link: '/events/birthdays'
     },
     {
       id: 4,
       title: 'Special Days',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461264/WhatsApp_Image_2025-08-28_at_9.42.48_PM_zj1w25.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460345/WhatsApp_Image_2025-08-27_at_12.56.59_AM_qrevrx.jpg',
       alt: 'Special Occasions - Griha Pravesham by D Day Evento',
       link: '/events/special-days'
     },
     {
       id: 5,
       title: 'College Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1761398564/WhatsApp_Image_2025-08-29_at_12.07.56_AM_w8dfp0.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460567/WhatsApp_Image_2025-08-27_at_12.23.23_AM_woknvv.jpg',
       alt: 'College Events - D Day Evento',
       link: '/events/college-events'
     },
     {
       id: 6,
       title: 'Corporate Events',
-      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760461094/WhatsApp_Image_2025-08-26_at_3.01.17_PM_ucfwlf.jpg',
+      image: 'https://res.cloudinary.com/dvfx89ago/image/upload/v1760460459/WhatsApp_Image_2025-08-27_at_12.16.30_AM_ivcmp1.jpg',
       alt: 'Corporate Events - D Day Evento',
       link: '/events/corporate-events'
     }
@@ -112,63 +112,62 @@ const EventCategories: React.FC = () => {
             Event Categories
             <span className="block md:inline text-brand-primary"> We Specialize In</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             From intimate family gatherings to grand celebrations across Hyderabad, we specialize in creating
             <span className="text-brand-primary font-semibold"> memorable experiences</span> that reflect your unique story
           </p>
         </div>
       </div>
-
-        {/* Image Slider - Hidden on mobile, visible on desktop */}
-        <section id="carousel" className="hidden md:block my-8">
-          <div className="slider overflow-hidden py-8">
-            <div
-              ref={sliderRef}
-              className="flex slide-track gap-5 items-end"
-              style={{ width: `${duplicatedCategories.length * 420}px` }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {duplicatedCategories.map((category, index) => (
-                <motion.div
-                  key={`${category.id}-${index}`}
-                  data-caid={category.id}
-                  className={`carousel-link cursor-pointer ${index % 2 === 0 ? 'mt-0' : 'mt-8'
-                    }`}
-                  onClick={() => handleCategoryClick(category)}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex carousel-slide-item">
-                    <div className="image-wrapper flex relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-                      <img
-                        className="w-full max-w-none object-cover"
-                        alt={category.alt}
-                        width="400"
-                        height="260"
-                        title={category.title}
-                        src={category.image}
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      <p className="absolute bottom-4 left-4 text-lg font-bold mb-0 z-10" style={{ color: '#FFFFFF', textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.9)' }}>
-                        {category.title}
-                      </p>
-                      {/* Hover indicator */}
-                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
-                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </div>
+      {/* Image Slider - Hidden on mobile, visible on desktop */}
+      <section id="carousel" className="hidden md:block my-8">
+        <div className="slider overflow-hidden py-8">
+          <div
+            ref={sliderRef}
+            className="flex slide-track gap-5 items-end"
+            style={{ width: `${duplicatedCategories.length * 420}px` }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {duplicatedCategories.map((category, index) => (
+              <motion.div
+                key={`${category.id}-${index}`}
+                data-caid={category.id}
+                className={`carousel-link cursor-pointer ${index % 2 === 0 ? 'mt-0' : 'mt-8'
+                  }`}
+                onClick={() => handleCategoryClick(category)}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex carousel-slide-item">
+                  <div className="image-wrapper flex relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+                    <img
+                      className="w-full max-w-none object-cover"
+                      alt={category.alt}
+                      width="400"
+                      height="260"
+                      title={category.title}
+                      src={category.image}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <p className="absolute bottom-4 left-4 text-lg font-bold mb-0 z-10" style={{ color: '#FFFFFF', textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.9)' }}>
+                      {category.title}
+                    </p>
+                    {/* Hover indicator */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
       <div className="container mx-auto px-6 relative">
 
         {/* Mobile Grid - Visible on mobile, hidden on desktop */}
@@ -193,7 +192,7 @@ const EventCategories: React.FC = () => {
           ))}
         </div>
 
-      
+
 
       </div>
     </section>

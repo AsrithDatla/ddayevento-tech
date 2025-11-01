@@ -21,59 +21,54 @@ export interface SelectedService {
 }
 
 export interface QuoteFormData {
-  // Step 1: Event Category
   eventCategory: string;
-  
-  // Step 2: Sub Events
   eventType: string;
   subEvents: string[];
-  
-  // Step 3: Event Details
+  eventCelebration: string;
   eventDate: string;
-  guestCount: number;
+  eventTime: string;
   venue: string;
+  venueType: string;
   location: string;
-  
-  // Step 4: Services
-  selectedServices: SelectedService[];
-  
-  // Step 5: Contact
-  contactInfo: ContactInfo;
+  guestCount: number;
+  servicesLookingFor: string[];
+  estimatedBudget: string;
   specialRequests: string;
-}
-
-export interface QuoteRequest extends QuoteFormData {
-  id?: string;
-  submittedAt: string;
-  status: 'new' | 'contacted' | 'quoted' | 'converted';
-  source: string;
-  leadScore?: number;
-}
-
-// Event data interfaces (from comprehensive events data)
-export interface ServiceItem {
-  id: string;
-  name: string;
-  category: 'core' | 'extra';
-  description?: string;
-  estimatedPrice?: {
-    min: number;
-    max: number;
-  };
-}
-
-export interface EventService {
-  eventId: string;
-  eventName: string;
-  coreServices: ServiceItem[];
-  extraServices: ServiceItem[];
-  description: string;
+  selectedServices: SelectedService[];
+  contactInfo: ContactInfo;
 }
 
 export interface EventCategory {
   id: string;
   name: string;
   description: string;
-  image: string;
-  events: EventService[];
+  icon: string;
+  subEvents: SubEvent[];
+}
+
+export interface SubEvent {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+}
+
+export interface Service {
+  id: string;
+  name: string;
+  description?: string;
+  isPopular?: boolean;
+}
+
+export interface ServiceCategory {
+  id: string;
+  name: string;
+  icon: string;
+  services: Service[];
+}
+
+export interface EventSpecificService {
+  eventId: string;
+  eventName: string;
+  availableServices: Service[];
 }

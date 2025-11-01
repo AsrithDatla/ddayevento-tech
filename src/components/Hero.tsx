@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Sparkles, MapPin, Heart, Users, Calendar } from 'lucide-react';
-import QuoteModal from './QuoteGenerator/QuoteModal';
+import ImprovedQuoteModal from './QuoteGenerator/ImprovedQuoteModal';
 
 const Hero: React.FC = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -92,71 +92,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ 
-            y: [0, -20, 0],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-20 left-10 text-brand-gold/40"
-        >
-          <Heart size={60} />
-        </motion.div>
-        <motion.div
-          animate={{ 
-            y: [0, 15, 0],
-            rotate: [0, -5, 0]
-          }}
-          transition={{ 
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-          className="absolute top-40 right-20 text-white/30"
-        >
-          <Sparkles size={50} />
-        </motion.div>
-        <motion.div
-          animate={{ 
-            y: [0, -10, 0],
-            x: [0, 10, 0]
-          }}
-          transition={{ 
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-          className="absolute bottom-40 left-20 text-brand-gold/40"
-        >
-          <Users size={45} />
-        </motion.div>
-        <motion.div
-          animate={{ 
-            y: [0, -15, 0],
-            rotate: [0, 10, 0]
-          }}
-          transition={{ 
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-          className="absolute bottom-60 right-32 text-white/25"
-        >
-          <Calendar size={35} />
-        </motion.div>
-      </div>
-
-     
-
       {/* Hero Content */}
       <div className="relative flex items-center justify-center min-h-screen pt-32 pb-20">
         <div className="container mx-auto px-6 text-center">
@@ -166,26 +101,14 @@ const Hero: React.FC = () => {
             transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            {/* Trust Badge with Local Focus */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/30"
-            >
-              <Star className="text-brand-gold" size={20} />
-              <span className="text-white font-medium">Hyderabad's #1 Event Planners</span>
-              <Star className="text-brand-gold" size={20} />
-            </motion.div>
-
             {/* Main Headline with Local Positioning */}
             <motion.h1 
-              className="text-display-lg md:text-display-xl font-black text-white mb-8 leading-tight font-hero tracking-wider"
+              className="text-heading-md md:text-heading-xl font-semibold text-white/95 mb-10"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.4, delay: 0.5, ease: "easeOut" }}
             >
-              Hyderabad's Most Trusted Service Provider
+             <span className="text-brand-gold font-semibold">Hyderabad's Most Trusted Service Provider</span>
             </motion.h1>
 
             {/* Subheadline with Local Market Focus */}
@@ -196,7 +119,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 1, delay: 0.9 }}
             >
              From intimate gatherings to grand celebrations, we bring your dreams to life with 
-                     <span className="text-brand-gold font-semibold"> style, elegance, and excellence</span>
+                     <span className="text-brand-primary font-semibold"> style, elegance, and excellence</span>
             </motion.h3>
 
 
@@ -255,7 +178,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Quote Modal */}
-      <QuoteModal 
+      <ImprovedQuoteModal 
         isOpen={isQuoteModalOpen} 
         onClose={() => setIsQuoteModalOpen(false)} 
       />
